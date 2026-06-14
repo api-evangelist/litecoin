@@ -45,7 +45,7 @@ apis:
       - type: Documentation
         url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
       - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/openapi.yml
+        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/openapi/litecoin-core-json-rpc.yml
       - type: Plans
         url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-json-rpc.yml
       - type: RateLimits
@@ -82,6 +82,8 @@ apis:
     properties:
       - type: Documentation
         url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/openapi/litecoin-core-rest.yml
       - type: Plans
         url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-rest.yml
       - type: RateLimits
@@ -121,6 +123,8 @@ apis:
     properties:
       - type: Documentation
         url: https://litecoinspace.org/docs/api/rest
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/openapi/litecoin-space-rest.yml
       - type: Plans
         url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-rest.yml
       - type: RateLimits
@@ -170,6 +174,8 @@ apis:
         value: 0
 
 common:
+  - type: JSONLd
+    url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/json-ld/litecoin.json
   - type: GitHubOrg
     url: https://github.com/litecoin-project
   - type: GitHubOrg

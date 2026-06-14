@@ -1,0 +1,122 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "https://litecoin.org",
+      "@type": "Organization",
+      "name": "Litecoin",
+      "url": "https://litecoin.org",
+      "description": "Litecoin is a peer-to-peer cryptocurrency network based on the Bitcoin protocol, offering faster block times (2.5 minutes) and lower transaction fees.",
+      "sameAs": [
+        "https://github.com/litecoin-project",
+        "https://github.com/litecoin-foundation"
+      ],
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Litecoin Core JSON-RPC API",
+          "description": "The primary programmatic interface to a Litecoin Core node via JSON-RPC 2.0.",
+          "url": "https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md"
+        },
+        {
+          "@type": "Offer",
+          "name": "Litecoin Core REST API",
+          "description": "An unauthenticated, read-only HTTP REST interface built into Litecoin Core.",
+          "url": "https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md"
+        },
+        {
+          "@type": "Offer",
+          "name": "Litecoin Space REST API",
+          "description": "A public REST API for the Litecoin Space block explorer.",
+          "url": "https://litecoinspace.org/docs/api/rest"
+        },
+        {
+          "@type": "Offer",
+          "name": "Litecoin Space WebSocket API",
+          "description": "A real-time WebSocket API for subscribing to live Litecoin network events.",
+          "url": "https://litecoinspace.org/docs/api/websocket"
+        }
+      ]
+    },
+    {
+      "@id": "https://litecoinspace.org/api",
+      "@type": "WebAPI",
+      "name": "Litecoin Space REST API",
+      "description": "A public REST API provided by the Litecoin Space block explorer for querying the Litecoin network.",
+      "documentation": "https://litecoinspace.org/docs/api/rest",
+      "provider": {
+        "@type": "Organization",
+        "name": "Litecoin Foundation",
+        "url": "https://github.com/litecoin-foundation/ltcspace"
+      },
+      "termsOfService": "https://litecoinspace.org",
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://litecoinspace.org/api",
+        "availableLanguage": "en"
+      },
+      "category": [
+        "Cryptocurrency",
+        "Blockchain",
+        "Block Explorer",
+        "Litecoin",
+        "REST API"
+      ]
+    },
+    {
+      "@id": "http://localhost:9332",
+      "@type": "WebAPI",
+      "name": "Litecoin Core JSON-RPC API",
+      "description": "JSON-RPC 2.0 interface to a local Litecoin Core node for blockchain interaction.",
+      "documentation": "https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md",
+      "provider": {
+        "@type": "Organization",
+        "name": "Litecoin Project",
+        "url": "https://github.com/litecoin-project/litecoin"
+      },
+      "category": [
+        "Cryptocurrency",
+        "Blockchain",
+        "Litecoin",
+        "JSON-RPC"
+      ]
+    },
+    {
+      "@id": "https://litecoinspace.org/api/v1/ws",
+      "@type": "WebAPI",
+      "name": "Litecoin Space WebSocket API",
+      "description": "Real-time WebSocket API for subscribing to live Litecoin network events including blocks, mempool, and address tracking.",
+      "documentation": "https://litecoinspace.org/docs/api/websocket",
+      "provider": {
+        "@type": "Organization",
+        "name": "Litecoin Foundation",
+        "url": "https://github.com/litecoin-foundation/ltcspace"
+      },
+      "category": [
+        "Cryptocurrency",
+        "Blockchain",
+        "WebSocket",
+        "Real-Time",
+        "Litecoin"
+      ]
+    },
+    {
+      "@id": "https://litecoin.org/cryptocurrency",
+      "@type": "FinancialProduct",
+      "name": "Litecoin (LTC)",
+      "description": "A decentralized peer-to-peer digital currency with faster block confirmation times and lower transaction fees than Bitcoin.",
+      "currency": "LTC",
+      "provider": {
+        "@type": "Organization",
+        "name": "Litecoin Project",
+        "url": "https://github.com/litecoin-project"
+      },
+      "url": "https://litecoin.org"
+    }
+  ]
+}

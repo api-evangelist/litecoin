@@ -1,0 +1,17 @@
+name: Litecoin Core REST Interface Rate Limits
+description: The Litecoin Core unauthenticated REST interface has no built-in rate
+  limiting. It is intended for controlled local or private network use. Operators
+  exposing it publicly should place a reverse proxy (e.g., nginx) in front to enforce
+  rate limits, as the interface provides no authentication or throttling of its own.
+rateLimits:
+  - name: No Published Limit
+    description: No hard rate limit is enforced by the software. All inbound HTTP
+      requests are served as fast as node I/O allows.
+    type: node-resource
+    limit: null
+    window: null
+notes:
+  - The REST interface is unauthenticated by design; do not expose it to untrusted
+    networks without a protective proxy.
+  - Large responses (full blocks in JSON format) can be resource-intensive; consider
+    using the /notxdetails/ block variant to reduce payload size.

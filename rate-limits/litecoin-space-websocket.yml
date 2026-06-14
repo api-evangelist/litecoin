@@ -1,0 +1,16 @@
+name: Litecoin Space WebSocket API Rate Limits
+description: The Litecoin Space public WebSocket API does not publish hard connection
+  or message rate limits. As a free community service, abuse prevention may be applied
+  at the infrastructure level. Applications requiring guaranteed throughput should
+  self-host.
+rateLimits:
+  - name: Unofficial Connection Limit
+    description: No formally documented per-IP connection limit. Persistent connections
+      are supported; excessive connections from a single source may be throttled.
+    type: informal
+    limit: null
+    window: null
+notes:
+  - The WebSocket endpoint is wss://litecoinspace.org/api/v1/ws.
+  - Reconnect logic should be implemented to handle disconnections gracefully.
+  - For guaranteed uptime and unlimited connections, self-host ltcspace.

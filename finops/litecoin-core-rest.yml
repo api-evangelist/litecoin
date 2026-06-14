@@ -1,0 +1,16 @@
+name: Litecoin Core REST Interface FinOps
+description: Cost model for the Litecoin Core unauthenticated REST interface. This
+  interface is part of Litecoin Core and has no separate pricing. Costs are the same
+  infrastructure costs as running a Litecoin Core node.
+costs:
+  - name: Infrastructure (shared with JSON-RPC node)
+    description: The REST interface runs on the same Litecoin Core node as the JSON-RPC
+      interface. No additional infrastructure is required beyond the base node. See
+      the JSON-RPC FinOps file for storage, bandwidth, and compute cost estimates.
+    type: infrastructure
+    unit: shared
+    notes: Enable with -rest flag; no incremental cost beyond node operation.
+  - name: No Per-Call Fees
+    description: The REST interface is read-only and free to query. There are no
+      API fees, subscriptions, or usage charges.
+    type: none

@@ -1,0 +1,18 @@
+name: Litecoin Space WebSocket API FinOps
+description: The Litecoin Space WebSocket API is a free community service with no
+  connection fees. FinOps considerations apply only to self-hosted deployments.
+costs:
+  - name: Public WebSocket Usage
+    description: Zero cost for connecting to wss://litecoinspace.org/api/v1/ws.
+      No account, API key, or subscription is required.
+    type: free
+    amount: 0
+    currency: USD
+  - name: Self-Hosted Deployment
+    description: Self-hosting ltcspace for a guaranteed WebSocket feed requires a
+      Litecoin Core full node and the ltcspace backend. Infrastructure costs mirror
+      those of the REST API self-hosted plan.
+    type: infrastructure
+    unit: self-hosted
+    notes: Same infrastructure footprint as self-hosted REST API. WebSocket connections
+      are handled by the same Node.js backend service.

@@ -1,0 +1,38 @@
+name: Litecoin Space REST API Plans
+description: The Litecoin Space block explorer REST API is a free public service
+  operated by the Litecoin Foundation. It is a mempool.space-compatible API for the
+  Litecoin mainnet and testnet. No API key or registration is required for standard
+  public usage. High-volume or commercial users may self-host the open-source ltcspace
+  software.
+plans:
+  - name: Public Free
+    description: Free access to the Litecoin Space REST API at litecoinspace.org.
+      No authentication required. Covers addresses, blocks, transactions, mempool,
+      fees, and mining data. Suitable for developers building explorers, wallets, and
+      analytics tools.
+    url: https://litecoinspace.org/docs/api/rest
+    status: active
+    pricingModel: free
+    rateLimits:
+      - type: requests
+        description: Unofficial rate limits apply to prevent abuse; no published
+          hard cap. High-frequency consumers are encouraged to self-host.
+    features:
+      - Address details, transactions, and UTXOs
+      - Block details, headers, raw data, and transaction lists
+      - Transaction details, hex, raw, broadcast, and Merkle proofs
+      - Mempool statistics and transaction list
+      - Fee recommendations (fastest, half-hour, hour, economy, minimum)
+      - Mining pool statistics and network hashrate
+      - Mainnet and testnet support
+  - name: Self-Hosted
+    description: Deploy a private instance of ltcspace (mempool.space fork for Litecoin)
+      for unlimited throughput. Requires a full Litecoin Core node.
+    url: https://github.com/litecoin-foundation/ltcspace
+    status: active
+    pricingModel: free
+    rateLimits: []
+    features:
+      - All public API features
+      - No rate limits
+      - Full control over infrastructure

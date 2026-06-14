@@ -1,0 +1,22 @@
+name: Litecoin Core REST API Plans
+description: The Litecoin Core unauthenticated REST interface is part of the open-source
+  Litecoin Core node software. It is enabled with the -rest flag and is available
+  to any operator running a node. No commercial tiers or per-call fees apply.
+plans:
+  - name: Self-Hosted Node (REST Enabled)
+    description: Enable the REST interface by starting Litecoin Core with the -rest
+      flag. The REST API is read-only and requires no authentication. Access is limited
+      to the machine or network where the node is running unless rpcbind is configured.
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
+    status: active
+    pricingModel: free
+    rateLimits: []
+    features:
+      - Transaction retrieval
+      - Block retrieval (full and without tx details)
+      - Block header retrieval
+      - Block hash by height
+      - Chain info
+      - UTXO set queries (BIP64)
+      - Mempool info and contents
+      - Responses in binary, hex, or JSON

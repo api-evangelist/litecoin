@@ -1,0 +1,28 @@
+name: Litecoin Space REST API FinOps
+description: The Litecoin Space public REST API is a free community service with
+  no API fees. FinOps considerations are limited to self-hosted deployments and on-chain
+  transaction costs.
+costs:
+  - name: Public API Usage
+    description: Zero cost for calling the public litecoinspace.org REST API. No
+      account registration, API key, or payment is required.
+    type: free
+    amount: 0
+    currency: USD
+  - name: Self-Hosted Deployment
+    description: Operators who self-host ltcspace to avoid rate limits or ensure
+      uptime incur infrastructure costs for a Litecoin Core full node (approximately
+      22 GB storage) plus the ltcspace backend and frontend services.
+    type: infrastructure
+    unit: self-hosted
+    notes: Runs on Docker or bare metal; a mid-tier VPS (~$20-40/month) is sufficient
+      for moderate traffic.
+  - name: On-Chain Transaction Fees
+    description: The REST API itself is read-only. Posting transactions (via /api/tx)
+      to the Litecoin network incurs miner fees. Average fee is 0.00003-0.0003 LTC
+      per transaction (~$0.003-$0.03 USD at June 2026 prices).
+    type: network-fee
+    unit: LTC per transaction
+    amountMin: 0.00003
+    amountMax: 0.0003
+    currency: LTC

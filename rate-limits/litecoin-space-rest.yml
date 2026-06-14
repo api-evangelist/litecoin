@@ -1,0 +1,16 @@
+name: Litecoin Space REST API Rate Limits
+description: The Litecoin Space public REST API does not publish hard rate limits.
+  As a free community service, unofficial throttling may be applied to prevent abuse.
+  High-volume applications should self-host an ltcspace instance.
+rateLimits:
+  - name: Unofficial Throttle
+    description: No formally documented rate limit. Requests that generate excessive
+      load may be throttled or blocked at the infrastructure level without notice.
+    type: informal
+    limit: null
+    window: null
+notes:
+  - For production workloads with high request volumes, deploy a self-hosted ltcspace
+    instance backed by a full Litecoin Core node.
+  - The testnet API (litecoinspace.org/testnet) is subject to the same informal limits.
+  - No API key is required; no account registration is needed.

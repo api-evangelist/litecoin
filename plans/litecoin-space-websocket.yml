@@ -1,0 +1,34 @@
+name: Litecoin Space WebSocket API Plans
+description: The Litecoin Space WebSocket API is a free public real-time data service
+  operated by the Litecoin Foundation at litecoinspace.org. No API key or registration
+  is required. Clients connect over WebSocket and subscribe to live blockchain event
+  feeds.
+plans:
+  - name: Public Free
+    description: Free WebSocket access to litecoinspace.org for real-time Litecoin
+      network events. Subscribe to new blocks, mempool block projections, fee rate
+      charts, and address transaction notifications.
+    url: https://litecoinspace.org/docs/api/websocket
+    status: active
+    pricingModel: free
+    rateLimits:
+      - type: connections
+        description: Unofficial connection limits apply; no published hard cap.
+          High-frequency consumers are encouraged to self-host.
+    features:
+      - New block notifications
+      - Mempool block projections
+      - Live 2-hour fee rate chart updates
+      - Network stats updates
+      - Address transaction tracking (mempool and confirmed)
+  - name: Self-Hosted
+    description: Deploy a private ltcspace instance to run an unlimited WebSocket
+      feed. Requires a full Litecoin Core node.
+    url: https://github.com/litecoin-foundation/ltcspace
+    status: active
+    pricingModel: free
+    rateLimits: []
+    features:
+      - All public WebSocket features
+      - No connection limits
+      - Full control over infrastructure

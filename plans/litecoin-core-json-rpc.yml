@@ -1,0 +1,22 @@
+name: Litecoin Core JSON-RPC API Plans
+description: The Litecoin Core JSON-RPC API is self-hosted open-source software.
+  There is no commercial pricing tier. Operators run their own Litecoin Core node
+  and access the JSON-RPC interface locally or over a secured network. Cost is limited
+  to infrastructure (hardware, bandwidth, storage for the ~22 GB blockchain).
+plans:
+  - name: Self-Hosted Node
+    description: Run a full Litecoin Core node. The JSON-RPC API is available on
+      the local machine or via a configured rpcbind/rpcallowip network. No per-call
+      fees. Authentication via cookie file or rpcauth credentials.
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+    status: active
+    pricingModel: free
+    rateLimits: []
+    features:
+      - Full blockchain access
+      - All JSON-RPC methods
+      - Mempool access
+      - Wallet management
+      - Raw transaction construction and broadcast
+      - Fee estimation
+      - Mining support (getblocktemplate)

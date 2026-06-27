@@ -174,7 +174,7 @@ apis:
         value: 0
 
 common:
-  - type: JSONLd
+  - type: JSONLD
     url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/json-ld/litecoin.json
   - type: GitHubOrg
     url: https://github.com/litecoin-project

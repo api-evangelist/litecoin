@@ -2,13 +2,11 @@
   "repo": "litecoin",
   "feeds": [
     {
-      "source": "https://litecoin.org",
-      "feed_url": "https://litecoin.org",
-      "title": "",
+      "source": "https://blog.litecoin.org",
       "saved": 0,
-      "method": "none"
+      "error": "fetch failed (no response) on all attempts"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:51:50Z"
 }

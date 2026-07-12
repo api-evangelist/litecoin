@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/litecoin-core-json-rpc.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic Authentication using credentials from the .litecoin/.cookie file or
+    configured via rpcauth in litecoin.conf.
+  sources:
+  - openapi/litecoin-core-json-rpc.yml

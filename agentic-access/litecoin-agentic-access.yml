@@ -1,0 +1,638 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/litecoin-core-json-rpc.yml, openapi/litecoin-core-rest.yml, openapi/litecoin-space-rest.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 61
+  by_action_class:
+    acting: 2
+    connected: 59
+  by_consequence:
+    write: 2
+    read: 59
+  human_in_the_loop_required: 0
+operations:
+- path: /
+  method: post
+  operationId: jsonRpcRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/tx/{txHash}.json
+  method: get
+  operationId: getTransactionJson
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/tx/{txHash}.hex
+  method: get
+  operationId: getTransactionHex
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/tx/{txHash}.bin
+  method: get
+  operationId: getTransactionBin
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/block/{blockHash}.json
+  method: get
+  operationId: getBlockJson
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/block/{blockHash}.hex
+  method: get
+  operationId: getBlockHex
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/block/{blockHash}.bin
+  method: get
+  operationId: getBlockBin
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/block/notxdetails/{blockHash}.json
+  method: get
+  operationId: getBlockNoTxDetailsJson
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/block/notxdetails/{blockHash}.hex
+  method: get
+  operationId: getBlockNoTxDetailsHex
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/headers/{count}/{blockHash}.json
+  method: get
+  operationId: getBlockHeadersJson
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/headers/{count}/{blockHash}.hex
+  method: get
+  operationId: getBlockHeadersHex
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/blockhashbyheight/{height}.json
+  method: get
+  operationId: getBlockHashByHeightJson
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/blockhashbyheight/{height}.hex
+  method: get
+  operationId: getBlockHashByHeightHex
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/chaininfo.json
+  method: get
+  operationId: getChainInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/getutxos/{checkmempool}/{outpoints}.json
+  method: get
+  operationId: getUtxosJson
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/mempool/info.json
+  method: get
+  operationId: getMempoolInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/mempool/contents.json
+  method: get
+  operationId: getMempoolContents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /address/{address}
+  method: get
+  operationId: getAddress
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /address/{address}/txs
+  method: get
+  operationId: getAddressTxs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /address/{address}/txs/chain
+  method: get
+  operationId: getAddressTxsChain
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /address/{address}/txs/mempool
+  method: get
+  operationId: getAddressTxsMempool
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /address/{address}/utxo
+  method: get
+  operationId: getAddressUtxo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/validate-address/{address}
+  method: get
+  operationId: validateAddress
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /block/{hash}
+  method: get
+  operationId: getBlock
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /block/{hash}/header
+  method: get
+  operationId: getBlockHeader
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /block-height/{height}
+  method: get
+  operationId: getBlockHashAtHeight
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /block/{hash}/raw
+  method: get
+  operationId: getBlockRaw
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /block/{hash}/status
+  method: get
+  operationId: getBlockStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /blocks/tip/height
+  method: get
+  operationId: getBlockTipHeight
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /blocks/tip/hash
+  method: get
+  operationId: getBlockTipHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /block/{hash}/txid/{index}
+  method: get
+  operationId: getBlockTxid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /block/{hash}/txids
+  method: get
+  operationId: getBlockTxids
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /block/{hash}/txs/{startIndex}
+  method: get
+  operationId: getBlockTxs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /blocks/{startHeight}
+  method: get
+  operationId: getBlocks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/blocks/{startHeight}
+  method: get
+  operationId: getBlocksV1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/blocks-bulk/{minHeight}/{maxHeight}
+  method: get
+  operationId: getBlocksBulk
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tx/{txid}
+  method: get
+  operationId: getTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tx/{txid}/hex
+  method: get
+  operationId: getTransactionHex
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tx/{txid}/raw
+  method: get
+  operationId: getTransactionRaw
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tx/{txid}/merkleblock-proof
+  method: get
+  operationId: getTransactionMerkleBlockProof
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tx/{txid}/merkle-proof
+  method: get
+  operationId: getTransactionMerkleProof
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tx/{txid}/outspend/{vout}
+  method: get
+  operationId: getTransactionOutspend
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tx/{txid}/outspends
+  method: get
+  operationId: getTransactionOutspends
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tx/{txid}/status
+  method: get
+  operationId: getTransactionStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tx
+  method: post
+  operationId: broadcastTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /mempool
+  method: get
+  operationId: getMempool
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /mempool/txids
+  method: get
+  operationId: getMempoolTxids
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /mempool/recent
+  method: get
+  operationId: getMempoolRecent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/fees/recommended
+  method: get
+  operationId: getFeesRecommended
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/fees/mempool-blocks
+  method: get
+  operationId: getMempoolBlocks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/mining/pools/{timePeriod}
+  method: get
+  operationId: getMiningPools
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/mining/pool/{slug}
+  method: get
+  operationId: getMiningPool
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/mining/pool/{slug}/hashrate
+  method: get
+  operationId: getMiningPoolHashrate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/mining/pool/{slug}/blocks/{blockHeight}
+  method: get
+  operationId: getMiningPoolBlocks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/mining/hashrate/pools/{timePeriod}
+  method: get
+  operationId: getMiningPoolsHashrate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/mining/hashrate/{timePeriod}
+  method: get
+  operationId: getNetworkHashrate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/mining/difficulty-adjustments/{interval}
+  method: get
+  operationId: getDifficultyAdjustments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/mining/blocks/fees/{timePeriod}
+  method: get
+  operationId: getMiningBlockFees
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/mining/blocks/rewards/{timePeriod}
+  method: get
+  operationId: getMiningBlockRewards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/mining/reward-stats/{blockCount}
+  method: get
+  operationId: getMiningRewardStats
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/difficulty-adjustment
+  method: get
+  operationId: getDifficultyAdjustment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

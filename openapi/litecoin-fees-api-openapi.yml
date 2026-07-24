@@ -1,0 +1,105 @@
+openapi: 3.0.3
+info:
+  title: Litecoin Core JSON-RPC Addresses Fees API
+  description: 'The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
+
+    '
+  version: '0.21'
+  contact:
+    name: Litecoin Project
+    url: https://github.com/litecoin-project/litecoin
+  license:
+    name: MIT
+    url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
+servers:
+- url: http://localhost:9332
+  description: Litecoin Core mainnet
+- url: http://localhost:19332
+  description: Litecoin Core testnet
+- url: http://localhost:19443
+  description: Litecoin Core regtest
+security:
+- basicAuth: []
+tags:
+- name: Fees
+  description: Fee estimation and recommendation endpoints
+paths:
+  /v1/fees/recommended:
+    get:
+      operationId: getFeesRecommended
+      summary: Get recommended fees
+      description: 'Returns current recommended fee rates for fast confirmation, half-hour confirmation, hour confirmation, economy, and minimum relay.
+
+        '
+      responses:
+        '200':
+          description: Recommended fee rates in sat/vB
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeRecommendations'
+      tags:
+      - Fees
+  /v1/fees/mempool-blocks:
+    get:
+      operationId: getMempoolBlocks
+      summary: Get mempool as projected blocks
+      description: Returns the mempool projected into upcoming blocks with fee rate ranges.
+      responses:
+        '200':
+          description: Projected mempool blocks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MempoolBlock'
+      tags:
+      - Fees
+components:
+  schemas:
+    FeeRecommendations:
+      type: object
+      properties:
+        fastestFee:
+          type: integer
+          description: Fee rate for next-block confirmation in sat/vB
+        halfHourFee:
+          type: integer
+          description: Fee rate for ~30 minute confirmation in sat/vB
+        hourFee:
+          type: integer
+          description: Fee rate for ~1 hour confirmation in sat/vB
+        economyFee:
+          type: integer
+          description: Economy fee rate in sat/vB
+        minimumFee:
+          type: integer
+          description: Minimum relay fee rate in sat/vB
+    MempoolBlock:
+      type: object
+      properties:
+        blockSize:
+          type: integer
+        blockVSize:
+          type: number
+        nTx:
+          type: integer
+        totalFees:
+          type: integer
+        medianFee:
+          type: number
+        feeRange:
+          type: array
+          items:
+            type: number
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication using credentials from the .litecoin/.cookie file or configured via rpcauth in litecoin.conf.
+
+        '
+externalDocs:
+  description: Litecoin Core JSON-RPC Interface Documentation
+  url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md

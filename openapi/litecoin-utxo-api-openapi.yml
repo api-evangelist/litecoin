@@ -1,0 +1,103 @@
+openapi: 3.0.3
+info:
+  title: Litecoin Core JSON-RPC Addresses UTXO API
+  description: 'The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
+
+    '
+  version: '0.21'
+  contact:
+    name: Litecoin Project
+    url: https://github.com/litecoin-project/litecoin
+  license:
+    name: MIT
+    url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
+servers:
+- url: http://localhost:9332
+  description: Litecoin Core mainnet
+- url: http://localhost:19332
+  description: Litecoin Core testnet
+- url: http://localhost:19443
+  description: Litecoin Core regtest
+security:
+- basicAuth: []
+tags:
+- name: UTXO
+  description: Unspent transaction output query endpoints
+paths:
+  /rest/getutxos/{checkmempool}/{outpoints}.json:
+    get:
+      operationId: getUtxosJson
+      summary: Get UTXOs (JSON)
+      description: 'Queries the UTXO set for specified outpoints per BIP64. The checkmempool segment is a flag (0 or 1) indicating whether to check the mempool for unconfirmed outputs. Outpoints are specified as txid-n pairs separated by slashes (e.g. txid1-0/txid2-1).
+
+        '
+      parameters:
+      - name: checkmempool
+        in: path
+        required: true
+        description: Whether to check the mempool (0=no, 1=yes)
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+      - name: outpoints
+        in: path
+        required: true
+        description: 'One or more outpoints as txid-vout pairs separated by slashes (e.g. abc123-0/def456-1)
+
+          '
+        schema:
+          type: string
+      responses:
+        '200':
+          description: UTXO query results in JSON format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtxoResult'
+        '400':
+          description: Invalid outpoint format
+      tags:
+      - UTXO
+components:
+  schemas:
+    UtxoResult:
+      type: object
+      properties:
+        chainHeight:
+          type: integer
+          description: Current chain height
+        chaintipHash:
+          type: string
+          description: Hash of the chain tip
+        bitmap:
+          type: string
+          description: Bitmap indicating which requested UTXOs exist
+        utxos:
+          type: array
+          items:
+            type: object
+            properties:
+              txid:
+                type: string
+              vout:
+                type: integer
+              height:
+                type: integer
+                description: Block height where the UTXO was created
+              value:
+                type: number
+                description: Value in LTC
+              scriptPubKey:
+                type: object
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication using credentials from the .litecoin/.cookie file or configured via rpcauth in litecoin.conf.
+
+        '
+externalDocs:
+  description: Litecoin Core JSON-RPC Interface Documentation
+  url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md

@@ -1,0 +1,307 @@
+openapi: 3.0.3
+info:
+  title: Litecoin Core JSON-RPC Addresses API
+  description: 'The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
+
+    '
+  version: '0.21'
+  contact:
+    name: Litecoin Project
+    url: https://github.com/litecoin-project/litecoin
+  license:
+    name: MIT
+    url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
+servers:
+- url: http://localhost:9332
+  description: Litecoin Core mainnet
+- url: http://localhost:19332
+  description: Litecoin Core testnet
+- url: http://localhost:19443
+  description: Litecoin Core regtest
+security:
+- basicAuth: []
+tags:
+- name: Addresses
+  description: Address lookup, transaction history, and UTXO endpoints
+paths:
+  /address/{address}:
+    get:
+      operationId: getAddress
+      summary: Get address details
+      description: 'Returns details about an address including chain stats (funded, spent, tx count) and current mempool stats.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/address'
+      responses:
+        '200':
+          description: Address details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressDetails'
+        '400':
+          description: Invalid address
+      tags:
+      - Addresses
+  /address/{address}/txs:
+    get:
+      operationId: getAddressTxs
+      summary: Get address transactions
+      description: 'Returns up to 50 mempool transactions plus the first 25 confirmed transactions for the address. To get more confirmed transactions, use the after_txid parameter.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/address'
+      - name: after_txid
+        in: query
+        required: false
+        description: Paginate confirmed transactions after this txid
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+      tags:
+      - Addresses
+  /address/{address}/txs/chain:
+    get:
+      operationId: getAddressTxsChain
+      summary: Get address confirmed transactions
+      description: Returns confirmed transactions for the address (25 per page).
+      parameters:
+      - $ref: '#/components/parameters/address'
+      - name: last_seen_txid
+        in: query
+        required: false
+        description: Paginate from this txid
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Confirmed transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+      tags:
+      - Addresses
+  /address/{address}/txs/mempool:
+    get:
+      operationId: getAddressTxsMempool
+      summary: Get address mempool transactions
+      description: Returns unconfirmed transactions for the address (up to 50).
+      parameters:
+      - $ref: '#/components/parameters/address'
+      responses:
+        '200':
+          description: Mempool transactions for the address
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+      tags:
+      - Addresses
+  /address/{address}/utxo:
+    get:
+      operationId: getAddressUtxo
+      summary: Get address UTXOs
+      description: Returns unspent transaction outputs for the specified address.
+      parameters:
+      - $ref: '#/components/parameters/address'
+      responses:
+        '200':
+          description: List of UTXOs for the address
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Utxo'
+      tags:
+      - Addresses
+  /v1/validate-address/{address}:
+    get:
+      operationId: validateAddress
+      summary: Validate address
+      description: Validates a Litecoin address and returns its type and validity.
+      parameters:
+      - $ref: '#/components/parameters/address'
+      responses:
+        '200':
+          description: Address validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressValidation'
+      tags:
+      - Addresses
+components:
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        txid:
+          type: string
+        version:
+          type: integer
+        locktime:
+          type: integer
+        vin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxInput'
+        vout:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxOutput'
+        size:
+          type: integer
+        weight:
+          type: integer
+        sigops:
+          type: integer
+        fee:
+          type: integer
+          description: Transaction fee in satoshis
+        status:
+          $ref: '#/components/schemas/TxStatus'
+    AddressDetails:
+      type: object
+      properties:
+        address:
+          type: string
+        chain_stats:
+          type: object
+          properties:
+            funded_txo_count:
+              type: integer
+            funded_txo_sum:
+              type: integer
+              description: Total funded amount in satoshis
+            spent_txo_count:
+              type: integer
+            spent_txo_sum:
+              type: integer
+              description: Total spent amount in satoshis
+            tx_count:
+              type: integer
+        mempool_stats:
+          type: object
+          properties:
+            funded_txo_count:
+              type: integer
+            funded_txo_sum:
+              type: integer
+            spent_txo_count:
+              type: integer
+            spent_txo_sum:
+              type: integer
+            tx_count:
+              type: integer
+    TxInput:
+      type: object
+      properties:
+        txid:
+          type: string
+        vout:
+          type: integer
+        prevout:
+          $ref: '#/components/schemas/TxOutput'
+        scriptsig:
+          type: string
+        scriptsig_asm:
+          type: string
+        witness:
+          type: array
+          items:
+            type: string
+        is_coinbase:
+          type: boolean
+        sequence:
+          type: integer
+    TxStatus:
+      type: object
+      properties:
+        confirmed:
+          type: boolean
+        block_height:
+          type: integer
+          nullable: true
+        block_hash:
+          type: string
+          nullable: true
+        block_time:
+          type: integer
+          nullable: true
+    AddressValidation:
+      type: object
+      properties:
+        isvalid:
+          type: boolean
+        address:
+          type: string
+        scriptPubKey:
+          type: string
+        isscript:
+          type: boolean
+        iswitness:
+          type: boolean
+        witness_version:
+          type: integer
+        witness_program:
+          type: string
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
+          type: string
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
+          type: integer
+          description: Output value in satoshis
+    Utxo:
+      type: object
+      properties:
+        txid:
+          type: string
+        vout:
+          type: integer
+        status:
+          $ref: '#/components/schemas/TxStatus'
+        value:
+          type: integer
+          description: Value in satoshis
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      description: Litecoin address (P2PKH, P2SH, or bech32)
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication using credentials from the .litecoin/.cookie file or configured via rpcauth in litecoin.conf.
+
+        '
+externalDocs:
+  description: Litecoin Core JSON-RPC Interface Documentation
+  url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md

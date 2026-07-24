@@ -1,0 +1,456 @@
+openapi: 3.0.3
+info:
+  title: Litecoin Core JSON-RPC Addresses Transactions API
+  description: 'The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
+
+    '
+  version: '0.21'
+  contact:
+    name: Litecoin Project
+    url: https://github.com/litecoin-project/litecoin
+  license:
+    name: MIT
+    url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
+servers:
+- url: http://localhost:9332
+  description: Litecoin Core mainnet
+- url: http://localhost:19332
+  description: Litecoin Core testnet
+- url: http://localhost:19443
+  description: Litecoin Core regtest
+security:
+- basicAuth: []
+tags:
+- name: Transactions
+  description: Transaction retrieval endpoints
+paths:
+  /rest/tx/{txHash}.json:
+    get:
+      operationId: getTransactionJson
+      summary: Get transaction (JSON)
+      description: 'Returns a transaction in JSON format. Searches the mempool by default. Use txindex=1 in litecoin.conf to also retrieve confirmed transactions that are not in the mempool.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/txHash'
+      responses:
+        '200':
+          description: Transaction details in JSON format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '404':
+          description: Transaction not found
+      tags:
+      - Transactions
+  /rest/tx/{txHash}.hex:
+    get:
+      operationId: getTransactionHex
+      summary: Get transaction (hex)
+      description: Returns a transaction in hex-encoded binary format.
+      parameters:
+      - $ref: '#/components/parameters/txHash'
+      responses:
+        '200':
+          description: Hex-encoded transaction
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Transaction not found
+      tags:
+      - Transactions
+  /rest/tx/{txHash}.bin:
+    get:
+      operationId: getTransactionBin
+      summary: Get transaction (binary)
+      description: Returns a transaction in raw binary format.
+      parameters:
+      - $ref: '#/components/parameters/txHash'
+      responses:
+        '200':
+          description: Raw binary transaction data
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Transaction not found
+      tags:
+      - Transactions
+  /tx/{txid}:
+    get:
+      operationId: getTransaction
+      summary: Get transaction details
+      description: Returns details about the transaction including inputs, outputs, and status.
+      parameters:
+      - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Transaction details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction_2'
+        '404':
+          description: Transaction not found
+      tags:
+      - Transactions
+  /tx/{txid}/hex:
+    get:
+      operationId: getTransactionHex
+      summary: Get transaction hex
+      description: Returns the raw transaction in hex-encoded format.
+      parameters:
+      - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Hex-encoded transaction
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Transaction not found
+      tags:
+      - Transactions
+  /tx/{txid}/raw:
+    get:
+      operationId: getTransactionRaw
+      summary: Get raw transaction
+      description: Returns the raw transaction in binary format.
+      parameters:
+      - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Raw binary transaction data
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Transaction not found
+      tags:
+      - Transactions
+  /tx/{txid}/merkleblock-proof:
+    get:
+      operationId: getTransactionMerkleBlockProof
+      summary: Get transaction merkleblock proof
+      description: Returns the merkleblock proof for the transaction (for SPV verification).
+      parameters:
+      - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Hex-encoded merkleblock proof
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Transaction not found or not confirmed
+      tags:
+      - Transactions
+  /tx/{txid}/merkle-proof:
+    get:
+      operationId: getTransactionMerkleProof
+      summary: Get transaction Merkle proof (Electrum format)
+      description: Returns the Merkle proof for the transaction in Electrum format.
+      parameters:
+      - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Merkle proof in Electrum format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerkleProof'
+        '404':
+          description: Transaction not found or not confirmed
+      tags:
+      - Transactions
+  /tx/{txid}/outspend/{vout}:
+    get:
+      operationId: getTransactionOutspend
+      summary: Get output spending status
+      description: Returns the spending status of a specific transaction output.
+      parameters:
+      - $ref: '#/components/parameters/txid'
+      - name: vout
+        in: path
+        required: true
+        description: Output index (0-based)
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: Output spending status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Outspend'
+        '404':
+          description: Transaction or output not found
+      tags:
+      - Transactions
+  /tx/{txid}/outspends:
+    get:
+      operationId: getTransactionOutspends
+      summary: Get all output spending statuses
+      description: Returns the spending status for all outputs of the transaction.
+      parameters:
+      - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Array of output spending statuses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Outspend'
+        '404':
+          description: Transaction not found
+      tags:
+      - Transactions
+  /tx/{txid}/status:
+    get:
+      operationId: getTransactionStatus
+      summary: Get transaction confirmation status
+      description: Returns the confirmation status of the transaction.
+      parameters:
+      - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Transaction confirmation status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TxStatus'
+        '404':
+          description: Transaction not found
+      tags:
+      - Transactions
+  /tx:
+    post:
+      operationId: broadcastTransaction
+      summary: Broadcast raw transaction
+      description: Broadcasts a raw transaction to the Litecoin network. Returns the txid on success.
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: Raw transaction in hex format
+      responses:
+        '200':
+          description: Transaction ID of the broadcast transaction
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Invalid transaction
+      tags:
+      - Transactions
+components:
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        txid:
+          type: string
+          description: Transaction ID
+        hash:
+          type: string
+          description: Transaction hash (differs from txid for segwit)
+        size:
+          type: integer
+          description: Transaction size in bytes
+        vsize:
+          type: integer
+          description: Virtual transaction size
+        weight:
+          type: integer
+          description: Transaction weight
+        version:
+          type: integer
+          description: Transaction version
+        locktime:
+          type: integer
+          description: Transaction lock time
+        vin:
+          type: array
+          items:
+            type: object
+            properties:
+              txid:
+                type: string
+              vout:
+                type: integer
+              scriptSig:
+                type: object
+              txinwitness:
+                type: array
+                items:
+                  type: string
+              sequence:
+                type: integer
+        vout:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: number
+                description: Output value in LTC
+              n:
+                type: integer
+              scriptPubKey:
+                type: object
+        blockhash:
+          type: string
+          description: Hash of the block containing this transaction
+        confirmations:
+          type: integer
+          description: Number of confirmations
+        time:
+          type: integer
+          description: Transaction time (Unix timestamp)
+        blocktime:
+          type: integer
+          description: Block time (Unix timestamp)
+    MerkleProof:
+      type: object
+      properties:
+        block_height:
+          type: integer
+        merkle:
+          type: array
+          items:
+            type: string
+        pos:
+          type: integer
+    Transaction_2:
+      type: object
+      properties:
+        txid:
+          type: string
+        version:
+          type: integer
+        locktime:
+          type: integer
+        vin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxInput'
+        vout:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxOutput'
+        size:
+          type: integer
+        weight:
+          type: integer
+        sigops:
+          type: integer
+        fee:
+          type: integer
+          description: Transaction fee in satoshis
+        status:
+          $ref: '#/components/schemas/TxStatus'
+    TxInput:
+      type: object
+      properties:
+        txid:
+          type: string
+        vout:
+          type: integer
+        prevout:
+          $ref: '#/components/schemas/TxOutput'
+        scriptsig:
+          type: string
+        scriptsig_asm:
+          type: string
+        witness:
+          type: array
+          items:
+            type: string
+        is_coinbase:
+          type: boolean
+        sequence:
+          type: integer
+    Outspend:
+      type: object
+      properties:
+        spent:
+          type: boolean
+        txid:
+          type: string
+          nullable: true
+        vin:
+          type: integer
+          nullable: true
+        status:
+          $ref: '#/components/schemas/TxStatus'
+          nullable: true
+    TxStatus:
+      type: object
+      properties:
+        confirmed:
+          type: boolean
+        block_height:
+          type: integer
+          nullable: true
+        block_hash:
+          type: string
+          nullable: true
+        block_time:
+          type: integer
+          nullable: true
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
+          type: string
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
+          type: integer
+          description: Output value in satoshis
+  parameters:
+    txid:
+      name: txid
+      in: path
+      required: true
+      description: Transaction ID (txid) in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
+    txHash:
+      name: txHash
+      in: path
+      required: true
+      description: Transaction hash (txid) in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication using credentials from the .litecoin/.cookie file or configured via rpcauth in litecoin.conf.
+
+        '
+externalDocs:
+  description: Litecoin Core JSON-RPC Interface Documentation
+  url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md

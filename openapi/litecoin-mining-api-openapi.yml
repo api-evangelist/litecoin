@@ -1,0 +1,440 @@
+openapi: 3.0.3
+info:
+  title: Litecoin Core JSON-RPC Addresses Mining API
+  description: 'The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
+
+    '
+  version: '0.21'
+  contact:
+    name: Litecoin Project
+    url: https://github.com/litecoin-project/litecoin
+  license:
+    name: MIT
+    url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
+servers:
+- url: http://localhost:9332
+  description: Litecoin Core mainnet
+- url: http://localhost:19332
+  description: Litecoin Core testnet
+- url: http://localhost:19443
+  description: Litecoin Core regtest
+security:
+- basicAuth: []
+tags:
+- name: Mining
+  description: Mining pool statistics, hashrate, and difficulty endpoints
+paths:
+  /v1/mining/pools/{timePeriod}:
+    get:
+      operationId: getMiningPools
+      summary: Get mining pools by time period
+      description: Returns a list of mining pools ranked by block frequency over the specified time period.
+      parameters:
+      - $ref: '#/components/parameters/timePeriod'
+      responses:
+        '200':
+          description: Mining pool statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MiningPools'
+      tags:
+      - Mining
+  /v1/mining/pool/{slug}:
+    get:
+      operationId: getMiningPool
+      summary: Get mining pool details
+      description: Returns details for the specified mining pool.
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        description: Mining pool slug identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Mining pool details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MiningPool'
+      tags:
+      - Mining
+  /v1/mining/pool/{slug}/hashrate:
+    get:
+      operationId: getMiningPoolHashrate
+      summary: Get mining pool hashrate history
+      description: Returns historical hashrate data for the specified mining pool.
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Pool hashrate history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HashratePoint'
+      tags:
+      - Mining
+  /v1/mining/pool/{slug}/blocks/{blockHeight}:
+    get:
+      operationId: getMiningPoolBlocks
+      summary: Get blocks mined by pool
+      description: Returns the past 10 blocks mined by the specified pool.
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: blockHeight
+        in: path
+        required: false
+        description: Starting block height (defaults to tip)
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Blocks mined by the pool
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Block'
+      tags:
+      - Mining
+  /v1/mining/hashrate/pools/{timePeriod}:
+    get:
+      operationId: getMiningPoolsHashrate
+      summary: Get hashrate averages by pool
+      description: Returns average hashrate data for all pools over the specified time period.
+      parameters:
+      - $ref: '#/components/parameters/timePeriod'
+      responses:
+        '200':
+          description: Pool hashrate averages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PoolHashrateAverage'
+      tags:
+      - Mining
+  /v1/mining/hashrate/{timePeriod}:
+    get:
+      operationId: getNetworkHashrate
+      summary: Get network hashrate and difficulty
+      description: Returns network-wide hashrate and difficulty history over the specified period.
+      parameters:
+      - $ref: '#/components/parameters/timePeriod'
+      responses:
+        '200':
+          description: Network hashrate and difficulty data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkHashrate'
+      tags:
+      - Mining
+  /v1/mining/difficulty-adjustments/{interval}:
+    get:
+      operationId: getDifficultyAdjustments
+      summary: Get difficulty adjustment history
+      description: Returns historical difficulty adjustment data at the specified interval.
+      parameters:
+      - name: interval
+        in: path
+        required: true
+        description: Time interval for aggregation
+        schema:
+          type: string
+          enum:
+          - 24h
+          - 3d
+          - 1w
+          - 1m
+          - 3m
+          - 6m
+          - 1y
+          - 2y
+          - 3y
+      responses:
+        '200':
+          description: Difficulty adjustment history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DifficultyAdjustment'
+      tags:
+      - Mining
+  /v1/mining/blocks/fees/{timePeriod}:
+    get:
+      operationId: getMiningBlockFees
+      summary: Get average block fees by time period
+      description: Returns average block fee data over the specified time period.
+      parameters:
+      - $ref: '#/components/parameters/timePeriod'
+      responses:
+        '200':
+          description: Average block fee data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags:
+      - Mining
+  /v1/mining/blocks/rewards/{timePeriod}:
+    get:
+      operationId: getMiningBlockRewards
+      summary: Get average block rewards by time period
+      description: Returns average block reward data over the specified time period.
+      parameters:
+      - $ref: '#/components/parameters/timePeriod'
+      responses:
+        '200':
+          description: Average block reward data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags:
+      - Mining
+  /v1/mining/reward-stats/{blockCount}:
+    get:
+      operationId: getMiningRewardStats
+      summary: Get reward statistics for block count
+      description: Returns block reward and transaction fee statistics for the specified number of recent blocks.
+      parameters:
+      - name: blockCount
+        in: path
+        required: true
+        description: Number of recent blocks to analyze
+        schema:
+          type: integer
+          minimum: 1
+      responses:
+        '200':
+          description: Block reward statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewardStats'
+      tags:
+      - Mining
+  /v1/difficulty-adjustment:
+    get:
+      operationId: getDifficultyAdjustment
+      summary: Get current difficulty adjustment details
+      description: Returns details about the current difficulty adjustment period.
+      responses:
+        '200':
+          description: Current difficulty adjustment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DifficultyAdjustmentCurrent'
+      tags:
+      - Mining
+components:
+  schemas:
+    DifficultyAdjustmentCurrent:
+      type: object
+      properties:
+        progressPercent:
+          type: number
+        difficultyChange:
+          type: number
+        estimatedRetargetDate:
+          type: integer
+        remainingBlocks:
+          type: integer
+        remainingTime:
+          type: integer
+        previousRetarget:
+          type: number
+        previousTime:
+          type: integer
+        nextRetargetHeight:
+          type: integer
+        timeAvg:
+          type: integer
+        timeOffset:
+          type: integer
+        expectedBlocks:
+          type: number
+    DifficultyAdjustment:
+      type: object
+      properties:
+        time:
+          type: integer
+        height:
+          type: integer
+        difficulty:
+          type: number
+        adjustment:
+          type: number
+    Block:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Block hash
+        height:
+          type: integer
+        version:
+          type: integer
+        timestamp:
+          type: integer
+        tx_count:
+          type: integer
+        size:
+          type: integer
+        weight:
+          type: integer
+        merkle_root:
+          type: string
+        previousblockhash:
+          type: string
+        mediantime:
+          type: integer
+        nonce:
+          type: integer
+        bits:
+          type: integer
+        difficulty:
+          type: number
+    MiningPools:
+      type: object
+      properties:
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/MiningPool'
+        blockCount:
+          type: integer
+        lastEstimatedHashrate:
+          type: number
+    NetworkHashrate:
+      type: object
+      properties:
+        hashrates:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: integer
+              avgHashrate:
+                type: number
+        difficulty:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: integer
+              difficulty:
+                type: number
+        currentHashrate:
+          type: number
+        currentDifficulty:
+          type: number
+    MiningPool:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        blockCount:
+          type: integer
+        rank:
+          type: integer
+        emptyBlocks:
+          type: integer
+        avgMatchRate:
+          type: number
+        avgFeeDelta:
+          type: string
+        poolUniqueId:
+          type: integer
+    HashratePoint:
+      type: object
+      properties:
+        timestamp:
+          type: integer
+        avgHashrate:
+          type: number
+        share:
+          type: number
+        blockCount:
+          type: integer
+    PoolHashrateAverage:
+      type: object
+      properties:
+        poolName:
+          type: string
+        poolId:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HashratePoint'
+    RewardStats:
+      type: object
+      properties:
+        startBlock:
+          type: integer
+        endBlock:
+          type: integer
+        totalReward:
+          type: integer
+        totalFee:
+          type: integer
+        totalTx:
+          type: integer
+  parameters:
+    timePeriod:
+      name: timePeriod
+      in: path
+      required: true
+      description: Time period for the query
+      schema:
+        type: string
+        enum:
+        - 24h
+        - 3d
+        - 1w
+        - 1m
+        - 3m
+        - 6m
+        - 1y
+        - 2y
+        - 3y
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication using credentials from the .litecoin/.cookie file or configured via rpcauth in litecoin.conf.
+
+        '
+externalDocs:
+  description: Litecoin Core JSON-RPC Interface Documentation
+  url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md

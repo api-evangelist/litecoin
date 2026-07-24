@@ -1,0 +1,222 @@
+openapi: 3.0.3
+info:
+  title: Litecoin Core JSON-RPC Addresses Mempool API
+  description: 'The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
+
+    '
+  version: '0.21'
+  contact:
+    name: Litecoin Project
+    url: https://github.com/litecoin-project/litecoin
+  license:
+    name: MIT
+    url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
+servers:
+- url: http://localhost:9332
+  description: Litecoin Core mainnet
+- url: http://localhost:19332
+  description: Litecoin Core testnet
+- url: http://localhost:19443
+  description: Litecoin Core regtest
+security:
+- basicAuth: []
+tags:
+- name: Mempool
+  description: Mempool state and contents endpoints
+paths:
+  /rest/mempool/info.json:
+    get:
+      operationId: getMempoolInfo
+      summary: Get mempool info
+      description: 'Returns statistics about the current state of the mempool, including the number of transactions, total size, and fee information. Only available in JSON format.
+
+        '
+      responses:
+        '200':
+          description: Mempool statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MempoolInfo'
+      tags:
+      - Mempool
+  /rest/mempool/contents.json:
+    get:
+      operationId: getMempoolContents
+      summary: Get mempool contents
+      description: 'Returns all transactions currently in the mempool with full details. Only available in JSON format. Use with caution on busy nodes as the response can be very large.
+
+        '
+      responses:
+        '200':
+          description: All mempool transactions
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/MempoolEntry'
+      tags:
+      - Mempool
+  /mempool:
+    get:
+      operationId: getMempool
+      summary: Get mempool statistics
+      description: Returns statistics about the current state of the Litecoin mempool.
+      responses:
+        '200':
+          description: Mempool statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MempoolStats'
+      tags:
+      - Mempool
+  /mempool/txids:
+    get:
+      operationId: getMempoolTxids
+      summary: Get mempool transaction IDs
+      description: Returns all transaction IDs currently in the mempool.
+      responses:
+        '200':
+          description: Array of transaction IDs in the mempool
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      tags:
+      - Mempool
+  /mempool/recent:
+    get:
+      operationId: getMempoolRecent
+      summary: Get recent mempool transactions
+      description: Returns the last 10 transactions added to the mempool.
+      responses:
+        '200':
+          description: Array of recent mempool transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MempoolRecentTx'
+      tags:
+      - Mempool
+components:
+  schemas:
+    MempoolStats:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Number of transactions in the mempool
+        vsize:
+          type: integer
+          description: Total virtual size of all mempool transactions in vbytes
+        total_fee:
+          type: integer
+          description: Total fees in the mempool in satoshis
+        fee_histogram:
+          type: array
+          description: Fee histogram as [feerate, vsize] pairs
+          items:
+            type: array
+            items:
+              type: number
+    MempoolInfo:
+      type: object
+      properties:
+        loaded:
+          type: boolean
+          description: True if the mempool is fully loaded
+        size:
+          type: integer
+          description: Current transaction count in mempool
+        bytes:
+          type: integer
+          description: Sum of all transaction sizes in bytes
+        usage:
+          type: integer
+          description: Total memory usage for the mempool in bytes
+        maxmempool:
+          type: integer
+          description: Maximum memory usage for the mempool in bytes
+        mempoolminfee:
+          type: number
+          description: Minimum fee rate in LTC/kB for acceptance into mempool
+        minrelaytxfee:
+          type: number
+          description: Current minimum relay fee for transactions
+    MempoolEntry:
+      type: object
+      properties:
+        vsize:
+          type: integer
+        weight:
+          type: integer
+        fee:
+          type: number
+        modifiedfee:
+          type: number
+        time:
+          type: integer
+        height:
+          type: integer
+        descendantcount:
+          type: integer
+        descendantsize:
+          type: integer
+        descendantfees:
+          type: number
+        ancestorcount:
+          type: integer
+        ancestorsize:
+          type: integer
+        ancestorfees:
+          type: number
+        wtxid:
+          type: string
+        fees:
+          type: object
+          properties:
+            base:
+              type: number
+            modified:
+              type: number
+            ancestor:
+              type: number
+            descendant:
+              type: number
+        depends:
+          type: array
+          items:
+            type: string
+        spentby:
+          type: array
+          items:
+            type: string
+        bip125-replaceable:
+          type: boolean
+    MempoolRecentTx:
+      type: object
+      properties:
+        txid:
+          type: string
+        fee:
+          type: integer
+        vsize:
+          type: integer
+        value:
+          type: integer
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication using credentials from the .litecoin/.cookie file or configured via rpcauth in litecoin.conf.
+
+        '
+externalDocs:
+  description: Litecoin Core JSON-RPC Interface Documentation
+  url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md

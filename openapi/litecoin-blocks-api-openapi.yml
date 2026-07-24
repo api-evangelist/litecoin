@@ -1,0 +1,805 @@
+openapi: 3.0.3
+info:
+  title: Litecoin Core JSON-RPC Addresses Blocks API
+  description: 'The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
+
+    '
+  version: '0.21'
+  contact:
+    name: Litecoin Project
+    url: https://github.com/litecoin-project/litecoin
+  license:
+    name: MIT
+    url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
+servers:
+- url: http://localhost:9332
+  description: Litecoin Core mainnet
+- url: http://localhost:19332
+  description: Litecoin Core testnet
+- url: http://localhost:19443
+  description: Litecoin Core regtest
+security:
+- basicAuth: []
+tags:
+- name: Blocks
+  description: Block and header retrieval endpoints
+paths:
+  /rest/block/{blockHash}.json:
+    get:
+      operationId: getBlockJson
+      summary: Get block with full transaction details (JSON)
+      description: 'Returns complete block data including all transaction details in JSON format. Returns 404 if the block is not found.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Block with full transaction details in JSON format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Block'
+        '404':
+          description: Block not found
+      tags:
+      - Blocks
+  /rest/block/{blockHash}.hex:
+    get:
+      operationId: getBlockHex
+      summary: Get block (hex)
+      description: Returns complete block data in hex-encoded format.
+      parameters:
+      - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Hex-encoded block data
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Block not found
+      tags:
+      - Blocks
+  /rest/block/{blockHash}.bin:
+    get:
+      operationId: getBlockBin
+      summary: Get block (binary)
+      description: Returns complete block data in raw binary format.
+      parameters:
+      - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Raw binary block data
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Block not found
+      tags:
+      - Blocks
+  /rest/block/notxdetails/{blockHash}.json:
+    get:
+      operationId: getBlockNoTxDetailsJson
+      summary: Get block without full transaction details (JSON)
+      description: 'Returns block data in JSON format, but the transactions array contains only transaction hashes rather than full transaction objects.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Block with transaction IDs only in JSON format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockNoTxDetails'
+        '404':
+          description: Block not found
+      tags:
+      - Blocks
+  /rest/block/notxdetails/{blockHash}.hex:
+    get:
+      operationId: getBlockNoTxDetailsHex
+      summary: Get block without transaction details (hex)
+      description: Returns block data in hex-encoded format without full transaction expansion.
+      parameters:
+      - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Hex-encoded block data
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Block not found
+      tags:
+      - Blocks
+  /rest/headers/{count}/{blockHash}.json:
+    get:
+      operationId: getBlockHeadersJson
+      summary: Get block headers (JSON)
+      description: 'Retrieves the specified number of block headers starting from the given block hash and going in the upward (newer) direction.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/count'
+      - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Array of block headers in JSON format
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlockHeader'
+        '404':
+          description: Block not found
+      tags:
+      - Blocks
+  /rest/headers/{count}/{blockHash}.hex:
+    get:
+      operationId: getBlockHeadersHex
+      summary: Get block headers (hex)
+      description: Returns the specified number of block headers in hex-encoded format.
+      parameters:
+      - $ref: '#/components/parameters/count'
+      - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Hex-encoded block headers
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Block not found
+      tags:
+      - Blocks
+  /rest/blockhashbyheight/{height}.json:
+    get:
+      operationId: getBlockHashByHeightJson
+      summary: Get block hash by height (JSON)
+      description: Returns the hash of the block at the specified height in JSON format.
+      parameters:
+      - $ref: '#/components/parameters/height'
+      responses:
+        '200':
+          description: Block hash in JSON format
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  blockhash:
+                    type: string
+                    description: The block hash at the specified height
+        '404':
+          description: Block height not found
+      tags:
+      - Blocks
+  /rest/blockhashbyheight/{height}.hex:
+    get:
+      operationId: getBlockHashByHeightHex
+      summary: Get block hash by height (hex)
+      description: Returns the hash of the block at the specified height in hex format.
+      parameters:
+      - $ref: '#/components/parameters/height'
+      responses:
+        '200':
+          description: Block hash as hex string
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Block height not found
+      tags:
+      - Blocks
+  /block/{hash}:
+    get:
+      operationId: getBlock
+      summary: Get block details
+      description: Returns details about the block including header fields and transaction summary.
+      parameters:
+      - $ref: '#/components/parameters/hash'
+      responses:
+        '200':
+          description: Block details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Block_2'
+        '404':
+          description: Block not found
+      tags:
+      - Blocks
+  /block/{hash}/header:
+    get:
+      operationId: getBlockHeader
+      summary: Get block header
+      description: Returns the hex-encoded block header.
+      parameters:
+      - $ref: '#/components/parameters/hash'
+      responses:
+        '200':
+          description: Hex-encoded block header
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Block not found
+      tags:
+      - Blocks
+  /block-height/{height}:
+    get:
+      operationId: getBlockHashAtHeight
+      summary: Get block hash at height
+      description: Returns the hash of the block at the specified height.
+      parameters:
+      - $ref: '#/components/parameters/height'
+      responses:
+        '200':
+          description: Block hash as plain text
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Block height not found
+      tags:
+      - Blocks
+  /block/{hash}/raw:
+    get:
+      operationId: getBlockRaw
+      summary: Get raw block data
+      description: Returns the raw block data in binary format.
+      parameters:
+      - $ref: '#/components/parameters/hash'
+      responses:
+        '200':
+          description: Raw binary block data
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Block not found
+      tags:
+      - Blocks
+  /block/{hash}/status:
+    get:
+      operationId: getBlockStatus
+      summary: Get block confirmation status
+      description: Returns the confirmation status of a block.
+      parameters:
+      - $ref: '#/components/parameters/hash'
+      responses:
+        '200':
+          description: Block confirmation status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockStatus'
+      tags:
+      - Blocks
+  /blocks/tip/height:
+    get:
+      operationId: getBlockTipHeight
+      summary: Get latest block height
+      description: Returns the height of the latest confirmed block.
+      responses:
+        '200':
+          description: Current block height as plain integer
+          content:
+            text/plain:
+              schema:
+                type: integer
+      tags:
+      - Blocks
+  /blocks/tip/hash:
+    get:
+      operationId: getBlockTipHash
+      summary: Get latest block hash
+      description: Returns the hash of the latest confirmed block.
+      responses:
+        '200':
+          description: Current block hash as plain text
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+      - Blocks
+  /block/{hash}/txid/{index}:
+    get:
+      operationId: getBlockTxid
+      summary: Get transaction ID at index in block
+      description: Returns the transaction ID at the specified index within the block.
+      parameters:
+      - $ref: '#/components/parameters/hash'
+      - name: index
+        in: path
+        required: true
+        description: Zero-based transaction index within the block
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: Transaction ID
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Not found
+      tags:
+      - Blocks
+  /block/{hash}/txids:
+    get:
+      operationId: getBlockTxids
+      summary: Get all transaction IDs in block
+      description: Returns all transaction IDs included in the block.
+      parameters:
+      - $ref: '#/components/parameters/hash'
+      responses:
+        '200':
+          description: Array of transaction IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: Block not found
+      tags:
+      - Blocks
+  /block/{hash}/txs/{startIndex}:
+    get:
+      operationId: getBlockTxs
+      summary: Get block transactions
+      description: Returns up to 25 transactions from the block starting at the given index.
+      parameters:
+      - $ref: '#/components/parameters/hash'
+      - name: startIndex
+        in: path
+        required: true
+        description: Starting index (must be a multiple of 25)
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: Array of transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction_2'
+        '404':
+          description: Block not found
+      tags:
+      - Blocks
+  /blocks/{startHeight}:
+    get:
+      operationId: getBlocks
+      summary: Get recent blocks
+      description: Returns the past 10 blocks before the specified height (or tip if omitted).
+      parameters:
+      - name: startHeight
+        in: path
+        required: false
+        description: Block height to start from (defaults to chain tip)
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Array of blocks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Block_2'
+      tags:
+      - Blocks
+  /v1/blocks/{startHeight}:
+    get:
+      operationId: getBlocksV1
+      summary: Get recent blocks with mining data (v1)
+      description: Returns the past 15 blocks before the specified height including mining pool information.
+      parameters:
+      - name: startHeight
+        in: path
+        required: false
+        description: Block height to start from (defaults to chain tip)
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Array of blocks with mining data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlockWithMining'
+      tags:
+      - Blocks
+  /v1/blocks-bulk/{minHeight}/{maxHeight}:
+    get:
+      operationId: getBlocksBulk
+      summary: Get bulk range of blocks
+      description: Returns a range of blocks (up to 10 at a time) by height range.
+      parameters:
+      - name: minHeight
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: maxHeight
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Array of blocks in the height range
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Block_2'
+      tags:
+      - Blocks
+components:
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        txid:
+          type: string
+          description: Transaction ID
+        hash:
+          type: string
+          description: Transaction hash (differs from txid for segwit)
+        size:
+          type: integer
+          description: Transaction size in bytes
+        vsize:
+          type: integer
+          description: Virtual transaction size
+        weight:
+          type: integer
+          description: Transaction weight
+        version:
+          type: integer
+          description: Transaction version
+        locktime:
+          type: integer
+          description: Transaction lock time
+        vin:
+          type: array
+          items:
+            type: object
+            properties:
+              txid:
+                type: string
+              vout:
+                type: integer
+              scriptSig:
+                type: object
+              txinwitness:
+                type: array
+                items:
+                  type: string
+              sequence:
+                type: integer
+        vout:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: number
+                description: Output value in LTC
+              n:
+                type: integer
+              scriptPubKey:
+                type: object
+        blockhash:
+          type: string
+          description: Hash of the block containing this transaction
+        confirmations:
+          type: integer
+          description: Number of confirmations
+        time:
+          type: integer
+          description: Transaction time (Unix timestamp)
+        blocktime:
+          type: integer
+          description: Block time (Unix timestamp)
+    Block_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Block hash
+        height:
+          type: integer
+        version:
+          type: integer
+        timestamp:
+          type: integer
+        tx_count:
+          type: integer
+        size:
+          type: integer
+        weight:
+          type: integer
+        merkle_root:
+          type: string
+        previousblockhash:
+          type: string
+        mediantime:
+          type: integer
+        nonce:
+          type: integer
+        bits:
+          type: integer
+        difficulty:
+          type: number
+    BlockHeader:
+      type: object
+      properties:
+        hash:
+          type: string
+        confirmations:
+          type: integer
+        height:
+          type: integer
+        version:
+          type: integer
+        versionHex:
+          type: string
+        merkleroot:
+          type: string
+        time:
+          type: integer
+        mediantime:
+          type: integer
+        nonce:
+          type: integer
+        bits:
+          type: string
+        difficulty:
+          type: number
+        chainwork:
+          type: string
+        nTx:
+          type: integer
+        previousblockhash:
+          type: string
+        nextblockhash:
+          type: string
+    Block:
+      type: object
+      properties:
+        hash:
+          type: string
+          description: Block hash
+        confirmations:
+          type: integer
+        size:
+          type: integer
+        strippedsize:
+          type: integer
+        weight:
+          type: integer
+        height:
+          type: integer
+        version:
+          type: integer
+        versionHex:
+          type: string
+        merkleroot:
+          type: string
+        tx:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+          description: Full transaction objects
+        time:
+          type: integer
+        mediantime:
+          type: integer
+        nonce:
+          type: integer
+        bits:
+          type: string
+        difficulty:
+          type: number
+        chainwork:
+          type: string
+        nTx:
+          type: integer
+        previousblockhash:
+          type: string
+        nextblockhash:
+          type: string
+    Transaction_2:
+      type: object
+      properties:
+        txid:
+          type: string
+        version:
+          type: integer
+        locktime:
+          type: integer
+        vin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxInput'
+        vout:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxOutput'
+        size:
+          type: integer
+        weight:
+          type: integer
+        sigops:
+          type: integer
+        fee:
+          type: integer
+          description: Transaction fee in satoshis
+        status:
+          $ref: '#/components/schemas/TxStatus'
+    BlockWithMining:
+      allOf:
+      - $ref: '#/components/schemas/Block_2'
+      properties:
+        extras:
+          type: object
+          properties:
+            reward:
+              type: integer
+            coinbaseTx:
+              type: object
+            totalFees:
+              type: integer
+            avgFee:
+              type: integer
+            avgFeeRate:
+              type: integer
+            pool:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                slug:
+                  type: string
+    BlockStatus:
+      type: object
+      properties:
+        in_best_chain:
+          type: boolean
+        height:
+          type: integer
+        next_best:
+          type: string
+    TxInput:
+      type: object
+      properties:
+        txid:
+          type: string
+        vout:
+          type: integer
+        prevout:
+          $ref: '#/components/schemas/TxOutput'
+        scriptsig:
+          type: string
+        scriptsig_asm:
+          type: string
+        witness:
+          type: array
+          items:
+            type: string
+        is_coinbase:
+          type: boolean
+        sequence:
+          type: integer
+    TxStatus:
+      type: object
+      properties:
+        confirmed:
+          type: boolean
+        block_height:
+          type: integer
+          nullable: true
+        block_hash:
+          type: string
+          nullable: true
+        block_time:
+          type: integer
+          nullable: true
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
+          type: string
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
+          type: integer
+          description: Output value in satoshis
+    BlockNoTxDetails:
+      allOf:
+      - $ref: '#/components/schemas/Block'
+      properties:
+        tx:
+          type: array
+          items:
+            type: string
+          description: Array of transaction IDs only
+  parameters:
+    hash:
+      name: hash
+      in: path
+      required: true
+      description: Block hash in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
+    height:
+      name: height
+      in: path
+      required: true
+      description: Block height (0-indexed from genesis)
+      schema:
+        type: integer
+        minimum: 0
+    blockHash:
+      name: blockHash
+      in: path
+      required: true
+      description: Block hash in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
+    count:
+      name: count
+      in: path
+      required: true
+      description: Number of block headers to retrieve
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2000
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication using credentials from the .litecoin/.cookie file or configured via rpcauth in litecoin.conf.
+
+        '
+externalDocs:
+  description: Litecoin Core JSON-RPC Interface Documentation
+  url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md

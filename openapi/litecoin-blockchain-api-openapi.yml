@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  title: Litecoin Core JSON-RPC Addresses Blockchain API
+  description: 'The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
+
+    '
+  version: '0.21'
+  contact:
+    name: Litecoin Project
+    url: https://github.com/litecoin-project/litecoin
+  license:
+    name: MIT
+    url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
+servers:
+- url: http://localhost:9332
+  description: Litecoin Core mainnet
+- url: http://localhost:19332
+  description: Litecoin Core testnet
+- url: http://localhost:19443
+  description: Litecoin Core regtest
+security:
+- basicAuth: []
+tags:
+- name: Blockchain
+  description: Chain state information endpoints
+paths:
+  /rest/chaininfo.json:
+    get:
+      operationId: getChainInfo
+      summary: Get chain info
+      description: 'Returns various state information regarding block chain processing. Only available in JSON format. Equivalent to the getblockchaininfo JSON-RPC call.
+
+        '
+      responses:
+        '200':
+          description: Chain state information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChainInfo'
+      tags:
+      - Blockchain
+components:
+  schemas:
+    ChainInfo:
+      type: object
+      properties:
+        chain:
+          type: string
+          description: Current network (main, test, regtest)
+        blocks:
+          type: integer
+          description: Current number of blocks processed in the server
+        headers:
+          type: integer
+          description: Current number of headers known
+        bestblockhash:
+          type: string
+          description: Hash of the currently best block
+        difficulty:
+          type: number
+        mediantime:
+          type: integer
+        verificationprogress:
+          type: number
+        chainwork:
+          type: string
+        size_on_disk:
+          type: integer
+        pruned:
+          type: boolean
+        pruneheight:
+          type: integer
+        softforks:
+          type: object
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication using credentials from the .litecoin/.cookie file or configured via rpcauth in litecoin.conf.
+
+        '
+externalDocs:
+  description: Litecoin Core JSON-RPC Interface Documentation
+  url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md

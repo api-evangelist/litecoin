@@ -5,7 +5,20 @@ description: Litecoin is a peer-to-peer cryptocurrency network based on the Bitc
   built-in unauthenticated REST interface for public blockchain queries, and a Litecoin
   Space block explorer REST and WebSocket API (mempool.space-compatible) for querying
   transactions, addresses, blocks, UTXO data, mempool state, and fee estimates.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: open
+  trial: false
+  try_now: true
+  public: true
+  label: Free · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/litecoin.png
 tags:
   - Cryptocurrency
   - Blockchain
@@ -20,159 +33,432 @@ created: '2026-06-14'
 modified: '2026-06-14'
 specificationVersion: '0.19'
 apis:
-  - name: Litecoin Core JSON-RPC API
-    description: The primary programmatic interface to a Litecoin Core node. Clients
-      send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node.
-      Methods cover blockchain state, block and transaction retrieval, mempool inspection,
-      network peers, mining, UTXO queries, address validation, raw transaction construction
-      and broadcast, and fee estimation. The daemon listens on port 9332 (mainnet),
-      19332 (testnet), and 19443 (regtest). Authentication is required via cookie
-      file or rpcauth credentials.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
-    baseURL: http://localhost:9332
-    tags:
-      - JSON-RPC
-      - Blockchain
-      - Litecoin Core
-      - Node
-      - Transactions
-      - Blocks
-      - Mempool
-      - UTXO
-      - Mining
-    properties:
-      - type: Documentation
-        url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/openapi/litecoin-core-json-rpc.yml
-      - type: Plans
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-json-rpc.yml
-      - type: RateLimits
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-json-rpc.yml
-      - type: FinOps
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-json-rpc.yml
-    contact:
-      - FN: Litecoin Project
-        url: https://github.com/litecoin-project/litecoin
-    meta:
-      - name: score
-        value: 0
-
-  - name: Litecoin Core REST API
-    description: An unauthenticated, read-only HTTP REST interface built into Litecoin
-      Core and enabled with the -rest flag. Supports retrieval of transactions, full
-      blocks, block headers, block hash by height, chain information, UTXO set queries
-      (per BIP64), and mempool statistics and contents. Responses are available in
-      binary, hex-encoded, or JSON format depending on the file extension (.bin, .hex,
-      .json) appended to each path. Runs on the same port as JSON-RPC (default 9332
-      mainnet).
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
-    baseURL: http://localhost:9332
-    tags:
-      - REST
-      - Blockchain
-      - Litecoin Core
-      - Transactions
-      - Blocks
-      - UTXO
-      - Mempool
-      - Read-Only
-    properties:
-      - type: Documentation
-        url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/openapi/litecoin-core-rest.yml
-      - type: Plans
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-rest.yml
-      - type: RateLimits
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-rest.yml
-      - type: FinOps
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-rest.yml
-    contact:
-      - FN: Litecoin Project
-        url: https://github.com/litecoin-project/litecoin
-    meta:
-      - name: score
-        value: 0
-
-  - name: Litecoin Space REST API
-    description: A public REST API provided by the Litecoin Space block explorer (litecoinspace.org),
-      a mempool.space-compatible service for the Litecoin network. Endpoints cover
-      addresses (details, transactions, UTXOs, validation), blocks (details, headers,
-      height, raw data, transactions), transactions (details, hex, raw, Merkle proofs,
-      output spend status, broadcast), mempool (statistics, transaction IDs, recent
-      transactions), fee recommendations, mining pool statistics, and network hashrate
-      and difficulty data. No authentication required for public endpoints.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://litecoinspace.org/docs/api/rest
-    baseURL: https://litecoinspace.org/api
-    tags:
-      - REST
-      - Block Explorer
-      - Litecoin Space
-      - Transactions
-      - Blocks
-      - Addresses
-      - UTXO
-      - Mempool
-      - Fees
-      - Mining
-      - Public
-    properties:
-      - type: Documentation
-        url: https://litecoinspace.org/docs/api/rest
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/openapi/litecoin-space-rest.yml
-      - type: Plans
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-rest.yml
-      - type: RateLimits
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-rest.yml
-      - type: FinOps
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml
-    contact:
-      - FN: Litecoin Foundation
-        url: https://github.com/litecoin-foundation/ltcspace
-    meta:
-      - name: score
-        value: 0
-
-  - name: Litecoin Space WebSocket API
-    description: A real-time WebSocket API provided by Litecoin Space (litecoinspace.org)
-      for subscribing to live Litecoin network events. Clients connect to the WebSocket
-      endpoint and subscribe to channels including new blocks, mempool block projections,
-      live 2-hour fee rate charts, and network stats. Address tracking is supported
-      to receive push notifications for new mempool and block-confirmed transactions
-      involving a specific address.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://litecoinspace.org/docs/api/websocket
-    baseURL: wss://litecoinspace.org/api/v1/ws
-    tags:
-      - WebSocket
-      - Block Explorer
-      - Litecoin Space
-      - Real-Time
-      - Blocks
-      - Mempool
-      - Address Tracking
-      - Fees
-    properties:
-      - type: Documentation
-        url: https://litecoinspace.org/docs/api/websocket
-      - type: Plans
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-websocket.yml
-      - type: RateLimits
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-websocket.yml
-      - type: FinOps
-        url: https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-websocket.yml
-    contact:
-      - FN: Litecoin Foundation
-        url: https://github.com/litecoin-foundation/ltcspace
-    meta:
-      - name: score
-        value: 0
-
+- name: Litecoin Space WebSocket API
+  description: >-
+    A real-time WebSocket API provided by Litecoin Space (litecoinspace.org) for subscribing to live Litecoin
+    network events. Clients connect to the WebSocket endpoint and subscribe to channels including new
+    blocks, mempool block projections, live 2-hour fee rate charts, and network stats. Address tracking
+    is supported to receive push notifications for new mempool and block-confirmed transactions involving
+    a specific address.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://litecoinspace.org/docs/api/websocket
+  baseURL: wss://litecoinspace.org/api/v1/ws
+  tags:
+  - WebSocket
+  - Block Explorer
+  - Litecoin Space
+  - Real-Time
+  - Blocks
+  - Mempool
+  - Address Tracking
+  - Fees
+  properties:
+  - type: Documentation
+    url: https://litecoinspace.org/docs/api/websocket
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-websocket.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-websocket.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-websocket.yml
+  contact:
+  - FN: Litecoin Foundation
+    url: https://github.com/litecoin-foundation/ltcspace
+  meta:
+  - name: score
+    value: 0
+- aid: litecoin:litecoin-addresses-api
+  name: Litecoin Addresses API
+  description: Address lookup, transaction history, and UTXO endpoints
+  humanURL: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  baseURL: http://localhost:9332
+  tags:
+  - Addresses
+  properties:
+  - type: OpenAPI
+    url: openapi/litecoin-addresses-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-json-rpc.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-json-rpc.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-json-rpc.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-rest.yml
+  - type: Documentation
+    url: https://litecoinspace.org/docs/api/rest
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml
+- aid: litecoin:litecoin-blockchain-api
+  name: Litecoin Blockchain API
+  description: Chain state information endpoints
+  humanURL: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  baseURL: http://localhost:9332
+  tags:
+  - Blockchain
+  properties:
+  - type: OpenAPI
+    url: openapi/litecoin-blockchain-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-json-rpc.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-json-rpc.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-json-rpc.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-rest.yml
+  - type: Documentation
+    url: https://litecoinspace.org/docs/api/rest
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml
+- aid: litecoin:litecoin-blocks-api
+  name: Litecoin Blocks API
+  description: Block and header retrieval endpoints
+  humanURL: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  baseURL: http://localhost:9332
+  tags:
+  - Blocks
+  properties:
+  - type: OpenAPI
+    url: openapi/litecoin-blocks-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-json-rpc.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-json-rpc.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-json-rpc.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-rest.yml
+  - type: Documentation
+    url: https://litecoinspace.org/docs/api/rest
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml
+- aid: litecoin:litecoin-fees-api
+  name: Litecoin Fees API
+  description: Fee estimation and recommendation endpoints
+  humanURL: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  baseURL: http://localhost:9332
+  tags:
+  - Fees
+  properties:
+  - type: OpenAPI
+    url: openapi/litecoin-fees-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-json-rpc.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-json-rpc.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-json-rpc.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-rest.yml
+  - type: Documentation
+    url: https://litecoinspace.org/docs/api/rest
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml
+- aid: litecoin:litecoin-json-rpc-api
+  name: Litecoin JSON-RPC API
+  description: >-
+    Litecoin Core JSON-RPC 2.0 interface. All methods are accessed via a single POST endpoint using the
+    method field to select the operation.
+  humanURL: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  baseURL: http://localhost:9332
+  tags:
+  - JSON-RPC
+  properties:
+  - type: OpenAPI
+    url: openapi/litecoin-json-rpc-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-json-rpc.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-json-rpc.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-json-rpc.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-rest.yml
+  - type: Documentation
+    url: https://litecoinspace.org/docs/api/rest
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml
+- aid: litecoin:litecoin-mempool-api
+  name: Litecoin Mempool API
+  description: Mempool state and contents endpoints
+  humanURL: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  baseURL: http://localhost:9332
+  tags:
+  - Mempool
+  properties:
+  - type: OpenAPI
+    url: openapi/litecoin-mempool-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-json-rpc.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-json-rpc.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-json-rpc.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-rest.yml
+  - type: Documentation
+    url: https://litecoinspace.org/docs/api/rest
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml
+- aid: litecoin:litecoin-mining-api
+  name: Litecoin Mining API
+  description: Mining pool statistics, hashrate, and difficulty endpoints
+  humanURL: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  baseURL: http://localhost:9332
+  tags:
+  - Mining
+  properties:
+  - type: OpenAPI
+    url: openapi/litecoin-mining-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-json-rpc.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-json-rpc.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-json-rpc.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-rest.yml
+  - type: Documentation
+    url: https://litecoinspace.org/docs/api/rest
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml
+- aid: litecoin:litecoin-transactions-api
+  name: Litecoin Transactions API
+  description: Transaction retrieval endpoints
+  humanURL: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  baseURL: http://localhost:9332
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/litecoin-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-json-rpc.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-json-rpc.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-json-rpc.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-rest.yml
+  - type: Documentation
+    url: https://litecoinspace.org/docs/api/rest
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml
+- aid: litecoin:litecoin-utxo-api
+  name: Litecoin UTXO API
+  description: Unspent transaction output query endpoints
+  humanURL: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  baseURL: http://localhost:9332
+  tags:
+  - UTXO
+  properties:
+  - type: OpenAPI
+    url: openapi/litecoin-utxo-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-json-rpc.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-json-rpc.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-json-rpc.yml
+  - type: Documentation
+    url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-rest.yml
+  - type: Documentation
+    url: https://litecoinspace.org/docs/api/rest
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-rest.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-rest.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml
 common:
   - type: AgenticAccess
     url: agentic-access/litecoin-agentic-access.yml

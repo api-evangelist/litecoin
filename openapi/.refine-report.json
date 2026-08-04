@@ -1,0 +1,30 @@
+{
+  "provider": "litecoin",
+  "sources": [
+    "litecoin-addresses-api-openapi.yml",
+    "litecoin-blockchain-api-openapi.yml",
+    "litecoin-blocks-api-openapi.yml",
+    "litecoin-fees-api-openapi.yml",
+    "litecoin-json-rpc-api-openapi.yml",
+    "litecoin-mempool-api-openapi.yml",
+    "litecoin-mining-api-openapi.yml",
+    "litecoin-transactions-api-openapi.yml",
+    "litecoin-utxo-api-openapi.yml"
+  ],
+  "outputs": [
+    "litecoin-addresses-api-openapi.yml",
+    "litecoin-blockchain-api-openapi.yml",
+    "litecoin-blocks-api-openapi.yml",
+    "litecoin-fees-api-openapi.yml",
+    "litecoin-json-rpc-api-openapi.yml",
+    "litecoin-mempool-api-openapi.yml",
+    "litecoin-mining-api-openapi.yml",
+    "litecoin-transactions-api-openapi.yml",
+    "litecoin-utxo-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

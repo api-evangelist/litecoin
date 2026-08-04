@@ -1,0 +1,212 @@
+openapi: 3.0.3
+info:
+  title: Litecoin Core JSON-RPC API
+  description: >
+    The primary programmatic interface to a Litecoin Core node. Clients send HTTP
+    POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover
+    blockchain state, block and transaction retrieval, mempool inspection, network peers,
+    mining, UTXO queries, address validation, raw transaction construction and broadcast,
+    and fee estimation. Authentication is required via cookie file or rpcauth credentials.
+    The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
+  version: '0.21'
+  contact:
+    name: Litecoin Project
+    url: https://github.com/litecoin-project/litecoin
+  license:
+    name: MIT
+    url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
+externalDocs:
+  description: Litecoin Core JSON-RPC Interface Documentation
+  url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+servers:
+  - url: http://localhost:9332
+    description: Litecoin Core mainnet
+  - url: http://localhost:19332
+    description: Litecoin Core testnet
+  - url: http://localhost:19443
+    description: Litecoin Core regtest
+security:
+  - basicAuth: []
+paths:
+  /:
+    post:
+      operationId: jsonRpcRequest
+      summary: Execute a JSON-RPC method
+      description: >
+        Send a JSON-RPC 2.0 request to the Litecoin Core node. The method and params
+        fields determine which operation is performed. All requests use HTTP POST to
+        the root path with Basic authentication.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonRpcRequest'
+            examples:
+              getblockchaininfo:
+                summary: Get blockchain info
+                value:
+                  jsonrpc: "2.0"
+                  id: 1
+                  method: getblockchaininfo
+                  params: []
+              getblock:
+                summary: Get block by hash
+                value:
+                  jsonrpc: "2.0"
+                  id: 1
+                  method: getblock
+                  params: ["0000000000000000000000000000000000000000000000000000000000000000", 1]
+              getrawtransaction:
+                summary: Get raw transaction
+                value:
+                  jsonrpc: "2.0"
+                  id: 1
+                  method: getrawtransaction
+                  params: ["txid_here", true]
+              sendrawtransaction:
+                summary: Broadcast raw transaction
+                value:
+                  jsonrpc: "2.0"
+                  id: 1
+                  method: sendrawtransaction
+                  params: ["hex_encoded_transaction"]
+              estimatesmartfee:
+                summary: Estimate smart fee
+                value:
+                  jsonrpc: "2.0"
+                  id: 1
+                  method: estimatesmartfee
+                  params: [6]
+      responses:
+        '200':
+          description: JSON-RPC response (success or application-level error)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonRpcResponse'
+        '400':
+          description: Bad request (malformed JSON-RPC)
+        '401':
+          description: Unauthorized (missing or invalid credentials)
+        '500':
+          description: Internal server error
+      tags:
+        - JSON-RPC
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >
+        HTTP Basic Authentication using credentials from the .litecoin/.cookie file
+        or configured via rpcauth in litecoin.conf.
+  schemas:
+    JsonRpcRequest:
+      type: object
+      required:
+        - method
+      properties:
+        jsonrpc:
+          type: string
+          enum: ["1.0", "2.0"]
+          default: "2.0"
+          description: JSON-RPC protocol version
+        id:
+          oneOf:
+            - type: string
+            - type: integer
+            - type: 'null'
+          description: Request identifier echoed in the response
+        method:
+          type: string
+          description: >
+            The JSON-RPC method name. Supported methods include:
+
+            **Blockchain:** getbestblockhash, getblock, getblockchaininfo, getblockcount,
+            getblockhash, getblockheader, getblockstats, getchaintips, getchaintxstats,
+            getdifficulty, getmempoolancestors, getmempooldescendants, getmempoolentry,
+            getmempoolinfo, getrawmempool, gettxout, gettxoutproof, gettxoutsetinfo,
+            preciousblock, pruneblockchain, savemempool, scantxoutset, verifychain,
+            verifytxoutproof.
+
+            **Control:** getmemoryinfo, getrpcinfo, help, logging, stop, uptime.
+
+            **Generating:** generateblock, generatetoaddress, generatetodescriptor.
+
+            **Mining:** getblocktemplate, getmininginfo, getnetworkhashps,
+            prioritisetransaction, submitblock, submitheader.
+
+            **Network:** addnode, clearbanned, disconnectnode, getaddednodeinfo,
+            getconnectioncount, getnettotals, getnetworkinfo, getpeerinfo, listbanned,
+            ping, setban, setnetworkactive.
+
+            **Raw Transactions:** analyzepsbt, combinepsbt, combinerawtransaction,
+            converttopsbt, createpsbt, createrawtransaction, decodepsbt,
+            decoderawtransaction, decodescript, finalizepsbt, fundrawtransaction,
+            getrawtransaction, joinpsbts, sendrawtransaction, signrawtransactionwithkey,
+            testmempoolaccept, utxoupdatepsbt.
+
+            **Util:** createmultisig, deriveaddresses, estimatesmartfee, getdescriptorinfo,
+            getindexinfo, signmessagewithprivkey, validateaddress, verifymessage.
+
+            **Wallet (if built with wallet):** abandontransaction, abortrescan,
+            addmultisigaddress, backupwallet, bumpfee, createwallet, dumpprivkey,
+            dumpwallet, encryptwallet, getaddressesbylabel, getaddressinfo, getbalance,
+            getbalances, getnewaddress, getrawchangeaddress, getreceivedbyaddress,
+            getreceivedbylabel, gettransaction, getunconfirmedbalance, getwalletinfo,
+            importaddress, importdescriptors, importmulti, importprivkey, importprunedfunds,
+            importpubkey, importwallet, keypoolrefill, listaddressgroupings,
+            listdescriptors, listlabels, listlockunspent, listreceivedbyaddress,
+            listreceivedbylabel, listsinceblock, listtransactions, listunspent,
+            listwalletdir, listwallets, loadwallet, lockunspent, psbtbumpfee,
+            removeprunedfunds, rescanblockchain, send, sendmany, sendtoaddress,
+            sethdseed, setlabel, settxfee, setwalletflag, signmessage,
+            signrawtransactionwithwallet, unloadwallet, upgradewallet, walletcreatefundedpsbt,
+            walletlock, walletpassphrase, walletpassphrasechange, walletprocesspsbt.
+          example: getblockchaininfo
+        params:
+          type: array
+          description: >
+            Ordered array of parameters for the method. The required parameters vary
+            by method. Refer to the Litecoin Core help output (help <method>) or
+            documentation for each method's parameter list.
+          items: {}
+          default: []
+    JsonRpcResponse:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+          description: JSON-RPC protocol version
+        id:
+          oneOf:
+            - type: string
+            - type: integer
+            - type: 'null'
+          description: Echoed request identifier
+        result:
+          description: >
+            The result of the method call. Shape varies per method. null when error
+            is present.
+        error:
+          type: object
+          nullable: true
+          description: Present when the method call produced an application-level error
+          properties:
+            code:
+              type: integer
+              description: >
+                Standard JSON-RPC error code or Litecoin Core-specific code.
+                Common codes: -32700 (parse error), -32600 (invalid request),
+                -32601 (method not found), -32602 (invalid params), -1 (misc error),
+                -5 (invalid or non-wallet transaction id), -8 (invalid parameter),
+                -22 (transaction rejected), -25 (transaction already in mempool).
+            message:
+              type: string
+              description: Human-readable error description
+tags:
+  - name: JSON-RPC
+    description: >
+      Litecoin Core JSON-RPC 2.0 interface. All methods are accessed via a single
+      POST endpoint using the method field to select the operation.

@@ -1,0 +1,1439 @@
+openapi: 3.0.3
+info:
+  title: Litecoin Space REST API
+  description: >
+    A public REST API provided by the Litecoin Space block explorer (litecoinspace.org),
+    a mempool.space-compatible service for the Litecoin network. Endpoints cover
+    addresses (details, transactions, UTXOs, validation), blocks (details, headers,
+    height, raw data, transactions), transactions (details, hex, raw, Merkle proofs,
+    output spend status, broadcast), mempool (statistics, transaction IDs, recent
+    transactions), fee recommendations, mining pool statistics, and network hashrate
+    and difficulty data. No authentication required for public endpoints.
+  version: '1.0'
+  contact:
+    name: Litecoin Foundation
+    url: https://github.com/litecoin-foundation/ltcspace
+  license:
+    name: MIT
+externalDocs:
+  description: Litecoin Space REST API Documentation
+  url: https://litecoinspace.org/docs/api/rest
+servers:
+  - url: https://litecoinspace.org/api
+    description: Litecoin Space mainnet
+paths:
+
+  # ── Addresses ──────────────────────────────────────────────────────────────
+
+  /address/{address}:
+    get:
+      operationId: getAddress
+      summary: Get address details
+      description: >
+        Returns details about an address including chain stats (funded, spent, tx count)
+        and current mempool stats.
+      parameters:
+        - $ref: '#/components/parameters/address'
+      responses:
+        '200':
+          description: Address details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressDetails'
+        '400':
+          description: Invalid address
+      tags:
+        - Addresses
+
+  /address/{address}/txs:
+    get:
+      operationId: getAddressTxs
+      summary: Get address transactions
+      description: >
+        Returns up to 50 mempool transactions plus the first 25 confirmed transactions
+        for the address. To get more confirmed transactions, use the after_txid parameter.
+      parameters:
+        - $ref: '#/components/parameters/address'
+        - name: after_txid
+          in: query
+          required: false
+          description: Paginate confirmed transactions after this txid
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+      tags:
+        - Addresses
+
+  /address/{address}/txs/chain:
+    get:
+      operationId: getAddressTxsChain
+      summary: Get address confirmed transactions
+      description: Returns confirmed transactions for the address (25 per page).
+      parameters:
+        - $ref: '#/components/parameters/address'
+        - name: last_seen_txid
+          in: query
+          required: false
+          description: Paginate from this txid
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Confirmed transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+      tags:
+        - Addresses
+
+  /address/{address}/txs/mempool:
+    get:
+      operationId: getAddressTxsMempool
+      summary: Get address mempool transactions
+      description: Returns unconfirmed transactions for the address (up to 50).
+      parameters:
+        - $ref: '#/components/parameters/address'
+      responses:
+        '200':
+          description: Mempool transactions for the address
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+      tags:
+        - Addresses
+
+  /address/{address}/utxo:
+    get:
+      operationId: getAddressUtxo
+      summary: Get address UTXOs
+      description: Returns unspent transaction outputs for the specified address.
+      parameters:
+        - $ref: '#/components/parameters/address'
+      responses:
+        '200':
+          description: List of UTXOs for the address
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Utxo'
+      tags:
+        - Addresses
+
+  /v1/validate-address/{address}:
+    get:
+      operationId: validateAddress
+      summary: Validate address
+      description: Validates a Litecoin address and returns its type and validity.
+      parameters:
+        - $ref: '#/components/parameters/address'
+      responses:
+        '200':
+          description: Address validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressValidation'
+      tags:
+        - Addresses
+
+  # ── Blocks ─────────────────────────────────────────────────────────────────
+
+  /block/{hash}:
+    get:
+      operationId: getBlock
+      summary: Get block details
+      description: Returns details about the block including header fields and transaction summary.
+      parameters:
+        - $ref: '#/components/parameters/hash'
+      responses:
+        '200':
+          description: Block details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Block'
+        '404':
+          description: Block not found
+      tags:
+        - Blocks
+
+  /block/{hash}/header:
+    get:
+      operationId: getBlockHeader
+      summary: Get block header
+      description: Returns the hex-encoded block header.
+      parameters:
+        - $ref: '#/components/parameters/hash'
+      responses:
+        '200':
+          description: Hex-encoded block header
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Block not found
+      tags:
+        - Blocks
+
+  /block-height/{height}:
+    get:
+      operationId: getBlockHashAtHeight
+      summary: Get block hash at height
+      description: Returns the hash of the block at the specified height.
+      parameters:
+        - $ref: '#/components/parameters/height'
+      responses:
+        '200':
+          description: Block hash as plain text
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Block height not found
+      tags:
+        - Blocks
+
+  /block/{hash}/raw:
+    get:
+      operationId: getBlockRaw
+      summary: Get raw block data
+      description: Returns the raw block data in binary format.
+      parameters:
+        - $ref: '#/components/parameters/hash'
+      responses:
+        '200':
+          description: Raw binary block data
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Block not found
+      tags:
+        - Blocks
+
+  /block/{hash}/status:
+    get:
+      operationId: getBlockStatus
+      summary: Get block confirmation status
+      description: Returns the confirmation status of a block.
+      parameters:
+        - $ref: '#/components/parameters/hash'
+      responses:
+        '200':
+          description: Block confirmation status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockStatus'
+      tags:
+        - Blocks
+
+  /blocks/tip/height:
+    get:
+      operationId: getBlockTipHeight
+      summary: Get latest block height
+      description: Returns the height of the latest confirmed block.
+      responses:
+        '200':
+          description: Current block height as plain integer
+          content:
+            text/plain:
+              schema:
+                type: integer
+      tags:
+        - Blocks
+
+  /blocks/tip/hash:
+    get:
+      operationId: getBlockTipHash
+      summary: Get latest block hash
+      description: Returns the hash of the latest confirmed block.
+      responses:
+        '200':
+          description: Current block hash as plain text
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+        - Blocks
+
+  /block/{hash}/txid/{index}:
+    get:
+      operationId: getBlockTxid
+      summary: Get transaction ID at index in block
+      description: Returns the transaction ID at the specified index within the block.
+      parameters:
+        - $ref: '#/components/parameters/hash'
+        - name: index
+          in: path
+          required: true
+          description: Zero-based transaction index within the block
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: Transaction ID
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Not found
+      tags:
+        - Blocks
+
+  /block/{hash}/txids:
+    get:
+      operationId: getBlockTxids
+      summary: Get all transaction IDs in block
+      description: Returns all transaction IDs included in the block.
+      parameters:
+        - $ref: '#/components/parameters/hash'
+      responses:
+        '200':
+          description: Array of transaction IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: Block not found
+      tags:
+        - Blocks
+
+  /block/{hash}/txs/{startIndex}:
+    get:
+      operationId: getBlockTxs
+      summary: Get block transactions
+      description: Returns up to 25 transactions from the block starting at the given index.
+      parameters:
+        - $ref: '#/components/parameters/hash'
+        - name: startIndex
+          in: path
+          required: true
+          description: Starting index (must be a multiple of 25)
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: Array of transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+        '404':
+          description: Block not found
+      tags:
+        - Blocks
+
+  /blocks/{startHeight}:
+    get:
+      operationId: getBlocks
+      summary: Get recent blocks
+      description: Returns the past 10 blocks before the specified height (or tip if omitted).
+      parameters:
+        - name: startHeight
+          in: path
+          required: false
+          description: Block height to start from (defaults to chain tip)
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Array of blocks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Block'
+      tags:
+        - Blocks
+
+  /v1/blocks/{startHeight}:
+    get:
+      operationId: getBlocksV1
+      summary: Get recent blocks with mining data (v1)
+      description: Returns the past 15 blocks before the specified height including mining pool information.
+      parameters:
+        - name: startHeight
+          in: path
+          required: false
+          description: Block height to start from (defaults to chain tip)
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Array of blocks with mining data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlockWithMining'
+      tags:
+        - Blocks
+
+  /v1/blocks-bulk/{minHeight}/{maxHeight}:
+    get:
+      operationId: getBlocksBulk
+      summary: Get bulk range of blocks
+      description: Returns a range of blocks (up to 10 at a time) by height range.
+      parameters:
+        - name: minHeight
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: maxHeight
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Array of blocks in the height range
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Block'
+      tags:
+        - Blocks
+
+  # ── Transactions ───────────────────────────────────────────────────────────
+
+  /tx/{txid}:
+    get:
+      operationId: getTransaction
+      summary: Get transaction details
+      description: Returns details about the transaction including inputs, outputs, and status.
+      parameters:
+        - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Transaction details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '404':
+          description: Transaction not found
+      tags:
+        - Transactions
+
+  /tx/{txid}/hex:
+    get:
+      operationId: getTransactionHex
+      summary: Get transaction hex
+      description: Returns the raw transaction in hex-encoded format.
+      parameters:
+        - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Hex-encoded transaction
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Transaction not found
+      tags:
+        - Transactions
+
+  /tx/{txid}/raw:
+    get:
+      operationId: getTransactionRaw
+      summary: Get raw transaction
+      description: Returns the raw transaction in binary format.
+      parameters:
+        - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Raw binary transaction data
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Transaction not found
+      tags:
+        - Transactions
+
+  /tx/{txid}/merkleblock-proof:
+    get:
+      operationId: getTransactionMerkleBlockProof
+      summary: Get transaction merkleblock proof
+      description: Returns the merkleblock proof for the transaction (for SPV verification).
+      parameters:
+        - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Hex-encoded merkleblock proof
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Transaction not found or not confirmed
+      tags:
+        - Transactions
+
+  /tx/{txid}/merkle-proof:
+    get:
+      operationId: getTransactionMerkleProof
+      summary: Get transaction Merkle proof (Electrum format)
+      description: Returns the Merkle proof for the transaction in Electrum format.
+      parameters:
+        - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Merkle proof in Electrum format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerkleProof'
+        '404':
+          description: Transaction not found or not confirmed
+      tags:
+        - Transactions
+
+  /tx/{txid}/outspend/{vout}:
+    get:
+      operationId: getTransactionOutspend
+      summary: Get output spending status
+      description: Returns the spending status of a specific transaction output.
+      parameters:
+        - $ref: '#/components/parameters/txid'
+        - name: vout
+          in: path
+          required: true
+          description: Output index (0-based)
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: Output spending status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Outspend'
+        '404':
+          description: Transaction or output not found
+      tags:
+        - Transactions
+
+  /tx/{txid}/outspends:
+    get:
+      operationId: getTransactionOutspends
+      summary: Get all output spending statuses
+      description: Returns the spending status for all outputs of the transaction.
+      parameters:
+        - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Array of output spending statuses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Outspend'
+        '404':
+          description: Transaction not found
+      tags:
+        - Transactions
+
+  /tx/{txid}/status:
+    get:
+      operationId: getTransactionStatus
+      summary: Get transaction confirmation status
+      description: Returns the confirmation status of the transaction.
+      parameters:
+        - $ref: '#/components/parameters/txid'
+      responses:
+        '200':
+          description: Transaction confirmation status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TxStatus'
+        '404':
+          description: Transaction not found
+      tags:
+        - Transactions
+
+  /tx:
+    post:
+      operationId: broadcastTransaction
+      summary: Broadcast raw transaction
+      description: Broadcasts a raw transaction to the Litecoin network. Returns the txid on success.
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: Raw transaction in hex format
+      responses:
+        '200':
+          description: Transaction ID of the broadcast transaction
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Invalid transaction
+      tags:
+        - Transactions
+
+  # ── Mempool ────────────────────────────────────────────────────────────────
+
+  /mempool:
+    get:
+      operationId: getMempool
+      summary: Get mempool statistics
+      description: Returns statistics about the current state of the Litecoin mempool.
+      responses:
+        '200':
+          description: Mempool statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MempoolStats'
+      tags:
+        - Mempool
+
+  /mempool/txids:
+    get:
+      operationId: getMempoolTxids
+      summary: Get mempool transaction IDs
+      description: Returns all transaction IDs currently in the mempool.
+      responses:
+        '200':
+          description: Array of transaction IDs in the mempool
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      tags:
+        - Mempool
+
+  /mempool/recent:
+    get:
+      operationId: getMempoolRecent
+      summary: Get recent mempool transactions
+      description: Returns the last 10 transactions added to the mempool.
+      responses:
+        '200':
+          description: Array of recent mempool transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MempoolRecentTx'
+      tags:
+        - Mempool
+
+  # ── Fees ───────────────────────────────────────────────────────────────────
+
+  /v1/fees/recommended:
+    get:
+      operationId: getFeesRecommended
+      summary: Get recommended fees
+      description: >
+        Returns current recommended fee rates for fast confirmation, half-hour
+        confirmation, hour confirmation, economy, and minimum relay.
+      responses:
+        '200':
+          description: Recommended fee rates in sat/vB
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeRecommendations'
+      tags:
+        - Fees
+
+  /v1/fees/mempool-blocks:
+    get:
+      operationId: getMempoolBlocks
+      summary: Get mempool as projected blocks
+      description: Returns the mempool projected into upcoming blocks with fee rate ranges.
+      responses:
+        '200':
+          description: Projected mempool blocks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MempoolBlock'
+      tags:
+        - Fees
+
+  # ── Mining ─────────────────────────────────────────────────────────────────
+
+  /v1/mining/pools/{timePeriod}:
+    get:
+      operationId: getMiningPools
+      summary: Get mining pools by time period
+      description: Returns a list of mining pools ranked by block frequency over the specified time period.
+      parameters:
+        - $ref: '#/components/parameters/timePeriod'
+      responses:
+        '200':
+          description: Mining pool statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MiningPools'
+      tags:
+        - Mining
+
+  /v1/mining/pool/{slug}:
+    get:
+      operationId: getMiningPool
+      summary: Get mining pool details
+      description: Returns details for the specified mining pool.
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          description: Mining pool slug identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Mining pool details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MiningPool'
+      tags:
+        - Mining
+
+  /v1/mining/pool/{slug}/hashrate:
+    get:
+      operationId: getMiningPoolHashrate
+      summary: Get mining pool hashrate history
+      description: Returns historical hashrate data for the specified mining pool.
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Pool hashrate history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HashratePoint'
+      tags:
+        - Mining
+
+  /v1/mining/pool/{slug}/blocks/{blockHeight}:
+    get:
+      operationId: getMiningPoolBlocks
+      summary: Get blocks mined by pool
+      description: Returns the past 10 blocks mined by the specified pool.
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: blockHeight
+          in: path
+          required: false
+          description: Starting block height (defaults to tip)
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Blocks mined by the pool
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Block'
+      tags:
+        - Mining
+
+  /v1/mining/hashrate/pools/{timePeriod}:
+    get:
+      operationId: getMiningPoolsHashrate
+      summary: Get hashrate averages by pool
+      description: Returns average hashrate data for all pools over the specified time period.
+      parameters:
+        - $ref: '#/components/parameters/timePeriod'
+      responses:
+        '200':
+          description: Pool hashrate averages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PoolHashrateAverage'
+      tags:
+        - Mining
+
+  /v1/mining/hashrate/{timePeriod}:
+    get:
+      operationId: getNetworkHashrate
+      summary: Get network hashrate and difficulty
+      description: Returns network-wide hashrate and difficulty history over the specified period.
+      parameters:
+        - $ref: '#/components/parameters/timePeriod'
+      responses:
+        '200':
+          description: Network hashrate and difficulty data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkHashrate'
+      tags:
+        - Mining
+
+  /v1/mining/difficulty-adjustments/{interval}:
+    get:
+      operationId: getDifficultyAdjustments
+      summary: Get difficulty adjustment history
+      description: Returns historical difficulty adjustment data at the specified interval.
+      parameters:
+        - name: interval
+          in: path
+          required: true
+          description: Time interval for aggregation
+          schema:
+            type: string
+            enum: [24h, 3d, 1w, 1m, 3m, 6m, 1y, 2y, 3y]
+      responses:
+        '200':
+          description: Difficulty adjustment history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DifficultyAdjustment'
+      tags:
+        - Mining
+
+  /v1/mining/blocks/fees/{timePeriod}:
+    get:
+      operationId: getMiningBlockFees
+      summary: Get average block fees by time period
+      description: Returns average block fee data over the specified time period.
+      parameters:
+        - $ref: '#/components/parameters/timePeriod'
+      responses:
+        '200':
+          description: Average block fee data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags:
+        - Mining
+
+  /v1/mining/blocks/rewards/{timePeriod}:
+    get:
+      operationId: getMiningBlockRewards
+      summary: Get average block rewards by time period
+      description: Returns average block reward data over the specified time period.
+      parameters:
+        - $ref: '#/components/parameters/timePeriod'
+      responses:
+        '200':
+          description: Average block reward data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags:
+        - Mining
+
+  /v1/mining/reward-stats/{blockCount}:
+    get:
+      operationId: getMiningRewardStats
+      summary: Get reward statistics for block count
+      description: Returns block reward and transaction fee statistics for the specified number of recent blocks.
+      parameters:
+        - name: blockCount
+          in: path
+          required: true
+          description: Number of recent blocks to analyze
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Block reward statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewardStats'
+      tags:
+        - Mining
+
+  /v1/difficulty-adjustment:
+    get:
+      operationId: getDifficultyAdjustment
+      summary: Get current difficulty adjustment details
+      description: Returns details about the current difficulty adjustment period.
+      responses:
+        '200':
+          description: Current difficulty adjustment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DifficultyAdjustmentCurrent'
+      tags:
+        - Mining
+
+components:
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      description: Litecoin address (P2PKH, P2SH, or bech32)
+      schema:
+        type: string
+    hash:
+      name: hash
+      in: path
+      required: true
+      description: Block hash in hex format
+      schema:
+        type: string
+        pattern: '^[0-9a-fA-F]{64}$'
+    height:
+      name: height
+      in: path
+      required: true
+      description: Block height (0-indexed from genesis)
+      schema:
+        type: integer
+        minimum: 0
+    txid:
+      name: txid
+      in: path
+      required: true
+      description: Transaction ID (txid) in hex format
+      schema:
+        type: string
+        pattern: '^[0-9a-fA-F]{64}$'
+    timePeriod:
+      name: timePeriod
+      in: path
+      required: true
+      description: Time period for the query
+      schema:
+        type: string
+        enum: [24h, 3d, 1w, 1m, 3m, 6m, 1y, 2y, 3y]
+
+  schemas:
+    AddressDetails:
+      type: object
+      properties:
+        address:
+          type: string
+        chain_stats:
+          type: object
+          properties:
+            funded_txo_count:
+              type: integer
+            funded_txo_sum:
+              type: integer
+              description: Total funded amount in satoshis
+            spent_txo_count:
+              type: integer
+            spent_txo_sum:
+              type: integer
+              description: Total spent amount in satoshis
+            tx_count:
+              type: integer
+        mempool_stats:
+          type: object
+          properties:
+            funded_txo_count:
+              type: integer
+            funded_txo_sum:
+              type: integer
+            spent_txo_count:
+              type: integer
+            spent_txo_sum:
+              type: integer
+            tx_count:
+              type: integer
+
+    AddressValidation:
+      type: object
+      properties:
+        isvalid:
+          type: boolean
+        address:
+          type: string
+        scriptPubKey:
+          type: string
+        isscript:
+          type: boolean
+        iswitness:
+          type: boolean
+        witness_version:
+          type: integer
+        witness_program:
+          type: string
+
+    Transaction:
+      type: object
+      properties:
+        txid:
+          type: string
+        version:
+          type: integer
+        locktime:
+          type: integer
+        vin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxInput'
+        vout:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxOutput'
+        size:
+          type: integer
+        weight:
+          type: integer
+        sigops:
+          type: integer
+        fee:
+          type: integer
+          description: Transaction fee in satoshis
+        status:
+          $ref: '#/components/schemas/TxStatus'
+
+    TxInput:
+      type: object
+      properties:
+        txid:
+          type: string
+        vout:
+          type: integer
+        prevout:
+          $ref: '#/components/schemas/TxOutput'
+        scriptsig:
+          type: string
+        scriptsig_asm:
+          type: string
+        witness:
+          type: array
+          items:
+            type: string
+        is_coinbase:
+          type: boolean
+        sequence:
+          type: integer
+
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
+          type: string
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
+          type: integer
+          description: Output value in satoshis
+
+    TxStatus:
+      type: object
+      properties:
+        confirmed:
+          type: boolean
+        block_height:
+          type: integer
+          nullable: true
+        block_hash:
+          type: string
+          nullable: true
+        block_time:
+          type: integer
+          nullable: true
+
+    Utxo:
+      type: object
+      properties:
+        txid:
+          type: string
+        vout:
+          type: integer
+        status:
+          $ref: '#/components/schemas/TxStatus'
+        value:
+          type: integer
+          description: Value in satoshis
+
+    Block:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Block hash
+        height:
+          type: integer
+        version:
+          type: integer
+        timestamp:
+          type: integer
+        tx_count:
+          type: integer
+        size:
+          type: integer
+        weight:
+          type: integer
+        merkle_root:
+          type: string
+        previousblockhash:
+          type: string
+        mediantime:
+          type: integer
+        nonce:
+          type: integer
+        bits:
+          type: integer
+        difficulty:
+          type: number
+
+    BlockWithMining:
+      allOf:
+        - $ref: '#/components/schemas/Block'
+      properties:
+        extras:
+          type: object
+          properties:
+            reward:
+              type: integer
+            coinbaseTx:
+              type: object
+            totalFees:
+              type: integer
+            avgFee:
+              type: integer
+            avgFeeRate:
+              type: integer
+            pool:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                slug:
+                  type: string
+
+    BlockStatus:
+      type: object
+      properties:
+        in_best_chain:
+          type: boolean
+        height:
+          type: integer
+        next_best:
+          type: string
+
+    MerkleProof:
+      type: object
+      properties:
+        block_height:
+          type: integer
+        merkle:
+          type: array
+          items:
+            type: string
+        pos:
+          type: integer
+
+    Outspend:
+      type: object
+      properties:
+        spent:
+          type: boolean
+        txid:
+          type: string
+          nullable: true
+        vin:
+          type: integer
+          nullable: true
+        status:
+          $ref: '#/components/schemas/TxStatus'
+          nullable: true
+
+    MempoolStats:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Number of transactions in the mempool
+        vsize:
+          type: integer
+          description: Total virtual size of all mempool transactions in vbytes
+        total_fee:
+          type: integer
+          description: Total fees in the mempool in satoshis
+        fee_histogram:
+          type: array
+          description: Fee histogram as [feerate, vsize] pairs
+          items:
+            type: array
+            items:
+              type: number
+
+    MempoolRecentTx:
+      type: object
+      properties:
+        txid:
+          type: string
+        fee:
+          type: integer
+        vsize:
+          type: integer
+        value:
+          type: integer
+
+    FeeRecommendations:
+      type: object
+      properties:
+        fastestFee:
+          type: integer
+          description: Fee rate for next-block confirmation in sat/vB
+        halfHourFee:
+          type: integer
+          description: Fee rate for ~30 minute confirmation in sat/vB
+        hourFee:
+          type: integer
+          description: Fee rate for ~1 hour confirmation in sat/vB
+        economyFee:
+          type: integer
+          description: Economy fee rate in sat/vB
+        minimumFee:
+          type: integer
+          description: Minimum relay fee rate in sat/vB
+
+    MempoolBlock:
+      type: object
+      properties:
+        blockSize:
+          type: integer
+        blockVSize:
+          type: number
+        nTx:
+          type: integer
+        totalFees:
+          type: integer
+        medianFee:
+          type: number
+        feeRange:
+          type: array
+          items:
+            type: number
+
+    MiningPools:
+      type: object
+      properties:
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/MiningPool'
+        blockCount:
+          type: integer
+        lastEstimatedHashrate:
+          type: number
+
+    MiningPool:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        blockCount:
+          type: integer
+        rank:
+          type: integer
+        emptyBlocks:
+          type: integer
+        avgMatchRate:
+          type: number
+        avgFeeDelta:
+          type: string
+        poolUniqueId:
+          type: integer
+
+    HashratePoint:
+      type: object
+      properties:
+        timestamp:
+          type: integer
+        avgHashrate:
+          type: number
+        share:
+          type: number
+        blockCount:
+          type: integer
+
+    PoolHashrateAverage:
+      type: object
+      properties:
+        poolName:
+          type: string
+        poolId:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HashratePoint'
+
+    NetworkHashrate:
+      type: object
+      properties:
+        hashrates:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: integer
+              avgHashrate:
+                type: number
+        difficulty:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: integer
+              difficulty:
+                type: number
+        currentHashrate:
+          type: number
+        currentDifficulty:
+          type: number
+
+    DifficultyAdjustment:
+      type: object
+      properties:
+        time:
+          type: integer
+        height:
+          type: integer
+        difficulty:
+          type: number
+        adjustment:
+          type: number
+
+    DifficultyAdjustmentCurrent:
+      type: object
+      properties:
+        progressPercent:
+          type: number
+        difficultyChange:
+          type: number
+        estimatedRetargetDate:
+          type: integer
+        remainingBlocks:
+          type: integer
+        remainingTime:
+          type: integer
+        previousRetarget:
+          type: number
+        previousTime:
+          type: integer
+        nextRetargetHeight:
+          type: integer
+        timeAvg:
+          type: integer
+        timeOffset:
+          type: integer
+        expectedBlocks:
+          type: number
+
+    RewardStats:
+      type: object
+      properties:
+        startBlock:
+          type: integer
+        endBlock:
+          type: integer
+        totalReward:
+          type: integer
+        totalFee:
+          type: integer
+        totalTx:
+          type: integer
+
+tags:
+  - name: Addresses
+    description: Address lookup, transaction history, and UTXO endpoints
+  - name: Blocks
+    description: Block data, headers, and transaction listing endpoints
+  - name: Transactions
+    description: Transaction lookup, broadcast, and proof endpoints
+  - name: Mempool
+    description: Mempool statistics and contents endpoints
+  - name: Fees
+    description: Fee estimation and recommendation endpoints
+  - name: Mining
+    description: Mining pool statistics, hashrate, and difficulty endpoints

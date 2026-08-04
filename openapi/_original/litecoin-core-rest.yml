@@ -1,0 +1,708 @@
+openapi: 3.0.3
+info:
+  title: Litecoin Core REST API
+  description: >
+    An unauthenticated, read-only HTTP REST interface built into Litecoin Core,
+    enabled with the -rest flag. Supports retrieval of transactions, full blocks,
+    block headers, block hash by height, chain information, UTXO set queries (per BIP64),
+    and mempool statistics and contents. Responses are available in binary, hex-encoded,
+    or JSON format depending on the file extension (.bin, .hex, .json) appended to each path.
+    Runs on the same port as JSON-RPC (default 9332 mainnet). No authentication required.
+  version: '0.21'
+  contact:
+    name: Litecoin Project
+    url: https://github.com/litecoin-project/litecoin
+  license:
+    name: MIT
+    url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
+externalDocs:
+  description: Litecoin Core REST Interface Documentation
+  url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md
+servers:
+  - url: http://localhost:9332
+    description: Litecoin Core mainnet (start with -rest flag)
+  - url: http://localhost:19332
+    description: Litecoin Core testnet
+  - url: http://localhost:19443
+    description: Litecoin Core regtest
+paths:
+  /rest/tx/{txHash}.json:
+    get:
+      operationId: getTransactionJson
+      summary: Get transaction (JSON)
+      description: >
+        Returns a transaction in JSON format. Searches the mempool by default.
+        Use txindex=1 in litecoin.conf to also retrieve confirmed transactions
+        that are not in the mempool.
+      parameters:
+        - $ref: '#/components/parameters/txHash'
+      responses:
+        '200':
+          description: Transaction details in JSON format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '404':
+          description: Transaction not found
+      tags:
+        - Transactions
+
+  /rest/tx/{txHash}.hex:
+    get:
+      operationId: getTransactionHex
+      summary: Get transaction (hex)
+      description: Returns a transaction in hex-encoded binary format.
+      parameters:
+        - $ref: '#/components/parameters/txHash'
+      responses:
+        '200':
+          description: Hex-encoded transaction
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Transaction not found
+      tags:
+        - Transactions
+
+  /rest/tx/{txHash}.bin:
+    get:
+      operationId: getTransactionBin
+      summary: Get transaction (binary)
+      description: Returns a transaction in raw binary format.
+      parameters:
+        - $ref: '#/components/parameters/txHash'
+      responses:
+        '200':
+          description: Raw binary transaction data
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Transaction not found
+      tags:
+        - Transactions
+
+  /rest/block/{blockHash}.json:
+    get:
+      operationId: getBlockJson
+      summary: Get block with full transaction details (JSON)
+      description: >
+        Returns complete block data including all transaction details in JSON format.
+        Returns 404 if the block is not found.
+      parameters:
+        - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Block with full transaction details in JSON format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Block'
+        '404':
+          description: Block not found
+      tags:
+        - Blocks
+
+  /rest/block/{blockHash}.hex:
+    get:
+      operationId: getBlockHex
+      summary: Get block (hex)
+      description: Returns complete block data in hex-encoded format.
+      parameters:
+        - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Hex-encoded block data
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Block not found
+      tags:
+        - Blocks
+
+  /rest/block/{blockHash}.bin:
+    get:
+      operationId: getBlockBin
+      summary: Get block (binary)
+      description: Returns complete block data in raw binary format.
+      parameters:
+        - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Raw binary block data
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Block not found
+      tags:
+        - Blocks
+
+  /rest/block/notxdetails/{blockHash}.json:
+    get:
+      operationId: getBlockNoTxDetailsJson
+      summary: Get block without full transaction details (JSON)
+      description: >
+        Returns block data in JSON format, but the transactions array contains only
+        transaction hashes rather than full transaction objects.
+      parameters:
+        - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Block with transaction IDs only in JSON format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockNoTxDetails'
+        '404':
+          description: Block not found
+      tags:
+        - Blocks
+
+  /rest/block/notxdetails/{blockHash}.hex:
+    get:
+      operationId: getBlockNoTxDetailsHex
+      summary: Get block without transaction details (hex)
+      description: Returns block data in hex-encoded format without full transaction expansion.
+      parameters:
+        - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Hex-encoded block data
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Block not found
+      tags:
+        - Blocks
+
+  /rest/headers/{count}/{blockHash}.json:
+    get:
+      operationId: getBlockHeadersJson
+      summary: Get block headers (JSON)
+      description: >
+        Retrieves the specified number of block headers starting from the given
+        block hash and going in the upward (newer) direction.
+      parameters:
+        - $ref: '#/components/parameters/count'
+        - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Array of block headers in JSON format
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlockHeader'
+        '404':
+          description: Block not found
+      tags:
+        - Blocks
+
+  /rest/headers/{count}/{blockHash}.hex:
+    get:
+      operationId: getBlockHeadersHex
+      summary: Get block headers (hex)
+      description: Returns the specified number of block headers in hex-encoded format.
+      parameters:
+        - $ref: '#/components/parameters/count'
+        - $ref: '#/components/parameters/blockHash'
+      responses:
+        '200':
+          description: Hex-encoded block headers
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Block not found
+      tags:
+        - Blocks
+
+  /rest/blockhashbyheight/{height}.json:
+    get:
+      operationId: getBlockHashByHeightJson
+      summary: Get block hash by height (JSON)
+      description: Returns the hash of the block at the specified height in JSON format.
+      parameters:
+        - $ref: '#/components/parameters/height'
+      responses:
+        '200':
+          description: Block hash in JSON format
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  blockhash:
+                    type: string
+                    description: The block hash at the specified height
+        '404':
+          description: Block height not found
+      tags:
+        - Blocks
+
+  /rest/blockhashbyheight/{height}.hex:
+    get:
+      operationId: getBlockHashByHeightHex
+      summary: Get block hash by height (hex)
+      description: Returns the hash of the block at the specified height in hex format.
+      parameters:
+        - $ref: '#/components/parameters/height'
+      responses:
+        '200':
+          description: Block hash as hex string
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Block height not found
+      tags:
+        - Blocks
+
+  /rest/chaininfo.json:
+    get:
+      operationId: getChainInfo
+      summary: Get chain info
+      description: >
+        Returns various state information regarding block chain processing.
+        Only available in JSON format. Equivalent to the getblockchaininfo JSON-RPC call.
+      responses:
+        '200':
+          description: Chain state information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChainInfo'
+      tags:
+        - Blockchain
+
+  /rest/getutxos/{checkmempool}/{outpoints}.json:
+    get:
+      operationId: getUtxosJson
+      summary: Get UTXOs (JSON)
+      description: >
+        Queries the UTXO set for specified outpoints per BIP64. The checkmempool
+        segment is a flag (0 or 1) indicating whether to check the mempool for
+        unconfirmed outputs. Outpoints are specified as txid-n pairs separated by
+        slashes (e.g. txid1-0/txid2-1).
+      parameters:
+        - name: checkmempool
+          in: path
+          required: true
+          description: Whether to check the mempool (0=no, 1=yes)
+          schema:
+            type: integer
+            enum: [0, 1]
+        - name: outpoints
+          in: path
+          required: true
+          description: >
+            One or more outpoints as txid-vout pairs separated by slashes
+            (e.g. abc123-0/def456-1)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: UTXO query results in JSON format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtxoResult'
+        '400':
+          description: Invalid outpoint format
+      tags:
+        - UTXO
+
+  /rest/mempool/info.json:
+    get:
+      operationId: getMempoolInfo
+      summary: Get mempool info
+      description: >
+        Returns statistics about the current state of the mempool, including the
+        number of transactions, total size, and fee information. Only available in JSON format.
+      responses:
+        '200':
+          description: Mempool statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MempoolInfo'
+      tags:
+        - Mempool
+
+  /rest/mempool/contents.json:
+    get:
+      operationId: getMempoolContents
+      summary: Get mempool contents
+      description: >
+        Returns all transactions currently in the mempool with full details.
+        Only available in JSON format. Use with caution on busy nodes as the
+        response can be very large.
+      responses:
+        '200':
+          description: All mempool transactions
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/MempoolEntry'
+      tags:
+        - Mempool
+
+components:
+  parameters:
+    txHash:
+      name: txHash
+      in: path
+      required: true
+      description: Transaction hash (txid) in hex format
+      schema:
+        type: string
+        pattern: '^[0-9a-fA-F]{64}$'
+    blockHash:
+      name: blockHash
+      in: path
+      required: true
+      description: Block hash in hex format
+      schema:
+        type: string
+        pattern: '^[0-9a-fA-F]{64}$'
+    count:
+      name: count
+      in: path
+      required: true
+      description: Number of block headers to retrieve
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2000
+    height:
+      name: height
+      in: path
+      required: true
+      description: Block height (0-indexed from genesis)
+      schema:
+        type: integer
+        minimum: 0
+
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        txid:
+          type: string
+          description: Transaction ID
+        hash:
+          type: string
+          description: Transaction hash (differs from txid for segwit)
+        size:
+          type: integer
+          description: Transaction size in bytes
+        vsize:
+          type: integer
+          description: Virtual transaction size
+        weight:
+          type: integer
+          description: Transaction weight
+        version:
+          type: integer
+          description: Transaction version
+        locktime:
+          type: integer
+          description: Transaction lock time
+        vin:
+          type: array
+          items:
+            type: object
+            properties:
+              txid:
+                type: string
+              vout:
+                type: integer
+              scriptSig:
+                type: object
+              txinwitness:
+                type: array
+                items:
+                  type: string
+              sequence:
+                type: integer
+        vout:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: number
+                description: Output value in LTC
+              n:
+                type: integer
+              scriptPubKey:
+                type: object
+        blockhash:
+          type: string
+          description: Hash of the block containing this transaction
+        confirmations:
+          type: integer
+          description: Number of confirmations
+        time:
+          type: integer
+          description: Transaction time (Unix timestamp)
+        blocktime:
+          type: integer
+          description: Block time (Unix timestamp)
+
+    Block:
+      type: object
+      properties:
+        hash:
+          type: string
+          description: Block hash
+        confirmations:
+          type: integer
+        size:
+          type: integer
+        strippedsize:
+          type: integer
+        weight:
+          type: integer
+        height:
+          type: integer
+        version:
+          type: integer
+        versionHex:
+          type: string
+        merkleroot:
+          type: string
+        tx:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+          description: Full transaction objects
+        time:
+          type: integer
+        mediantime:
+          type: integer
+        nonce:
+          type: integer
+        bits:
+          type: string
+        difficulty:
+          type: number
+        chainwork:
+          type: string
+        nTx:
+          type: integer
+        previousblockhash:
+          type: string
+        nextblockhash:
+          type: string
+
+    BlockNoTxDetails:
+      allOf:
+        - $ref: '#/components/schemas/Block'
+      properties:
+        tx:
+          type: array
+          items:
+            type: string
+          description: Array of transaction IDs only
+
+    BlockHeader:
+      type: object
+      properties:
+        hash:
+          type: string
+        confirmations:
+          type: integer
+        height:
+          type: integer
+        version:
+          type: integer
+        versionHex:
+          type: string
+        merkleroot:
+          type: string
+        time:
+          type: integer
+        mediantime:
+          type: integer
+        nonce:
+          type: integer
+        bits:
+          type: string
+        difficulty:
+          type: number
+        chainwork:
+          type: string
+        nTx:
+          type: integer
+        previousblockhash:
+          type: string
+        nextblockhash:
+          type: string
+
+    ChainInfo:
+      type: object
+      properties:
+        chain:
+          type: string
+          description: Current network (main, test, regtest)
+        blocks:
+          type: integer
+          description: Current number of blocks processed in the server
+        headers:
+          type: integer
+          description: Current number of headers known
+        bestblockhash:
+          type: string
+          description: Hash of the currently best block
+        difficulty:
+          type: number
+        mediantime:
+          type: integer
+        verificationprogress:
+          type: number
+        chainwork:
+          type: string
+        size_on_disk:
+          type: integer
+        pruned:
+          type: boolean
+        pruneheight:
+          type: integer
+        softforks:
+          type: object
+
+    UtxoResult:
+      type: object
+      properties:
+        chainHeight:
+          type: integer
+          description: Current chain height
+        chaintipHash:
+          type: string
+          description: Hash of the chain tip
+        bitmap:
+          type: string
+          description: Bitmap indicating which requested UTXOs exist
+        utxos:
+          type: array
+          items:
+            type: object
+            properties:
+              txid:
+                type: string
+              vout:
+                type: integer
+              height:
+                type: integer
+                description: Block height where the UTXO was created
+              value:
+                type: number
+                description: Value in LTC
+              scriptPubKey:
+                type: object
+
+    MempoolInfo:
+      type: object
+      properties:
+        loaded:
+          type: boolean
+          description: True if the mempool is fully loaded
+        size:
+          type: integer
+          description: Current transaction count in mempool
+        bytes:
+          type: integer
+          description: Sum of all transaction sizes in bytes
+        usage:
+          type: integer
+          description: Total memory usage for the mempool in bytes
+        maxmempool:
+          type: integer
+          description: Maximum memory usage for the mempool in bytes
+        mempoolminfee:
+          type: number
+          description: Minimum fee rate in LTC/kB for acceptance into mempool
+        minrelaytxfee:
+          type: number
+          description: Current minimum relay fee for transactions
+
+    MempoolEntry:
+      type: object
+      properties:
+        vsize:
+          type: integer
+        weight:
+          type: integer
+        fee:
+          type: number
+        modifiedfee:
+          type: number
+        time:
+          type: integer
+        height:
+          type: integer
+        descendantcount:
+          type: integer
+        descendantsize:
+          type: integer
+        descendantfees:
+          type: number
+        ancestorcount:
+          type: integer
+        ancestorsize:
+          type: integer
+        ancestorfees:
+          type: number
+        wtxid:
+          type: string
+        fees:
+          type: object
+          properties:
+            base:
+              type: number
+            modified:
+              type: number
+            ancestor:
+              type: number
+            descendant:
+              type: number
+        depends:
+          type: array
+          items:
+            type: string
+        spentby:
+          type: array
+          items:
+            type: string
+        bip125-replaceable:
+          type: boolean
+
+tags:
+  - name: Transactions
+    description: Transaction retrieval endpoints
+  - name: Blocks
+    description: Block and header retrieval endpoints
+  - name: Blockchain
+    description: Chain state information endpoints
+  - name: UTXO
+    description: Unspent transaction output query endpoints
+  - name: Mempool
+    description: Mempool state and contents endpoints

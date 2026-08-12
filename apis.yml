@@ -460,6 +460,9 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml
 common:
+  - type: License
+    name: MIT
+    url: https://github.com/litecoin-project/litecoin/blob/master/LICENSE
   - type: AgenticAccess
     url: agentic-access/litecoin-agentic-access.yml
   - type: DomainSecurity

@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Litecoin Core JSON-RPC Addresses Mempool API",
+    "version": "0.21"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mempool",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get mempool info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/mempool/info.json"
+          },
+          "docs": "Returns statistics about the current state of the mempool, including the number of transactions, total size, and fee information. Only available in JSON format.\n"
+        },
+        {
+          "info": {
+            "name": "Get mempool contents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/mempool/contents.json"
+          },
+          "docs": "Returns all transactions currently in the mempool with full details. Only available in JSON format. Use with caution on busy nodes as the response can be very large.\n"
+        },
+        {
+          "info": {
+            "name": "Get mempool statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/mempool"
+          },
+          "docs": "Returns statistics about the current state of the Litecoin mempool."
+        },
+        {
+          "info": {
+            "name": "Get mempool transaction IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/mempool/txids"
+          },
+          "docs": "Returns all transaction IDs currently in the mempool."
+        },
+        {
+          "info": {
+            "name": "Get recent mempool transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/mempool/recent"
+          },
+          "docs": "Returns the last 10 transactions added to the mempool."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

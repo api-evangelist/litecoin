@@ -1,0 +1,2873 @@
+{
+  "item": [
+    {
+      "id": "6b425c85-a296-4482-aed2-70f928d5d016",
+      "name": "Blocks",
+      "description": {
+        "content": "Block and header retrieval endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a21b84f9-fae5-49fc-8303-312acfd98d10",
+          "name": "Get block with full transaction details (JSON)",
+          "request": {
+            "name": "Get block with full transaction details (JSON)",
+            "description": {
+              "content": "Returns complete block data including all transaction details in JSON format. Returns 404 if the block is not found.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "block",
+                "{{blockHash}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "605d8003-44d3-49dd-b368-914641cf8e71",
+              "name": "Block with full transaction details in JSON format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "block",
+                    "{{blockHash}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hash\": \"string\",\n  \"confirmations\": 6253,\n  \"size\": 3362,\n  \"strippedsize\": 9144,\n  \"weight\": 4301,\n  \"height\": 5580,\n  \"version\": 3981,\n  \"versionHex\": \"string\",\n  \"merkleroot\": \"string\",\n  \"tx\": [\n    {\n      \"txid\": \"string\",\n      \"hash\": \"string\",\n      \"size\": 2143,\n      \"vsize\": 5002,\n      \"weight\": 9279,\n      \"version\": 4916,\n      \"locktime\": 7239,\n      \"vin\": [\n        {\n          \"txid\": \"string\",\n          \"vout\": 7190,\n          \"scriptSig\": {},\n          \"txinwitness\": [\n            \"string\",\n            \"string\"\n          ],\n          \"sequence\": 6762\n        },\n        {\n          \"txid\": \"string\",\n          \"vout\": 232,\n          \"scriptSig\": {},\n          \"txinwitness\": [\n            \"string\",\n            \"string\"\n          ],\n          \"sequence\": 378\n        }\n      ],\n      \"vout\": [\n        {\n          \"value\": 9227.819192053634,\n          \"n\": 6696,\n          \"scriptPubKey\": {}\n        },\n        {\n          \"value\": 7787.716185732441,\n          \"n\": 9858,\n          \"scriptPubKey\": {}\n        }\n      ],\n      \"blockhash\": \"string\",\n      \"confirmations\": 9979,\n      \"time\": 9862,\n      \"blocktime\": 4877\n    },\n    {\n      \"txid\": \"string\",\n      \"hash\": \"string\",\n      \"size\": 4594,\n      \"vsize\": 5517,\n      \"weight\": 8621,\n      \"version\": 4836,\n      \"locktime\": 1991,\n      \"vin\": [\n        {\n          \"txid\": \"string\",\n          \"vout\": 4256,\n          \"scriptSig\": {},\n          \"txinwitness\": [\n            \"string\",\n            \"string\"\n          ],\n          \"sequence\": 7392\n        },\n        {\n          \"txid\": \"string\",\n          \"vout\": 9512,\n          \"scriptSig\": {},\n          \"txinwitness\": [\n            \"string\",\n            \"string\"\n          ],\n          \"sequence\": 3300\n        }\n      ],\n      \"vout\": [\n        {\n          \"value\": 5779.994193057044,\n          \"n\": 3935,\n          \"scriptPubKey\": {}\n        },\n        {\n          \"value\": 7148.220144736492,\n          \"n\": 6187,\n          \"scriptPubKey\": {}\n        }\n      ],\n      \"blockhash\": \"string\",\n      \"confirmations\": 6236,\n      \"time\": 6075,\n      \"blocktime\": 8825\n    }\n  ],\n  \"time\": 7191,\n  \"mediantime\": 2562,\n  \"nonce\": 9291,\n  \"bits\": \"string\",\n  \"difficulty\": 4689.2561940913,\n  \"chainwork\": \"string\",\n  \"nTx\": 8239,\n  \"previousblockhash\": \"string\",\n  \"nextblockhash\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32a0cc0d-40c5-40fb-a90c-e6a1fa5a8989",
+              "name": "Block not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "block",
+                    "{{blockHash}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d1b2dd6-92f7-428f-af71-a4167f10584d",
+          "name": "Get block (hex)",
+          "request": {
+            "name": "Get block (hex)",
+            "description": {
+              "content": "Returns complete block data in hex-encoded format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "block",
+                "{{blockHash}}.hex"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d4291723-fe80-4e36-a7bb-f91dba37352b",
+              "name": "Hex-encoded block data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "block",
+                    "{{blockHash}}.hex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ab128177-e8ba-426f-82a2-5661528c6fbd",
+              "name": "Block not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "block",
+                    "{{blockHash}}.hex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fa206b9-60ce-4fa6-8e54-fc7611b9ce76",
+          "name": "Get block (binary)",
+          "request": {
+            "name": "Get block (binary)",
+            "description": {
+              "content": "Returns complete block data in raw binary format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "block",
+                "{{blockHash}}.bin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2103c0e-84c6-466a-97f7-ce2da0c13f34",
+              "name": "Raw binary block data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "block",
+                    "{{blockHash}}.bin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fbf25add-7114-4d29-8ae3-193bd66cfa2a",
+              "name": "Block not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "block",
+                    "{{blockHash}}.bin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d31a26a-0d64-4514-84f3-960f057792d7",
+          "name": "Get block without full transaction details (JSON)",
+          "request": {
+            "name": "Get block without full transaction details (JSON)",
+            "description": {
+              "content": "Returns block data in JSON format, but the transactions array contains only transaction hashes rather than full transaction objects.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "block",
+                "notxdetails",
+                "{{blockHash}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9604bddf-ef3b-45a9-acf7-6ca558a92a73",
+              "name": "Block with transaction IDs only in JSON format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "block",
+                    "notxdetails",
+                    "{{blockHash}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d280381-2e27-4eb2-a8f3-8d40e45809a7",
+              "name": "Block not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "block",
+                    "notxdetails",
+                    "{{blockHash}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc671e93-6584-4851-8a28-1ef23c5b30f7",
+          "name": "Get block without transaction details (hex)",
+          "request": {
+            "name": "Get block without transaction details (hex)",
+            "description": {
+              "content": "Returns block data in hex-encoded format without full transaction expansion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "block",
+                "notxdetails",
+                "{{blockHash}}.hex"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb044611-97b0-4738-b0a3-e148c41ce001",
+              "name": "Hex-encoded block data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "block",
+                    "notxdetails",
+                    "{{blockHash}}.hex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "62741f74-6f20-42d0-b506-3b5a3ddec87b",
+              "name": "Block not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "block",
+                    "notxdetails",
+                    "{{blockHash}}.hex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "decf2499-2fcf-421a-ae99-9cbd98f7e905",
+          "name": "Get block headers (JSON)",
+          "request": {
+            "name": "Get block headers (JSON)",
+            "description": {
+              "content": "Retrieves the specified number of block headers starting from the given block hash and going in the upward (newer) direction.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "headers",
+                ":count",
+                "{{blockHash}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "count",
+                  "description": "(Required) Number of block headers to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ddc78df-0a06-431d-a449-3fcaeed4fd55",
+              "name": "Array of block headers in JSON format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "headers",
+                    ":count",
+                    "{{blockHash}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "count",
+                      "description": "(Required) Number of block headers to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"hash\": \"string\",\n    \"confirmations\": 7639,\n    \"height\": 5139,\n    \"version\": 3492,\n    \"versionHex\": \"string\",\n    \"merkleroot\": \"string\",\n    \"time\": 4689,\n    \"mediantime\": 8262,\n    \"nonce\": 6050,\n    \"bits\": \"string\",\n    \"difficulty\": 7330.671767465018,\n    \"chainwork\": \"string\",\n    \"nTx\": 9401,\n    \"previousblockhash\": \"string\",\n    \"nextblockhash\": \"string\"\n  },\n  {\n    \"hash\": \"string\",\n    \"confirmations\": 1374,\n    \"height\": 9077,\n    \"version\": 7380,\n    \"versionHex\": \"string\",\n    \"merkleroot\": \"string\",\n    \"time\": 5843,\n    \"mediantime\": 64,\n    \"nonce\": 5467,\n    \"bits\": \"string\",\n    \"difficulty\": 4569.783398174953,\n    \"chainwork\": \"string\",\n    \"nTx\": 4724,\n    \"previousblockhash\": \"string\",\n    \"nextblockhash\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e72fa397-4ae2-42d1-b126-da0d197e7188",
+              "name": "Block not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "headers",
+                    ":count",
+                    "{{blockHash}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "count",
+                      "description": "(Required) Number of block headers to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06658bbe-3733-4852-8f27-8a08ef14962e",
+          "name": "Get block headers (hex)",
+          "request": {
+            "name": "Get block headers (hex)",
+            "description": {
+              "content": "Returns the specified number of block headers in hex-encoded format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "headers",
+                ":count",
+                "{{blockHash}}.hex"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "count",
+                  "description": "(Required) Number of block headers to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c879d5b-981a-4921-a422-f5371a259c93",
+              "name": "Hex-encoded block headers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "headers",
+                    ":count",
+                    "{{blockHash}}.hex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "count",
+                      "description": "(Required) Number of block headers to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "099e15f4-47cf-4008-baee-4bf7a5ee5ad2",
+              "name": "Block not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "headers",
+                    ":count",
+                    "{{blockHash}}.hex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "count",
+                      "description": "(Required) Number of block headers to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd6d6b9f-f029-4a5e-800a-89c304fac34a",
+          "name": "Get block hash by height (JSON)",
+          "request": {
+            "name": "Get block hash by height (JSON)",
+            "description": {
+              "content": "Returns the hash of the block at the specified height in JSON format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "blockhashbyheight",
+                "{{height}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bbe47e18-c333-4dab-987e-9f480ec3d503",
+              "name": "Block hash in JSON format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "blockhashbyheight",
+                    "{{height}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"blockhash\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f00df70f-f0ca-4910-8111-2ae8d400225c",
+              "name": "Block height not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "blockhashbyheight",
+                    "{{height}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47cce529-ad06-4a8a-b2e1-d39f1f49a159",
+          "name": "Get block hash by height (hex)",
+          "request": {
+            "name": "Get block hash by height (hex)",
+            "description": {
+              "content": "Returns the hash of the block at the specified height in hex format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "blockhashbyheight",
+                "{{height}}.hex"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cdb8bef2-87ba-4e69-be11-eb8165135c21",
+              "name": "Block hash as hex string",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "blockhashbyheight",
+                    "{{height}}.hex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0aafc430-dc56-4639-b523-9ce80eb6b72c",
+              "name": "Block height not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "blockhashbyheight",
+                    "{{height}}.hex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ffbc65c-d212-4760-bb0e-8566a6b29bd8",
+          "name": "Get block details",
+          "request": {
+            "name": "Get block details",
+            "description": {
+              "content": "Returns details about the block including header fields and transaction summary.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "block",
+                ":hash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) Block hash in hex format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e06e938-5a63-4eaa-ac19-1f0ac5377885",
+              "name": "Block details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"height\": 6361,\n  \"version\": 3320,\n  \"timestamp\": 6262,\n  \"tx_count\": 4936,\n  \"size\": 4452,\n  \"weight\": 9497,\n  \"merkle_root\": \"string\",\n  \"previousblockhash\": \"string\",\n  \"mediantime\": 6989,\n  \"nonce\": 6459,\n  \"bits\": 2386,\n  \"difficulty\": 7237.868519321917\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c00681e-215c-4f8e-a92c-4c17c318130b",
+              "name": "Block not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4fd1fc26-308d-4576-8db7-4c22a2e0a0e4",
+          "name": "Get block header",
+          "request": {
+            "name": "Get block header",
+            "description": {
+              "content": "Returns the hex-encoded block header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "block",
+                ":hash",
+                "header"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) Block hash in hex format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2adc56a6-c14a-4580-9194-3b978a9a2b61",
+              "name": "Hex-encoded block header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash",
+                    "header"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2152b57c-c1a4-4db3-9919-158c2e8b7496",
+              "name": "Block not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash",
+                    "header"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "062f1fc7-0cf4-463f-873d-f9d4826a57dc",
+          "name": "Get block hash at height",
+          "request": {
+            "name": "Get block hash at height",
+            "description": {
+              "content": "Returns the hash of the block at the specified height.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "block-height",
+                ":height"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "height",
+                  "description": "(Required) Block height (0-indexed from genesis)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65842300-0f31-4b99-9aa3-57d943e203ba",
+              "name": "Block hash as plain text",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block-height",
+                    ":height"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "height",
+                      "description": "(Required) Block height (0-indexed from genesis)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "56e5c505-9ccf-47b2-97f9-e90237ccf9d6",
+              "name": "Block height not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block-height",
+                    ":height"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "height",
+                      "description": "(Required) Block height (0-indexed from genesis)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50c5a5c8-dd1f-45db-8b27-73f34d082659",
+          "name": "Get raw block data",
+          "request": {
+            "name": "Get raw block data",
+            "description": {
+              "content": "Returns the raw block data in binary format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "block",
+                ":hash",
+                "raw"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) Block hash in hex format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "569c2eb7-ca32-40e7-adc4-b2fb02f590a7",
+              "name": "Raw binary block data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ee52607e-dca0-4b3d-9eae-21674ec92824",
+              "name": "Block not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2333c95a-8e58-4e24-9904-21cce01c6a09",
+          "name": "Get block confirmation status",
+          "request": {
+            "name": "Get block confirmation status",
+            "description": {
+              "content": "Returns the confirmation status of a block.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "block",
+                ":hash",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) Block hash in hex format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "150754ff-ac7f-4697-b180-c5faca6be010",
+              "name": "Block confirmation status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"in_best_chain\": true,\n  \"height\": 2383,\n  \"next_best\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdc522c5-c7c8-4e89-9e45-2b8c7b87ef0d",
+          "name": "Get latest block height",
+          "request": {
+            "name": "Get latest block height",
+            "description": {
+              "content": "Returns the height of the latest confirmed block.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blocks",
+                "tip",
+                "height"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "842d3989-562a-4c87-bf29-11a88424ef46",
+              "name": "Current block height as plain integer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blocks",
+                    "tip",
+                    "height"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd9c3dfa-d293-40c3-a5a9-220642c4075a",
+          "name": "Get latest block hash",
+          "request": {
+            "name": "Get latest block hash",
+            "description": {
+              "content": "Returns the hash of the latest confirmed block.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blocks",
+                "tip",
+                "hash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "30cded99-2d1f-45b2-94a2-da6b8d2d3462",
+              "name": "Current block hash as plain text",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blocks",
+                    "tip",
+                    "hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1244d6e4-5883-476e-8fa0-bb3c2d855fbc",
+          "name": "Get transaction ID at index in block",
+          "request": {
+            "name": "Get transaction ID at index in block",
+            "description": {
+              "content": "Returns the transaction ID at the specified index within the block.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "block",
+                ":hash",
+                "txid",
+                ":index"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) Block hash in hex format"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "index",
+                  "description": "(Required) Zero-based transaction index within the block"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91d65a57-be57-4f68-9609-350e7a7b0a10",
+              "name": "Transaction ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash",
+                    "txid",
+                    ":index"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "index",
+                      "description": "(Required) Zero-based transaction index within the block"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "436e84f0-95bc-4ca9-a47e-96feeb0f9fae",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash",
+                    "txid",
+                    ":index"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "index",
+                      "description": "(Required) Zero-based transaction index within the block"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a08c84a-cbdc-4fc7-8272-ba96fe6c3bc8",
+          "name": "Get all transaction IDs in block",
+          "request": {
+            "name": "Get all transaction IDs in block",
+            "description": {
+              "content": "Returns all transaction IDs included in the block.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "block",
+                ":hash",
+                "txids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) Block hash in hex format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "94a9f055-9f3c-469e-a810-097f78428dd9",
+              "name": "Array of transaction IDs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash",
+                    "txids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"string\",\n  \"string\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b13dc19-8e7c-4ad4-bf27-d8869ffa8f5a",
+              "name": "Block not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash",
+                    "txids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "607b961c-3c68-45fa-a54b-421071b7d16d",
+          "name": "Get block transactions",
+          "request": {
+            "name": "Get block transactions",
+            "description": {
+              "content": "Returns up to 25 transactions from the block starting at the given index.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "block",
+                ":hash",
+                "txs",
+                ":startIndex"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) Block hash in hex format"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "startIndex",
+                  "description": "(Required) Starting index (must be a multiple of 25)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7872a12-ab80-4500-ae36-1f3f2c126534",
+              "name": "Array of transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash",
+                    "txs",
+                    ":startIndex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "startIndex",
+                      "description": "(Required) Starting index (must be a multiple of 25)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"txid\": \"string\",\n    \"version\": 9261,\n    \"locktime\": 6697,\n    \"vin\": [\n      {\n        \"txid\": \"string\",\n        \"vout\": 7950,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 5701\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": false,\n        \"sequence\": 6401\n      },\n      {\n        \"txid\": \"string\",\n        \"vout\": 3523,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 6629\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": false,\n        \"sequence\": 6451\n      }\n    ],\n    \"vout\": [\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 9710\n      },\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 439\n      }\n    ],\n    \"size\": 9392,\n    \"weight\": 3715,\n    \"sigops\": 2255,\n    \"fee\": 8771,\n    \"status\": {\n      \"confirmed\": true,\n      \"block_height\": 2705,\n      \"block_hash\": \"string\",\n      \"block_time\": 3654\n    }\n  },\n  {\n    \"txid\": \"string\",\n    \"version\": 8960,\n    \"locktime\": 3597,\n    \"vin\": [\n      {\n        \"txid\": \"string\",\n        \"vout\": 9742,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 9847\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": true,\n        \"sequence\": 1766\n      },\n      {\n        \"txid\": \"string\",\n        \"vout\": 7903,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 18\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": false,\n        \"sequence\": 1687\n      }\n    ],\n    \"vout\": [\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 6396\n      },\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 1528\n      }\n    ],\n    \"size\": 7664,\n    \"weight\": 960,\n    \"sigops\": 5170,\n    \"fee\": 2824,\n    \"status\": {\n      \"confirmed\": true,\n      \"block_height\": 3135,\n      \"block_hash\": \"string\",\n      \"block_time\": 5112\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9df6c7ea-06e6-403e-9d34-a0debf9c5cae",
+              "name": "Block not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "block",
+                    ":hash",
+                    "txs",
+                    ":startIndex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Block hash in hex format"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "startIndex",
+                      "description": "(Required) Starting index (must be a multiple of 25)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0f2ccdc-f0ab-415e-a187-25013dbd8f68",
+          "name": "Get recent blocks",
+          "request": {
+            "name": "Get recent blocks",
+            "description": {
+              "content": "Returns the past 10 blocks before the specified height (or tip if omitted).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blocks",
+                ":startHeight"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "startHeight",
+                  "description": "Block height to start from (defaults to chain tip)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4dd5738-42db-4232-bf10-74076e867765",
+              "name": "Array of blocks",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blocks",
+                    ":startHeight"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "startHeight",
+                      "description": "Block height to start from (defaults to chain tip)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"height\": 3853,\n    \"version\": 4991,\n    \"timestamp\": 9940,\n    \"tx_count\": 9794,\n    \"size\": 1624,\n    \"weight\": 6035,\n    \"merkle_root\": \"string\",\n    \"previousblockhash\": \"string\",\n    \"mediantime\": 749,\n    \"nonce\": 3620,\n    \"bits\": 1691,\n    \"difficulty\": 7767.592888537651\n  },\n  {\n    \"id\": \"string\",\n    \"height\": 8505,\n    \"version\": 5422,\n    \"timestamp\": 5098,\n    \"tx_count\": 2714,\n    \"size\": 6964,\n    \"weight\": 7535,\n    \"merkle_root\": \"string\",\n    \"previousblockhash\": \"string\",\n    \"mediantime\": 9525,\n    \"nonce\": 5232,\n    \"bits\": 9528,\n    \"difficulty\": 235.0035592889388\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fbff0f60-1a7f-48f6-9cd9-2e4539b8b2f3",
+          "name": "Get recent blocks with mining data (v1)",
+          "request": {
+            "name": "Get recent blocks with mining data (v1)",
+            "description": {
+              "content": "Returns the past 15 blocks before the specified height including mining pool information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "blocks",
+                ":startHeight"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "startHeight",
+                  "description": "Block height to start from (defaults to chain tip)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9696db38-e4ec-44a9-bede-941be94a6da7",
+              "name": "Array of blocks with mining data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "blocks",
+                    ":startHeight"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "startHeight",
+                      "description": "Block height to start from (defaults to chain tip)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"extras\": {\n      \"reward\": 7848,\n      \"coinbaseTx\": {},\n      \"totalFees\": 6625,\n      \"avgFee\": 5639,\n      \"avgFeeRate\": 477,\n      \"pool\": {\n        \"id\": 7406,\n        \"name\": \"string\",\n        \"slug\": \"string\"\n      }\n    },\n    \"id\": \"string\",\n    \"height\": 4501,\n    \"version\": 4926,\n    \"timestamp\": 129,\n    \"tx_count\": 2744,\n    \"size\": 3900,\n    \"weight\": 3302,\n    \"merkle_root\": \"string\",\n    \"previousblockhash\": \"string\",\n    \"mediantime\": 5660,\n    \"nonce\": 756,\n    \"bits\": 717,\n    \"difficulty\": 7670.347522278027\n  },\n  {\n    \"extras\": {\n      \"reward\": 6044,\n      \"coinbaseTx\": {},\n      \"totalFees\": 7313,\n      \"avgFee\": 5510,\n      \"avgFeeRate\": 962,\n      \"pool\": {\n        \"id\": 3475,\n        \"name\": \"string\",\n        \"slug\": \"string\"\n      }\n    },\n    \"id\": \"string\",\n    \"height\": 5106,\n    \"version\": 2820,\n    \"timestamp\": 4453,\n    \"tx_count\": 905,\n    \"size\": 3146,\n    \"weight\": 3886,\n    \"merkle_root\": \"string\",\n    \"previousblockhash\": \"string\",\n    \"mediantime\": 8519,\n    \"nonce\": 137,\n    \"bits\": 1744,\n    \"difficulty\": 5810.759052619359\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11b7e78e-50cc-435d-b22b-c6ccc45cfb3a",
+          "name": "Get bulk range of blocks",
+          "request": {
+            "name": "Get bulk range of blocks",
+            "description": {
+              "content": "Returns a range of blocks (up to 10 at a time) by height range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "blocks-bulk",
+                ":minHeight",
+                ":maxHeight"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "minHeight",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "maxHeight",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ff76a53-bead-47ba-8d00-428b78a22c07",
+              "name": "Array of blocks in the height range",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "blocks-bulk",
+                    ":minHeight",
+                    ":maxHeight"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "minHeight",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "maxHeight",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"height\": 3853,\n    \"version\": 4991,\n    \"timestamp\": 9940,\n    \"tx_count\": 9794,\n    \"size\": 1624,\n    \"weight\": 6035,\n    \"merkle_root\": \"string\",\n    \"previousblockhash\": \"string\",\n    \"mediantime\": 749,\n    \"nonce\": 3620,\n    \"bits\": 1691,\n    \"difficulty\": 7767.592888537651\n  },\n  {\n    \"id\": \"string\",\n    \"height\": 8505,\n    \"version\": 5422,\n    \"timestamp\": 5098,\n    \"tx_count\": 2714,\n    \"size\": 6964,\n    \"weight\": 7535,\n    \"merkle_root\": \"string\",\n    \"previousblockhash\": \"string\",\n    \"mediantime\": 9525,\n    \"nonce\": 5232,\n    \"bits\": 9528,\n    \"difficulty\": 235.0035592889388\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9332",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Block hash in hex format",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "blockHash"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Block height (0-indexed from genesis)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "height"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bcc475e7-f889-424e-b8f3-91292e9307b5",
+    "name": "Litecoin Core JSON-RPC Addresses Blocks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).\n\n\nContact Support:\n Name: Litecoin Project",
+      "type": "text/plain"
+    }
+  }
+}

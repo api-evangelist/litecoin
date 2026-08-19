@@ -1,0 +1,455 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Litecoin Core JSON-RPC Addresses Blocks API",
+    "version": "0.21"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get block with full transaction details (JSON)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/block/:blockHash.json",
+            "params": [
+              {
+                "name": "blockHash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              }
+            ]
+          },
+          "docs": "Returns complete block data including all transaction details in JSON format. Returns 404 if the block is not found.\n"
+        },
+        {
+          "info": {
+            "name": "Get block (hex)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/block/:blockHash.hex",
+            "params": [
+              {
+                "name": "blockHash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              }
+            ]
+          },
+          "docs": "Returns complete block data in hex-encoded format."
+        },
+        {
+          "info": {
+            "name": "Get block (binary)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/block/:blockHash.bin",
+            "params": [
+              {
+                "name": "blockHash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              }
+            ]
+          },
+          "docs": "Returns complete block data in raw binary format."
+        },
+        {
+          "info": {
+            "name": "Get block without full transaction details (JSON)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/block/notxdetails/:blockHash.json",
+            "params": [
+              {
+                "name": "blockHash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              }
+            ]
+          },
+          "docs": "Returns block data in JSON format, but the transactions array contains only transaction hashes rather than full transaction objects.\n"
+        },
+        {
+          "info": {
+            "name": "Get block without transaction details (hex)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/block/notxdetails/:blockHash.hex",
+            "params": [
+              {
+                "name": "blockHash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              }
+            ]
+          },
+          "docs": "Returns block data in hex-encoded format without full transaction expansion."
+        },
+        {
+          "info": {
+            "name": "Get block headers (JSON)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/headers/:count/:blockHash.json",
+            "params": [
+              {
+                "name": "count",
+                "value": "",
+                "type": "path",
+                "description": "Number of block headers to retrieve"
+              },
+              {
+                "name": "blockHash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              }
+            ]
+          },
+          "docs": "Retrieves the specified number of block headers starting from the given block hash and going in the upward (newer) direction.\n"
+        },
+        {
+          "info": {
+            "name": "Get block headers (hex)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/headers/:count/:blockHash.hex",
+            "params": [
+              {
+                "name": "count",
+                "value": "",
+                "type": "path",
+                "description": "Number of block headers to retrieve"
+              },
+              {
+                "name": "blockHash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              }
+            ]
+          },
+          "docs": "Returns the specified number of block headers in hex-encoded format."
+        },
+        {
+          "info": {
+            "name": "Get block hash by height (JSON)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/blockhashbyheight/:height.json",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "path",
+                "description": "Block height (0-indexed from genesis)"
+              }
+            ]
+          },
+          "docs": "Returns the hash of the block at the specified height in JSON format."
+        },
+        {
+          "info": {
+            "name": "Get block hash by height (hex)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/blockhashbyheight/:height.hex",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "path",
+                "description": "Block height (0-indexed from genesis)"
+              }
+            ]
+          },
+          "docs": "Returns the hash of the block at the specified height in hex format."
+        },
+        {
+          "info": {
+            "name": "Get block details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/block/:hash",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              }
+            ]
+          },
+          "docs": "Returns details about the block including header fields and transaction summary."
+        },
+        {
+          "info": {
+            "name": "Get block header",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/block/:hash/header",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              }
+            ]
+          },
+          "docs": "Returns the hex-encoded block header."
+        },
+        {
+          "info": {
+            "name": "Get block hash at height",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/block-height/:height",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "path",
+                "description": "Block height (0-indexed from genesis)"
+              }
+            ]
+          },
+          "docs": "Returns the hash of the block at the specified height."
+        },
+        {
+          "info": {
+            "name": "Get raw block data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/block/:hash/raw",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              }
+            ]
+          },
+          "docs": "Returns the raw block data in binary format."
+        },
+        {
+          "info": {
+            "name": "Get block confirmation status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/block/:hash/status",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              }
+            ]
+          },
+          "docs": "Returns the confirmation status of a block."
+        },
+        {
+          "info": {
+            "name": "Get latest block height",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/blocks/tip/height"
+          },
+          "docs": "Returns the height of the latest confirmed block."
+        },
+        {
+          "info": {
+            "name": "Get latest block hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/blocks/tip/hash"
+          },
+          "docs": "Returns the hash of the latest confirmed block."
+        },
+        {
+          "info": {
+            "name": "Get transaction ID at index in block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/block/:hash/txid/:index",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              },
+              {
+                "name": "index",
+                "value": "",
+                "type": "path",
+                "description": "Zero-based transaction index within the block"
+              }
+            ]
+          },
+          "docs": "Returns the transaction ID at the specified index within the block."
+        },
+        {
+          "info": {
+            "name": "Get all transaction IDs in block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/block/:hash/txids",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              }
+            ]
+          },
+          "docs": "Returns all transaction IDs included in the block."
+        },
+        {
+          "info": {
+            "name": "Get block transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/block/:hash/txs/:startIndex",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash in hex format"
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "path",
+                "description": "Starting index (must be a multiple of 25)"
+              }
+            ]
+          },
+          "docs": "Returns up to 25 transactions from the block starting at the given index."
+        },
+        {
+          "info": {
+            "name": "Get recent blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/blocks/:startHeight",
+            "params": [
+              {
+                "name": "startHeight",
+                "value": "",
+                "type": "path",
+                "description": "Block height to start from (defaults to chain tip)"
+              }
+            ]
+          },
+          "docs": "Returns the past 10 blocks before the specified height (or tip if omitted)."
+        },
+        {
+          "info": {
+            "name": "Get recent blocks with mining data (v1)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/blocks/:startHeight",
+            "params": [
+              {
+                "name": "startHeight",
+                "value": "",
+                "type": "path",
+                "description": "Block height to start from (defaults to chain tip)"
+              }
+            ]
+          },
+          "docs": "Returns the past 15 blocks before the specified height including mining pool information."
+        },
+        {
+          "info": {
+            "name": "Get bulk range of blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/blocks-bulk/:minHeight/:maxHeight",
+            "params": [
+              {
+                "name": "minHeight",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "maxHeight",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a range of blocks (up to 10 at a time) by height range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

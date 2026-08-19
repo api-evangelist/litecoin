@@ -1,0 +1,1151 @@
+{
+  "item": [
+    {
+      "id": "2bb2ddc8-5f3d-4165-aa0c-b3d94c52d593",
+      "name": "Mining",
+      "description": {
+        "content": "Mining pool statistics, hashrate, and difficulty endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "827753f9-1cfb-44d7-8bb7-52546fb09892",
+          "name": "Get mining pools by time period",
+          "request": {
+            "name": "Get mining pools by time period",
+            "description": {
+              "content": "Returns a list of mining pools ranked by block frequency over the specified time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mining",
+                "pools",
+                ":timePeriod"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "timePeriod",
+                  "description": "(Required) Time period for the query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1bfd8b6-7df6-41ea-be84-bc0078be72de",
+              "name": "Mining pool statistics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mining",
+                    "pools",
+                    ":timePeriod"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timePeriod",
+                      "description": "(Required) Time period for the query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pools\": [\n    {\n      \"id\": 645,\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"blockCount\": 839,\n      \"rank\": 6370,\n      \"emptyBlocks\": 759,\n      \"avgMatchRate\": 1999.8614878760623,\n      \"avgFeeDelta\": \"string\",\n      \"poolUniqueId\": 2558\n    },\n    {\n      \"id\": 9009,\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"blockCount\": 5205,\n      \"rank\": 2361,\n      \"emptyBlocks\": 8111,\n      \"avgMatchRate\": 4338.839652640088,\n      \"avgFeeDelta\": \"string\",\n      \"poolUniqueId\": 7135\n    }\n  ],\n  \"blockCount\": 8574,\n  \"lastEstimatedHashrate\": 3945.371213527905\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26e690ef-515e-4a4b-be54-ef2a848a7437",
+          "name": "Get mining pool details",
+          "request": {
+            "name": "Get mining pool details",
+            "description": {
+              "content": "Returns details for the specified mining pool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mining",
+                "pool",
+                ":slug"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) Mining pool slug identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ef5c5ac-eee4-4b08-a55e-2f44e655a44c",
+              "name": "Mining pool details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mining",
+                    "pool",
+                    ":slug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) Mining pool slug identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8917,\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"blockCount\": 5016,\n  \"rank\": 9059,\n  \"emptyBlocks\": 8551,\n  \"avgMatchRate\": 1524.8525496383713,\n  \"avgFeeDelta\": \"string\",\n  \"poolUniqueId\": 74\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7890f8ee-a7ee-4981-9ace-9928c7985e29",
+          "name": "Get mining pool hashrate history",
+          "request": {
+            "name": "Get mining pool hashrate history",
+            "description": {
+              "content": "Returns historical hashrate data for the specified mining pool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mining",
+                "pool",
+                ":slug",
+                "hashrate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7293a86d-bb76-42c9-989b-c43ef1f89b26",
+              "name": "Pool hashrate history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mining",
+                    "pool",
+                    ":slug",
+                    "hashrate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"timestamp\": 2358,\n    \"avgHashrate\": 4086.862562754455,\n    \"share\": 1033.4062068107419,\n    \"blockCount\": 8854\n  },\n  {\n    \"timestamp\": 4905,\n    \"avgHashrate\": 6131.032411754007,\n    \"share\": 5765.707767819679,\n    \"blockCount\": 7330\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46be0c51-bd62-46a2-b704-1f7743670b1f",
+          "name": "Get blocks mined by pool",
+          "request": {
+            "name": "Get blocks mined by pool",
+            "description": {
+              "content": "Returns the past 10 blocks mined by the specified pool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mining",
+                "pool",
+                ":slug",
+                "blocks",
+                ":blockHeight"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "blockHeight",
+                  "description": "Starting block height (defaults to tip)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2475479-0fe0-4999-998e-9136e09a7cf9",
+              "name": "Blocks mined by the pool",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mining",
+                    "pool",
+                    ":slug",
+                    "blocks",
+                    ":blockHeight"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "blockHeight",
+                      "description": "Starting block height (defaults to tip)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"height\": 847,\n    \"version\": 4805,\n    \"timestamp\": 4443,\n    \"tx_count\": 7505,\n    \"size\": 7984,\n    \"weight\": 584,\n    \"merkle_root\": \"string\",\n    \"previousblockhash\": \"string\",\n    \"mediantime\": 7196,\n    \"nonce\": 1410,\n    \"bits\": 3439,\n    \"difficulty\": 3273.6799644165217\n  },\n  {\n    \"id\": \"string\",\n    \"height\": 6213,\n    \"version\": 9438,\n    \"timestamp\": 4457,\n    \"tx_count\": 7672,\n    \"size\": 7440,\n    \"weight\": 6724,\n    \"merkle_root\": \"string\",\n    \"previousblockhash\": \"string\",\n    \"mediantime\": 3850,\n    \"nonce\": 1345,\n    \"bits\": 4558,\n    \"difficulty\": 3945.6224982371546\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07a5c6ba-39a2-4bf7-883f-45a7c1689ee3",
+          "name": "Get hashrate averages by pool",
+          "request": {
+            "name": "Get hashrate averages by pool",
+            "description": {
+              "content": "Returns average hashrate data for all pools over the specified time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mining",
+                "hashrate",
+                "pools",
+                ":timePeriod"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "timePeriod",
+                  "description": "(Required) Time period for the query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b95bfdf0-43aa-4277-a989-1ac96d429cc2",
+              "name": "Pool hashrate averages",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mining",
+                    "hashrate",
+                    "pools",
+                    ":timePeriod"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timePeriod",
+                      "description": "(Required) Time period for the query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"poolName\": \"string\",\n    \"poolId\": 1275,\n    \"data\": [\n      {\n        \"timestamp\": 6944,\n        \"avgHashrate\": 4469.36850043843,\n        \"share\": 5268.405322525351,\n        \"blockCount\": 8850\n      },\n      {\n        \"timestamp\": 5034,\n        \"avgHashrate\": 7339.895114771674,\n        \"share\": 3171.974615391164,\n        \"blockCount\": 8717\n      }\n    ]\n  },\n  {\n    \"poolName\": \"string\",\n    \"poolId\": 2311,\n    \"data\": [\n      {\n        \"timestamp\": 1552,\n        \"avgHashrate\": 4920.107949405198,\n        \"share\": 9299.348999997499,\n        \"blockCount\": 3207\n      },\n      {\n        \"timestamp\": 2846,\n        \"avgHashrate\": 1661.417956230209,\n        \"share\": 4479.988156052037,\n        \"blockCount\": 8494\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cd24770-e4b9-4397-bacf-e8919746cd27",
+          "name": "Get network hashrate and difficulty",
+          "request": {
+            "name": "Get network hashrate and difficulty",
+            "description": {
+              "content": "Returns network-wide hashrate and difficulty history over the specified period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mining",
+                "hashrate",
+                ":timePeriod"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "timePeriod",
+                  "description": "(Required) Time period for the query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "879fcf8d-4b7c-44d6-b170-8bc03e4db530",
+              "name": "Network hashrate and difficulty data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mining",
+                    "hashrate",
+                    ":timePeriod"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timePeriod",
+                      "description": "(Required) Time period for the query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hashrates\": [\n    {\n      \"timestamp\": 7412,\n      \"avgHashrate\": 1574.9005742375155\n    },\n    {\n      \"timestamp\": 7594,\n      \"avgHashrate\": 2177.322158347166\n    }\n  ],\n  \"difficulty\": [\n    {\n      \"timestamp\": 8892,\n      \"difficulty\": 6711.704649665443\n    },\n    {\n      \"timestamp\": 1551,\n      \"difficulty\": 8078.328914112809\n    }\n  ],\n  \"currentHashrate\": 9733.558935575687,\n  \"currentDifficulty\": 2617.303073033167\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b86b70de-72b3-41ec-9f17-6f0929086cd2",
+          "name": "Get difficulty adjustment history",
+          "request": {
+            "name": "Get difficulty adjustment history",
+            "description": {
+              "content": "Returns historical difficulty adjustment data at the specified interval.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mining",
+                "difficulty-adjustments",
+                ":interval"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "interval",
+                  "description": "(Required) Time interval for aggregation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "78262b62-4932-48e6-b995-eb2c78c64d67",
+              "name": "Difficulty adjustment history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mining",
+                    "difficulty-adjustments",
+                    ":interval"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "interval",
+                      "description": "(Required) Time interval for aggregation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"time\": 1334,\n    \"height\": 7263,\n    \"difficulty\": 3751.7327007217127,\n    \"adjustment\": 4538.192503447706\n  },\n  {\n    \"time\": 2085,\n    \"height\": 7292,\n    \"difficulty\": 1126.6414666820267,\n    \"adjustment\": 6142.434336286024\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40702a8c-e7cc-4ac4-9223-b4a7d6e05d8c",
+          "name": "Get average block fees by time period",
+          "request": {
+            "name": "Get average block fees by time period",
+            "description": {
+              "content": "Returns average block fee data over the specified time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mining",
+                "blocks",
+                "fees",
+                ":timePeriod"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "timePeriod",
+                  "description": "(Required) Time period for the query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "caf36476-9791-496f-bff3-e9309d3db289",
+              "name": "Average block fee data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mining",
+                    "blocks",
+                    "fees",
+                    ":timePeriod"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timePeriod",
+                      "description": "(Required) Time period for the query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0480eba0-6d15-49ce-a142-9458d0f62309",
+          "name": "Get average block rewards by time period",
+          "request": {
+            "name": "Get average block rewards by time period",
+            "description": {
+              "content": "Returns average block reward data over the specified time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mining",
+                "blocks",
+                "rewards",
+                ":timePeriod"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "timePeriod",
+                  "description": "(Required) Time period for the query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab32db05-bf76-4bd1-b98d-9c4ddb273bb7",
+              "name": "Average block reward data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mining",
+                    "blocks",
+                    "rewards",
+                    ":timePeriod"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timePeriod",
+                      "description": "(Required) Time period for the query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d06d462-c0f4-49d7-8e73-5c7adc3b3173",
+          "name": "Get reward statistics for block count",
+          "request": {
+            "name": "Get reward statistics for block count",
+            "description": {
+              "content": "Returns block reward and transaction fee statistics for the specified number of recent blocks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mining",
+                "reward-stats",
+                ":blockCount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "blockCount",
+                  "description": "(Required) Number of recent blocks to analyze"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84323877-fedc-466f-b774-9795847a677b",
+              "name": "Block reward statistics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mining",
+                    "reward-stats",
+                    ":blockCount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "blockCount",
+                      "description": "(Required) Number of recent blocks to analyze"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"startBlock\": 8436,\n  \"endBlock\": 4783,\n  \"totalReward\": 9074,\n  \"totalFee\": 5638,\n  \"totalTx\": 6932\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f083cac-3d96-4ed9-a826-69b75279f75e",
+          "name": "Get current difficulty adjustment details",
+          "request": {
+            "name": "Get current difficulty adjustment details",
+            "description": {
+              "content": "Returns details about the current difficulty adjustment period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "difficulty-adjustment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bcf8fc32-ec34-43a2-937d-90a4ff8da26a",
+              "name": "Current difficulty adjustment details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "difficulty-adjustment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"progressPercent\": 3927.2115543638342,\n  \"difficultyChange\": 3329.306320147001,\n  \"estimatedRetargetDate\": 1396,\n  \"remainingBlocks\": 7616,\n  \"remainingTime\": 9043,\n  \"previousRetarget\": 2916.1842617726097,\n  \"previousTime\": 6739,\n  \"nextRetargetHeight\": 1534,\n  \"timeAvg\": 4832,\n  \"timeOffset\": 6014,\n  \"expectedBlocks\": 6061.055378915839\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9332",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7d96a49f-4a6d-422b-b4f8-7c357e833ad2",
+    "name": "Litecoin Core JSON-RPC Addresses Mining API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).\n\n\nContact Support:\n Name: Litecoin Project",
+      "type": "text/plain"
+    }
+  }
+}

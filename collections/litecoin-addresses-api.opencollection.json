@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Litecoin Core JSON-RPC Addresses API",
+    "version": "0.21"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Addresses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get address details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/address/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Litecoin address (P2PKH, P2SH, or bech32)"
+              }
+            ]
+          },
+          "docs": "Returns details about an address including chain stats (funded, spent, tx count) and current mempool stats.\n"
+        },
+        {
+          "info": {
+            "name": "Get address transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/address/:address/txs",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Litecoin address (P2PKH, P2SH, or bech32)"
+              },
+              {
+                "name": "after_txid",
+                "value": "",
+                "type": "query",
+                "description": "Paginate confirmed transactions after this txid"
+              }
+            ]
+          },
+          "docs": "Returns up to 50 mempool transactions plus the first 25 confirmed transactions for the address. To get more confirmed transactions, use the after_txid parameter.\n"
+        },
+        {
+          "info": {
+            "name": "Get address confirmed transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/address/:address/txs/chain",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Litecoin address (P2PKH, P2SH, or bech32)"
+              },
+              {
+                "name": "last_seen_txid",
+                "value": "",
+                "type": "query",
+                "description": "Paginate from this txid"
+              }
+            ]
+          },
+          "docs": "Returns confirmed transactions for the address (25 per page)."
+        },
+        {
+          "info": {
+            "name": "Get address mempool transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/address/:address/txs/mempool",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Litecoin address (P2PKH, P2SH, or bech32)"
+              }
+            ]
+          },
+          "docs": "Returns unconfirmed transactions for the address (up to 50)."
+        },
+        {
+          "info": {
+            "name": "Get address UTXOs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/address/:address/utxo",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Litecoin address (P2PKH, P2SH, or bech32)"
+              }
+            ]
+          },
+          "docs": "Returns unspent transaction outputs for the specified address."
+        },
+        {
+          "info": {
+            "name": "Validate address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/validate-address/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Litecoin address (P2PKH, P2SH, or bech32)"
+              }
+            ]
+          },
+          "docs": "Validates a Litecoin address and returns its type and validity."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

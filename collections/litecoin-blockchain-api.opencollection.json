@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Litecoin Core JSON-RPC Addresses Blockchain API",
+    "version": "0.21"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blockchain",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get chain info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/chaininfo.json"
+          },
+          "docs": "Returns various state information regarding block chain processing. Only available in JSON format. Equivalent to the getblockchaininfo JSON-RPC call.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

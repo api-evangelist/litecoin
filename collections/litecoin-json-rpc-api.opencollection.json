@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Litecoin Core Addresses JSON-RPC API",
+    "version": "0.21"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "JSON-RPC",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute a JSON-RPC method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:9332/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a JSON-RPC 2.0 request to the Litecoin Core node. The method and params fields determine which operation is performed. All requests use HTTP POST to the root path with Basic authentication.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,209 @@
+{
+  "item": [
+    {
+      "id": "b53d26f0-7160-42cc-a0b7-8739d9a3ee1a",
+      "name": "Fees",
+      "description": {
+        "content": "Fee estimation and recommendation endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "340be0ff-f925-4548-a927-6b5c7f51d62b",
+          "name": "Get recommended fees",
+          "request": {
+            "name": "Get recommended fees",
+            "description": {
+              "content": "Returns current recommended fee rates for fast confirmation, half-hour confirmation, hour confirmation, economy, and minimum relay.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "fees",
+                "recommended"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de0d2c2c-0535-4ae1-b9f5-f92f5d974dbe",
+              "name": "Recommended fee rates in sat/vB",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "fees",
+                    "recommended"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fastestFee\": 4883,\n  \"halfHourFee\": 3150,\n  \"hourFee\": 8001,\n  \"economyFee\": 3277,\n  \"minimumFee\": 3542\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f12f22a-69cc-43d3-8f5c-b71e9a5e4c8d",
+          "name": "Get mempool as projected blocks",
+          "request": {
+            "name": "Get mempool as projected blocks",
+            "description": {
+              "content": "Returns the mempool projected into upcoming blocks with fee rate ranges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "fees",
+                "mempool-blocks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd5a0b66-1dc1-4e43-b41f-c5cf260b322f",
+              "name": "Projected mempool blocks",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "fees",
+                    "mempool-blocks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"blockSize\": 528,\n    \"blockVSize\": 779.6455960178695,\n    \"nTx\": 1147,\n    \"totalFees\": 4036,\n    \"medianFee\": 8158.400650229576,\n    \"feeRange\": [\n      7021.084367379851,\n      7752.245790387582\n    ]\n  },\n  {\n    \"blockSize\": 6650,\n    \"blockVSize\": 3171.803091585168,\n    \"nTx\": 749,\n    \"totalFees\": 813,\n    \"medianFee\": 3029.2479020531414,\n    \"feeRange\": [\n      6741.708041802662,\n      562.0209349969018\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9332",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "95f54eac-6d28-4212-bc1e-98bde9fdb88f",
+    "name": "Litecoin Core JSON-RPC Addresses Fees API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).\n\n\nContact Support:\n Name: Litecoin Project",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "item": [
+    {
+      "id": "56703eab-1ebc-47f1-91e8-3570bcd381d8",
+      "name": "Blockchain",
+      "description": {
+        "content": "Chain state information endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d5f01a93-f393-4f90-86a0-21539a88ca94",
+          "name": "Get chain info",
+          "request": {
+            "name": "Get chain info",
+            "description": {
+              "content": "Returns various state information regarding block chain processing. Only available in JSON format. Equivalent to the getblockchaininfo JSON-RPC call.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "chaininfo.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a71f345-fcc4-4d04-a03e-24a7a1c723ed",
+              "name": "Chain state information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "chaininfo.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chain\": \"string\",\n  \"blocks\": 923,\n  \"headers\": 4286,\n  \"bestblockhash\": \"string\",\n  \"difficulty\": 7460.335696977445,\n  \"mediantime\": 6628,\n  \"verificationprogress\": 3214.1529129038227,\n  \"chainwork\": \"string\",\n  \"size_on_disk\": 7403,\n  \"pruned\": true,\n  \"pruneheight\": 2620,\n  \"softforks\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9332",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "20fb1f12-7495-411f-817b-32bcd47af166",
+    "name": "Litecoin Core JSON-RPC Addresses Blockchain API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).\n\n\nContact Support:\n Name: Litecoin Project",
+      "type": "text/plain"
+    }
+  }
+}

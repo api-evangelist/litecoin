@@ -1,0 +1,205 @@
+{
+  "item": [
+    {
+      "id": "df4df83b-9a5c-4e8e-b088-c9ebf4cfd4b7",
+      "name": "UTXO",
+      "description": {
+        "content": "Unspent transaction output query endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "35fd6cc6-59f1-4841-bd93-547fc97514ad",
+          "name": "Get UTXOs (JSON)",
+          "request": {
+            "name": "Get UTXOs (JSON)",
+            "description": {
+              "content": "Queries the UTXO set for specified outpoints per BIP64. The checkmempool segment is a flag (0 or 1) indicating whether to check the mempool for unconfirmed outputs. Outpoints are specified as txid-n pairs separated by slashes (e.g. txid1-0/txid2-1).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "getutxos",
+                ":checkmempool",
+                "{{outpoints}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "checkmempool",
+                  "description": "(Required) Whether to check the mempool (0=no, 1=yes)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "040b809d-adac-4489-afe2-25eb3af6cd10",
+              "name": "UTXO query results in JSON format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "getutxos",
+                    ":checkmempool",
+                    "{{outpoints}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "checkmempool",
+                      "description": "(Required) Whether to check the mempool (0=no, 1=yes)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chainHeight\": 5186,\n  \"chaintipHash\": \"string\",\n  \"bitmap\": \"string\",\n  \"utxos\": [\n    {\n      \"txid\": \"string\",\n      \"vout\": 6192,\n      \"height\": 2700,\n      \"value\": 3723.3440781523486,\n      \"scriptPubKey\": {}\n    },\n    {\n      \"txid\": \"string\",\n      \"vout\": 5390,\n      \"height\": 3250,\n      \"value\": 2395.778433843092,\n      \"scriptPubKey\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "517e71a9-41d4-474e-821d-17628a12712b",
+              "name": "Invalid outpoint format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "getutxos",
+                    ":checkmempool",
+                    "{{outpoints}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "checkmempool",
+                      "description": "(Required) Whether to check the mempool (0=no, 1=yes)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9332",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) One or more outpoints as txid-vout pairs separated by slashes (e.g. abc123-0/def456-1)\n",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "outpoints"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5148acf7-78b7-4364-8820-f941cb07a28c",
+    "name": "Litecoin Core JSON-RPC Addresses UTXO API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).\n\n\nContact Support:\n Name: Litecoin Project",
+      "type": "text/plain"
+    }
+  }
+}

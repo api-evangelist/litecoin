@@ -1,0 +1,251 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Litecoin Core JSON-RPC Addresses Transactions API",
+    "version": "0.21"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get transaction (JSON)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/tx/:txHash.json",
+            "params": [
+              {
+                "name": "txHash",
+                "value": "",
+                "type": "path",
+                "description": "Transaction hash (txid) in hex format"
+              }
+            ]
+          },
+          "docs": "Returns a transaction in JSON format. Searches the mempool by default. Use txindex=1 in litecoin.conf to also retrieve confirmed transactions that are not in the mempool.\n"
+        },
+        {
+          "info": {
+            "name": "Get transaction (hex)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/tx/:txHash.hex",
+            "params": [
+              {
+                "name": "txHash",
+                "value": "",
+                "type": "path",
+                "description": "Transaction hash (txid) in hex format"
+              }
+            ]
+          },
+          "docs": "Returns a transaction in hex-encoded binary format."
+        },
+        {
+          "info": {
+            "name": "Get transaction (binary)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/rest/tx/:txHash.bin",
+            "params": [
+              {
+                "name": "txHash",
+                "value": "",
+                "type": "path",
+                "description": "Transaction hash (txid) in hex format"
+              }
+            ]
+          },
+          "docs": "Returns a transaction in raw binary format."
+        },
+        {
+          "info": {
+            "name": "Get transaction details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/tx/:txid",
+            "params": [
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID (txid) in hex format"
+              }
+            ]
+          },
+          "docs": "Returns details about the transaction including inputs, outputs, and status."
+        },
+        {
+          "info": {
+            "name": "Get transaction hex",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/tx/:txid/hex",
+            "params": [
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID (txid) in hex format"
+              }
+            ]
+          },
+          "docs": "Returns the raw transaction in hex-encoded format."
+        },
+        {
+          "info": {
+            "name": "Get raw transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/tx/:txid/raw",
+            "params": [
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID (txid) in hex format"
+              }
+            ]
+          },
+          "docs": "Returns the raw transaction in binary format."
+        },
+        {
+          "info": {
+            "name": "Get transaction merkleblock proof",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/tx/:txid/merkleblock-proof",
+            "params": [
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID (txid) in hex format"
+              }
+            ]
+          },
+          "docs": "Returns the merkleblock proof for the transaction (for SPV verification)."
+        },
+        {
+          "info": {
+            "name": "Get transaction Merkle proof (Electrum format)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/tx/:txid/merkle-proof",
+            "params": [
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID (txid) in hex format"
+              }
+            ]
+          },
+          "docs": "Returns the Merkle proof for the transaction in Electrum format."
+        },
+        {
+          "info": {
+            "name": "Get output spending status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/tx/:txid/outspend/:vout",
+            "params": [
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID (txid) in hex format"
+              },
+              {
+                "name": "vout",
+                "value": "",
+                "type": "path",
+                "description": "Output index (0-based)"
+              }
+            ]
+          },
+          "docs": "Returns the spending status of a specific transaction output."
+        },
+        {
+          "info": {
+            "name": "Get all output spending statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/tx/:txid/outspends",
+            "params": [
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID (txid) in hex format"
+              }
+            ]
+          },
+          "docs": "Returns the spending status for all outputs of the transaction."
+        },
+        {
+          "info": {
+            "name": "Get transaction confirmation status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/tx/:txid/status",
+            "params": [
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID (txid) in hex format"
+              }
+            ]
+          },
+          "docs": "Returns the confirmation status of the transaction."
+        },
+        {
+          "info": {
+            "name": "Broadcast raw transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:9332/tx"
+          },
+          "docs": "Broadcasts a raw transaction to the Litecoin network. Returns the txid on success."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

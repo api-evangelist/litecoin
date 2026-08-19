@@ -1,0 +1,230 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Litecoin Core JSON-RPC Addresses Mining API",
+    "version": "0.21"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mining",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get mining pools by time period",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/mining/pools/:timePeriod",
+            "params": [
+              {
+                "name": "timePeriod",
+                "value": "",
+                "type": "path",
+                "description": "Time period for the query"
+              }
+            ]
+          },
+          "docs": "Returns a list of mining pools ranked by block frequency over the specified time period."
+        },
+        {
+          "info": {
+            "name": "Get mining pool details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/mining/pool/:slug",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Mining pool slug identifier"
+              }
+            ]
+          },
+          "docs": "Returns details for the specified mining pool."
+        },
+        {
+          "info": {
+            "name": "Get mining pool hashrate history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/mining/pool/:slug/hashrate",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns historical hashrate data for the specified mining pool."
+        },
+        {
+          "info": {
+            "name": "Get blocks mined by pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/mining/pool/:slug/blocks/:blockHeight",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "blockHeight",
+                "value": "",
+                "type": "path",
+                "description": "Starting block height (defaults to tip)"
+              }
+            ]
+          },
+          "docs": "Returns the past 10 blocks mined by the specified pool."
+        },
+        {
+          "info": {
+            "name": "Get hashrate averages by pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/mining/hashrate/pools/:timePeriod",
+            "params": [
+              {
+                "name": "timePeriod",
+                "value": "",
+                "type": "path",
+                "description": "Time period for the query"
+              }
+            ]
+          },
+          "docs": "Returns average hashrate data for all pools over the specified time period."
+        },
+        {
+          "info": {
+            "name": "Get network hashrate and difficulty",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/mining/hashrate/:timePeriod",
+            "params": [
+              {
+                "name": "timePeriod",
+                "value": "",
+                "type": "path",
+                "description": "Time period for the query"
+              }
+            ]
+          },
+          "docs": "Returns network-wide hashrate and difficulty history over the specified period."
+        },
+        {
+          "info": {
+            "name": "Get difficulty adjustment history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/mining/difficulty-adjustments/:interval",
+            "params": [
+              {
+                "name": "interval",
+                "value": "",
+                "type": "path",
+                "description": "Time interval for aggregation"
+              }
+            ]
+          },
+          "docs": "Returns historical difficulty adjustment data at the specified interval."
+        },
+        {
+          "info": {
+            "name": "Get average block fees by time period",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/mining/blocks/fees/:timePeriod",
+            "params": [
+              {
+                "name": "timePeriod",
+                "value": "",
+                "type": "path",
+                "description": "Time period for the query"
+              }
+            ]
+          },
+          "docs": "Returns average block fee data over the specified time period."
+        },
+        {
+          "info": {
+            "name": "Get average block rewards by time period",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/mining/blocks/rewards/:timePeriod",
+            "params": [
+              {
+                "name": "timePeriod",
+                "value": "",
+                "type": "path",
+                "description": "Time period for the query"
+              }
+            ]
+          },
+          "docs": "Returns average block reward data over the specified time period."
+        },
+        {
+          "info": {
+            "name": "Get reward statistics for block count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/mining/reward-stats/:blockCount",
+            "params": [
+              {
+                "name": "blockCount",
+                "value": "",
+                "type": "path",
+                "description": "Number of recent blocks to analyze"
+              }
+            ]
+          },
+          "docs": "Returns block reward and transaction fee statistics for the specified number of recent blocks."
+        },
+        {
+          "info": {
+            "name": "Get current difficulty adjustment details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/difficulty-adjustment"
+          },
+          "docs": "Returns details about the current difficulty adjustment period."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

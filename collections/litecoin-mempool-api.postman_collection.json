@@ -1,0 +1,447 @@
+{
+  "item": [
+    {
+      "id": "79ecfe19-3011-4ae9-9a36-b6d9a1a9e79b",
+      "name": "Mempool",
+      "description": {
+        "content": "Mempool state and contents endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2ab0cf5d-3683-48ce-a89d-ed8cc8e20d11",
+          "name": "Get mempool info",
+          "request": {
+            "name": "Get mempool info",
+            "description": {
+              "content": "Returns statistics about the current state of the mempool, including the number of transactions, total size, and fee information. Only available in JSON format.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "mempool",
+                "info.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b655091-47c5-4823-a5ae-c499d1453ba2",
+              "name": "Mempool statistics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mempool",
+                    "info.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"loaded\": true,\n  \"size\": 8207,\n  \"bytes\": 5950,\n  \"usage\": 8686,\n  \"maxmempool\": 340,\n  \"mempoolminfee\": 9609.36964500431,\n  \"minrelaytxfee\": 9998.822312391356\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ffe49d2-7c0c-44ee-9dae-84498f07dadd",
+          "name": "Get mempool contents",
+          "request": {
+            "name": "Get mempool contents",
+            "description": {
+              "content": "Returns all transactions currently in the mempool with full details. Only available in JSON format. Use with caution on busy nodes as the response can be very large.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "mempool",
+                "contents.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a3d5fe7-14bd-4283-bd40-d51c1bc3fce2",
+              "name": "All mempool transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mempool",
+                    "contents.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"vsize\": 4797,\n    \"weight\": 4585,\n    \"fee\": 4607.291869390737,\n    \"modifiedfee\": 7091.791010182573,\n    \"time\": 4582,\n    \"height\": 8312,\n    \"descendantcount\": 382,\n    \"descendantsize\": 3227,\n    \"descendantfees\": 7138.679861350365,\n    \"ancestorcount\": 1482,\n    \"ancestorsize\": 1412,\n    \"ancestorfees\": 8239.87654835616,\n    \"wtxid\": \"string\",\n    \"fees\": {\n      \"base\": 6942.5217677853525,\n      \"modified\": 4269.340488920115,\n      \"ancestor\": 8008.731570516884,\n      \"descendant\": 5158.6050196179785\n    },\n    \"depends\": [\n      \"string\",\n      \"string\"\n    ],\n    \"spentby\": [\n      \"string\",\n      \"string\"\n    ],\n    \"bip125-replaceable\": true\n  },\n  \"key_1\": {\n    \"vsize\": 8831,\n    \"weight\": 8815,\n    \"fee\": 9191.823217124605,\n    \"modifiedfee\": 6908.126509986001,\n    \"time\": 5207,\n    \"height\": 9477,\n    \"descendantcount\": 2859,\n    \"descendantsize\": 6905,\n    \"descendantfees\": 3473.3160838650856,\n    \"ancestorcount\": 1352,\n    \"ancestorsize\": 4365,\n    \"ancestorfees\": 8038.368927543652,\n    \"wtxid\": \"string\",\n    \"fees\": {\n      \"base\": 4344.013176422627,\n      \"modified\": 3617.3731394303977,\n      \"ancestor\": 3955.3663853396524,\n      \"descendant\": 8414.306869454638\n    },\n    \"depends\": [\n      \"string\",\n      \"string\"\n    ],\n    \"spentby\": [\n      \"string\",\n      \"string\"\n    ],\n    \"bip125-replaceable\": true\n  },\n  \"key_2\": {\n    \"vsize\": 3648,\n    \"weight\": 9285,\n    \"fee\": 1850.0803169695234,\n    \"modifiedfee\": 4452.831127227356,\n    \"time\": 4972,\n    \"height\": 6621,\n    \"descendantcount\": 1414,\n    \"descendantsize\": 421,\n    \"descendantfees\": 4722.9504247674895,\n    \"ancestorcount\": 3269,\n    \"ancestorsize\": 3574,\n    \"ancestorfees\": 4811.986442594694,\n    \"wtxid\": \"string\",\n    \"fees\": {\n      \"base\": 222.67301953815655,\n      \"modified\": 376.6781368395611,\n      \"ancestor\": 8915.26023803856,\n      \"descendant\": 9895.486726465493\n    },\n    \"depends\": [\n      \"string\",\n      \"string\"\n    ],\n    \"spentby\": [\n      \"string\",\n      \"string\"\n    ],\n    \"bip125-replaceable\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b0741d5-1aaa-4abd-a65b-85250a5ff384",
+          "name": "Get mempool statistics",
+          "request": {
+            "name": "Get mempool statistics",
+            "description": {
+              "content": "Returns statistics about the current state of the Litecoin mempool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mempool"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3eaf315-142f-4563-89a5-8879c4732b09",
+              "name": "Mempool statistics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mempool"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 7621,\n  \"vsize\": 7427,\n  \"total_fee\": 5222,\n  \"fee_histogram\": [\n    [\n      6160.388509233207,\n      3006.047794209652\n    ],\n    [\n      5880.345213444009,\n      727.5518300410411\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4a18e98-9452-4da4-b2db-42e6a249768b",
+          "name": "Get mempool transaction IDs",
+          "request": {
+            "name": "Get mempool transaction IDs",
+            "description": {
+              "content": "Returns all transaction IDs currently in the mempool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mempool",
+                "txids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc074f63-b884-4f7a-b881-028c1a8ea9ef",
+              "name": "Array of transaction IDs in the mempool",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mempool",
+                    "txids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"string\",\n  \"string\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74bdc521-c964-4b52-bfe0-17bf6a1b850a",
+          "name": "Get recent mempool transactions",
+          "request": {
+            "name": "Get recent mempool transactions",
+            "description": {
+              "content": "Returns the last 10 transactions added to the mempool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mempool",
+                "recent"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd0d26fc-3955-43cb-b7ca-b3677e3c83bc",
+              "name": "Array of recent mempool transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mempool",
+                    "recent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"txid\": \"string\",\n    \"fee\": 9919,\n    \"vsize\": 2518,\n    \"value\": 8949\n  },\n  {\n    \"txid\": \"string\",\n    \"fee\": 3894,\n    \"vsize\": 7564,\n    \"value\": 6459\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9332",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1114af34-a470-420b-bae9-93fe7c264f06",
+    "name": "Litecoin Core JSON-RPC Addresses Mempool API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).\n\n\nContact Support:\n Name: Litecoin Project",
+      "type": "text/plain"
+    }
+  }
+}

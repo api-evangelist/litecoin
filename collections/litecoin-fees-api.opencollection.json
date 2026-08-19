@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Litecoin Core JSON-RPC Addresses Fees API",
+    "version": "0.21"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fees",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get recommended fees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/fees/recommended"
+          },
+          "docs": "Returns current recommended fee rates for fast confirmation, half-hour confirmation, hour confirmation, economy, and minimum relay.\n"
+        },
+        {
+          "info": {
+            "name": "Get mempool as projected blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9332/v1/fees/mempool-blocks"
+          },
+          "docs": "Returns the mempool projected into upcoming blocks with fee rate ranges."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

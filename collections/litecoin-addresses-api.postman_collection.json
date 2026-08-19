@@ -1,0 +1,707 @@
+{
+  "item": [
+    {
+      "id": "aafee2a5-9abd-474a-8a01-4db304a28fdf",
+      "name": "Addresses",
+      "description": {
+        "content": "Address lookup, transaction history, and UTXO endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "69a71372-0fce-492d-a17e-c83b95b1a59a",
+          "name": "Get address details",
+          "request": {
+            "name": "Get address details",
+            "description": {
+              "content": "Returns details about an address including chain stats (funded, spent, tx count) and current mempool stats.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "address",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e22f47e1-1de7-41a1-b8d6-24890c308f12",
+              "name": "Address details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "address",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"address\": \"string\",\n  \"chain_stats\": {\n    \"funded_txo_count\": 658,\n    \"funded_txo_sum\": 4494,\n    \"spent_txo_count\": 3535,\n    \"spent_txo_sum\": 9399,\n    \"tx_count\": 313\n  },\n  \"mempool_stats\": {\n    \"funded_txo_count\": 2551,\n    \"funded_txo_sum\": 7256,\n    \"spent_txo_count\": 837,\n    \"spent_txo_sum\": 8782,\n    \"tx_count\": 2360\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eeec30e2-cdc8-452e-b267-053e9e4146ee",
+              "name": "Invalid address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "address",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a5e7318-db92-4c3e-862e-0c2dc6c62028",
+          "name": "Get address transactions",
+          "request": {
+            "name": "Get address transactions",
+            "description": {
+              "content": "Returns up to 50 mempool transactions plus the first 25 confirmed transactions for the address. To get more confirmed transactions, use the after_txid parameter.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "address",
+                ":address",
+                "txs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_txid",
+                  "value": "<string>",
+                  "description": "Paginate confirmed transactions after this txid"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ba5f9e8d-c7e4-411a-81d9-b999cac29d44",
+              "name": "List of transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "address",
+                    ":address",
+                    "txs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_txid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"txid\": \"string\",\n    \"version\": 8252,\n    \"locktime\": 5526,\n    \"vin\": [\n      {\n        \"txid\": \"string\",\n        \"vout\": 3791,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 3128\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": true,\n        \"sequence\": 3516\n      },\n      {\n        \"txid\": \"string\",\n        \"vout\": 6823,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 7831\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": true,\n        \"sequence\": 8064\n      }\n    ],\n    \"vout\": [\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 7817\n      },\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 255\n      }\n    ],\n    \"size\": 9893,\n    \"weight\": 9853,\n    \"sigops\": 9297,\n    \"fee\": 8837,\n    \"status\": {\n      \"confirmed\": false,\n      \"block_height\": 1926,\n      \"block_hash\": \"string\",\n      \"block_time\": 5294\n    }\n  },\n  {\n    \"txid\": \"string\",\n    \"version\": 7383,\n    \"locktime\": 7615,\n    \"vin\": [\n      {\n        \"txid\": \"string\",\n        \"vout\": 3488,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 218\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": false,\n        \"sequence\": 7465\n      },\n      {\n        \"txid\": \"string\",\n        \"vout\": 4314,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 3801\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": true,\n        \"sequence\": 6981\n      }\n    ],\n    \"vout\": [\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 1351\n      },\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 5350\n      }\n    ],\n    \"size\": 4762,\n    \"weight\": 5361,\n    \"sigops\": 3196,\n    \"fee\": 3598,\n    \"status\": {\n      \"confirmed\": false,\n      \"block_height\": 1053,\n      \"block_hash\": \"string\",\n      \"block_time\": 4709\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e60c6136-14ab-4d01-845b-55b81357b8d0",
+          "name": "Get address confirmed transactions",
+          "request": {
+            "name": "Get address confirmed transactions",
+            "description": {
+              "content": "Returns confirmed transactions for the address (25 per page).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "address",
+                ":address",
+                "txs",
+                "chain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "last_seen_txid",
+                  "value": "<string>",
+                  "description": "Paginate from this txid"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f865045d-8124-4477-a8a5-3529536ff291",
+              "name": "Confirmed transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "address",
+                    ":address",
+                    "txs",
+                    "chain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "last_seen_txid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"txid\": \"string\",\n    \"version\": 7441,\n    \"locktime\": 4134,\n    \"vin\": [\n      {\n        \"txid\": \"string\",\n        \"vout\": 3954,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 6113\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": true,\n        \"sequence\": 1772\n      },\n      {\n        \"txid\": \"string\",\n        \"vout\": 81,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 5686\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": true,\n        \"sequence\": 9915\n      }\n    ],\n    \"vout\": [\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 7229\n      },\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 5274\n      }\n    ],\n    \"size\": 4757,\n    \"weight\": 4036,\n    \"sigops\": 5503,\n    \"fee\": 7053,\n    \"status\": {\n      \"confirmed\": false,\n      \"block_height\": 7468,\n      \"block_hash\": \"string\",\n      \"block_time\": 2242\n    }\n  },\n  {\n    \"txid\": \"string\",\n    \"version\": 5230,\n    \"locktime\": 1816,\n    \"vin\": [\n      {\n        \"txid\": \"string\",\n        \"vout\": 7300,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 4103\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": false,\n        \"sequence\": 7161\n      },\n      {\n        \"txid\": \"string\",\n        \"vout\": 4035,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 7444\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": false,\n        \"sequence\": 2942\n      }\n    ],\n    \"vout\": [\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 863\n      },\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 9186\n      }\n    ],\n    \"size\": 7110,\n    \"weight\": 7453,\n    \"sigops\": 1670,\n    \"fee\": 9998,\n    \"status\": {\n      \"confirmed\": false,\n      \"block_height\": 7162,\n      \"block_hash\": \"string\",\n      \"block_time\": 1644\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e646ebf7-7129-478e-b211-3ec3ca692844",
+          "name": "Get address mempool transactions",
+          "request": {
+            "name": "Get address mempool transactions",
+            "description": {
+              "content": "Returns unconfirmed transactions for the address (up to 50).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "address",
+                ":address",
+                "txs",
+                "mempool"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6092d47-222a-417f-9cd6-bc1016bb6f80",
+              "name": "Mempool transactions for the address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "address",
+                    ":address",
+                    "txs",
+                    "mempool"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"txid\": \"string\",\n    \"version\": 7441,\n    \"locktime\": 4134,\n    \"vin\": [\n      {\n        \"txid\": \"string\",\n        \"vout\": 3954,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 6113\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": true,\n        \"sequence\": 1772\n      },\n      {\n        \"txid\": \"string\",\n        \"vout\": 81,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 5686\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": true,\n        \"sequence\": 9915\n      }\n    ],\n    \"vout\": [\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 7229\n      },\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 5274\n      }\n    ],\n    \"size\": 4757,\n    \"weight\": 4036,\n    \"sigops\": 5503,\n    \"fee\": 7053,\n    \"status\": {\n      \"confirmed\": false,\n      \"block_height\": 7468,\n      \"block_hash\": \"string\",\n      \"block_time\": 2242\n    }\n  },\n  {\n    \"txid\": \"string\",\n    \"version\": 5230,\n    \"locktime\": 1816,\n    \"vin\": [\n      {\n        \"txid\": \"string\",\n        \"vout\": 7300,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 4103\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": false,\n        \"sequence\": 7161\n      },\n      {\n        \"txid\": \"string\",\n        \"vout\": 4035,\n        \"prevout\": {\n          \"scriptpubkey\": \"string\",\n          \"scriptpubkey_asm\": \"string\",\n          \"scriptpubkey_type\": \"string\",\n          \"scriptpubkey_address\": \"string\",\n          \"value\": 7444\n        },\n        \"scriptsig\": \"string\",\n        \"scriptsig_asm\": \"string\",\n        \"witness\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_coinbase\": false,\n        \"sequence\": 2942\n      }\n    ],\n    \"vout\": [\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 863\n      },\n      {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 9186\n      }\n    ],\n    \"size\": 7110,\n    \"weight\": 7453,\n    \"sigops\": 1670,\n    \"fee\": 9998,\n    \"status\": {\n      \"confirmed\": false,\n      \"block_height\": 7162,\n      \"block_hash\": \"string\",\n      \"block_time\": 1644\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f05cd79-549f-40e4-9a1f-e9b7d8b9e7d8",
+          "name": "Get address UTXOs",
+          "request": {
+            "name": "Get address UTXOs",
+            "description": {
+              "content": "Returns unspent transaction outputs for the specified address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "address",
+                ":address",
+                "utxo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1de8d622-c03c-4031-b2a6-d63e5d36f0a6",
+              "name": "List of UTXOs for the address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "address",
+                    ":address",
+                    "utxo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"txid\": \"string\",\n    \"vout\": 5709,\n    \"status\": {\n      \"confirmed\": false,\n      \"block_height\": 4571,\n      \"block_hash\": \"string\",\n      \"block_time\": 5098\n    },\n    \"value\": 9413\n  },\n  {\n    \"txid\": \"string\",\n    \"vout\": 7375,\n    \"status\": {\n      \"confirmed\": true,\n      \"block_height\": 3197,\n      \"block_hash\": \"string\",\n      \"block_time\": 1111\n    },\n    \"value\": 2667\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a066c48-c6ac-4d8b-b0c0-d96cb3d94a20",
+          "name": "Validate address",
+          "request": {
+            "name": "Validate address",
+            "description": {
+              "content": "Validates a Litecoin address and returns its type and validity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "validate-address",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f22bbe16-6d09-4c60-a9f5-f78987e077fe",
+              "name": "Address validation result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "validate-address",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Litecoin address (P2PKH, P2SH, or bech32)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isvalid\": false,\n  \"address\": \"string\",\n  \"scriptPubKey\": \"string\",\n  \"isscript\": true,\n  \"iswitness\": false,\n  \"witness_version\": 4931,\n  \"witness_program\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9332",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2410999a-657a-4f23-94c0-b3701f825cd0",
+    "name": "Litecoin Core JSON-RPC Addresses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).\n\n\nContact Support:\n Name: Litecoin Project",
+      "type": "text/plain"
+    }
+  }
+}

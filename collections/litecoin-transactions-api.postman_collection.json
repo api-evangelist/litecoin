@@ -1,0 +1,1752 @@
+{
+  "item": [
+    {
+      "id": "5a9f701b-7744-41e3-9aba-606e92c5e32c",
+      "name": "Transactions",
+      "description": {
+        "content": "Transaction retrieval endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0e05f87f-fc3a-43b5-ac13-292b68a49f89",
+          "name": "Get transaction (JSON)",
+          "request": {
+            "name": "Get transaction (JSON)",
+            "description": {
+              "content": "Returns a transaction in JSON format. Searches the mempool by default. Use txindex=1 in litecoin.conf to also retrieve confirmed transactions that are not in the mempool.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "tx",
+                "{{txHash}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b29e504-902a-4d8c-be6c-68aee1282a6c",
+              "name": "Transaction details in JSON format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "tx",
+                    "{{txHash}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"txid\": \"string\",\n  \"hash\": \"string\",\n  \"size\": 7999,\n  \"vsize\": 6825,\n  \"weight\": 1278,\n  \"version\": 5990,\n  \"locktime\": 9860,\n  \"vin\": [\n    {\n      \"txid\": \"string\",\n      \"vout\": 1813,\n      \"scriptSig\": {},\n      \"txinwitness\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sequence\": 9273\n    },\n    {\n      \"txid\": \"string\",\n      \"vout\": 5581,\n      \"scriptSig\": {},\n      \"txinwitness\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sequence\": 3744\n    }\n  ],\n  \"vout\": [\n    {\n      \"value\": 6104.537800749516,\n      \"n\": 7456,\n      \"scriptPubKey\": {}\n    },\n    {\n      \"value\": 2823.0050375369597,\n      \"n\": 425,\n      \"scriptPubKey\": {}\n    }\n  ],\n  \"blockhash\": \"string\",\n  \"confirmations\": 208,\n  \"time\": 8682,\n  \"blocktime\": 8840\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0010f72-231a-4216-8428-c34c2fceda2b",
+              "name": "Transaction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "tx",
+                    "{{txHash}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a9609e9-7f1c-408c-b861-6271601a94a4",
+          "name": "Get transaction (hex)",
+          "request": {
+            "name": "Get transaction (hex)",
+            "description": {
+              "content": "Returns a transaction in hex-encoded binary format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "tx",
+                "{{txHash}}.hex"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "468f06fa-f896-4201-ba3a-1440d4b05dbf",
+              "name": "Hex-encoded transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "tx",
+                    "{{txHash}}.hex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4d0b463b-9a19-4e75-86d9-aa3ca49e4794",
+              "name": "Transaction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "tx",
+                    "{{txHash}}.hex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "947f9101-8449-4266-a16b-9cc644322e27",
+          "name": "Get transaction (binary)",
+          "request": {
+            "name": "Get transaction (binary)",
+            "description": {
+              "content": "Returns a transaction in raw binary format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "tx",
+                "{{txHash}}.bin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa13afc6-8a0e-43fc-9fff-2d52b0955161",
+              "name": "Raw binary transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "tx",
+                    "{{txHash}}.bin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5938aa55-1f4f-4338-9ef9-13ff78e8a9c2",
+              "name": "Transaction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "tx",
+                    "{{txHash}}.bin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f0f44ef-24a7-4032-9d15-ea3ae6aa4230",
+          "name": "Get transaction details",
+          "request": {
+            "name": "Get transaction details",
+            "description": {
+              "content": "Returns details about the transaction including inputs, outputs, and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tx",
+                ":txid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "txid",
+                  "description": "(Required) Transaction ID (txid) in hex format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3fecd11-0e30-4398-8ec8-0f42cae3f2ea",
+              "name": "Transaction details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"txid\": \"string\",\n  \"version\": 9589,\n  \"locktime\": 1052,\n  \"vin\": [\n    {\n      \"txid\": \"string\",\n      \"vout\": 5963,\n      \"prevout\": {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 7785\n      },\n      \"scriptsig\": \"string\",\n      \"scriptsig_asm\": \"string\",\n      \"witness\": [\n        \"string\",\n        \"string\"\n      ],\n      \"is_coinbase\": true,\n      \"sequence\": 6850\n    },\n    {\n      \"txid\": \"string\",\n      \"vout\": 5317,\n      \"prevout\": {\n        \"scriptpubkey\": \"string\",\n        \"scriptpubkey_asm\": \"string\",\n        \"scriptpubkey_type\": \"string\",\n        \"scriptpubkey_address\": \"string\",\n        \"value\": 2059\n      },\n      \"scriptsig\": \"string\",\n      \"scriptsig_asm\": \"string\",\n      \"witness\": [\n        \"string\",\n        \"string\"\n      ],\n      \"is_coinbase\": false,\n      \"sequence\": 4797\n    }\n  ],\n  \"vout\": [\n    {\n      \"scriptpubkey\": \"string\",\n      \"scriptpubkey_asm\": \"string\",\n      \"scriptpubkey_type\": \"string\",\n      \"scriptpubkey_address\": \"string\",\n      \"value\": 9842\n    },\n    {\n      \"scriptpubkey\": \"string\",\n      \"scriptpubkey_asm\": \"string\",\n      \"scriptpubkey_type\": \"string\",\n      \"scriptpubkey_address\": \"string\",\n      \"value\": 4812\n    }\n  ],\n  \"size\": 9492,\n  \"weight\": 3905,\n  \"sigops\": 9659,\n  \"fee\": 8852,\n  \"status\": {\n    \"confirmed\": false,\n    \"block_height\": 120,\n    \"block_hash\": \"string\",\n    \"block_time\": 9255\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2c69067-071a-4930-b4b8-3026ebebc978",
+              "name": "Transaction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a0e6eed-9e04-4210-b2fe-f5ffa093e9d7",
+          "name": "Get transaction hex",
+          "request": {
+            "name": "Get transaction hex",
+            "description": {
+              "content": "Returns the raw transaction in hex-encoded format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tx",
+                ":txid",
+                "hex"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "txid",
+                  "description": "(Required) Transaction ID (txid) in hex format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2039f371-ef2f-413b-b371-788d33d7201b",
+              "name": "Hex-encoded transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "hex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "862ced1a-0cc3-41a7-9fda-1a6203eedb41",
+              "name": "Transaction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "hex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ce04e8c-1f57-4f89-8fbd-d38e1f9253d8",
+          "name": "Get raw transaction",
+          "request": {
+            "name": "Get raw transaction",
+            "description": {
+              "content": "Returns the raw transaction in binary format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tx",
+                ":txid",
+                "raw"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "txid",
+                  "description": "(Required) Transaction ID (txid) in hex format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f87130cf-ddcf-4ce8-af68-d1dfce4c4c87",
+              "name": "Raw binary transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eec1ce0d-d2fa-40d4-a7a9-c83b911d2b0e",
+              "name": "Transaction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80e08ccb-0882-4fce-b01d-472c2b75c828",
+          "name": "Get transaction merkleblock proof",
+          "request": {
+            "name": "Get transaction merkleblock proof",
+            "description": {
+              "content": "Returns the merkleblock proof for the transaction (for SPV verification).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tx",
+                ":txid",
+                "merkleblock-proof"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "txid",
+                  "description": "(Required) Transaction ID (txid) in hex format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de88e5b4-6430-48b0-b027-767ce248ee4b",
+              "name": "Hex-encoded merkleblock proof",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "merkleblock-proof"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "981f3b79-e5d8-4d5f-bb60-f7bd1bf915a7",
+              "name": "Transaction not found or not confirmed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "merkleblock-proof"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c6ae31b-1968-41aa-ba6a-53ec1938c76f",
+          "name": "Get transaction Merkle proof (Electrum format)",
+          "request": {
+            "name": "Get transaction Merkle proof (Electrum format)",
+            "description": {
+              "content": "Returns the Merkle proof for the transaction in Electrum format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tx",
+                ":txid",
+                "merkle-proof"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "txid",
+                  "description": "(Required) Transaction ID (txid) in hex format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "399c1036-cf03-4936-a287-b09a3679b2b2",
+              "name": "Merkle proof in Electrum format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "merkle-proof"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"block_height\": 2692,\n  \"merkle\": [\n    \"string\",\n    \"string\"\n  ],\n  \"pos\": 6741\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b34eb0a-d566-4f5f-b351-57a5fa4d1c2b",
+              "name": "Transaction not found or not confirmed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "merkle-proof"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f995755d-7661-4e1d-b026-a9ed68312f48",
+          "name": "Get output spending status",
+          "request": {
+            "name": "Get output spending status",
+            "description": {
+              "content": "Returns the spending status of a specific transaction output.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tx",
+                ":txid",
+                "outspend",
+                ":vout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "txid",
+                  "description": "(Required) Transaction ID (txid) in hex format"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "vout",
+                  "description": "(Required) Output index (0-based)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73cc3a18-2256-4f73-9a03-09b14d5f7f61",
+              "name": "Output spending status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "outspend",
+                    ":vout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "vout",
+                      "description": "(Required) Output index (0-based)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"spent\": false,\n  \"txid\": \"string\",\n  \"vin\": 4340,\n  \"status\": {\n    \"confirmed\": false,\n    \"block_height\": 6147,\n    \"block_hash\": \"string\",\n    \"block_time\": 4978\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96f10fd5-7e9a-4dec-aa41-7900a7888d69",
+              "name": "Transaction or output not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "outspend",
+                    ":vout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "vout",
+                      "description": "(Required) Output index (0-based)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0c7c6ac-a16d-4aaf-9fea-5b7c677b501a",
+          "name": "Get all output spending statuses",
+          "request": {
+            "name": "Get all output spending statuses",
+            "description": {
+              "content": "Returns the spending status for all outputs of the transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tx",
+                ":txid",
+                "outspends"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "txid",
+                  "description": "(Required) Transaction ID (txid) in hex format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b9093a63-74df-4509-98e2-fceb4f4fd462",
+              "name": "Array of output spending statuses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "outspends"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"spent\": true,\n    \"txid\": \"string\",\n    \"vin\": 6934,\n    \"status\": {\n      \"confirmed\": true,\n      \"block_height\": 3246,\n      \"block_hash\": \"string\",\n      \"block_time\": 8137\n    }\n  },\n  {\n    \"spent\": true,\n    \"txid\": \"string\",\n    \"vin\": 7278,\n    \"status\": {\n      \"confirmed\": true,\n      \"block_height\": 8225,\n      \"block_hash\": \"string\",\n      \"block_time\": 1696\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b7a50e3-b117-4688-81d3-0894f74da05b",
+              "name": "Transaction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "outspends"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e965fb8e-adda-4203-bf5a-c59c1bee922a",
+          "name": "Get transaction confirmation status",
+          "request": {
+            "name": "Get transaction confirmation status",
+            "description": {
+              "content": "Returns the confirmation status of the transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tx",
+                ":txid",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "txid",
+                  "description": "(Required) Transaction ID (txid) in hex format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32a1ce48-374b-4d37-ab1b-c0ad14836a64",
+              "name": "Transaction confirmation status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"confirmed\": true,\n  \"block_height\": 2938,\n  \"block_hash\": \"string\",\n  \"block_time\": 8734\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f19aea0-94af-455e-a169-ba948bce4495",
+              "name": "Transaction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx",
+                    ":txid",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID (txid) in hex format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eab23984-edef-4c8f-9c91-4ebbb3970499",
+          "name": "Broadcast raw transaction",
+          "request": {
+            "name": "Broadcast raw transaction",
+            "description": {
+              "content": "Broadcasts a raw transaction to the Litecoin network. Returns the txid on success.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tx"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/plain"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>"
+            }
+          },
+          "response": [
+            {
+              "id": "129bfc2b-97c4-48a1-a493-28376f9ab8fd",
+              "name": "Transaction ID of the broadcast transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9f77dbde-e18f-4f93-ae8d-27ddf8fc74a4",
+              "name": "Invalid transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9332",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Transaction hash (txid) in hex format",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "txHash"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3c2964da-1796-4c31-9bc2-bcda1ec5fa47",
+    "name": "Litecoin Core JSON-RPC Addresses Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).\n\n\nContact Support:\n Name: Litecoin Project",
+      "type": "text/plain"
+    }
+  }
+}

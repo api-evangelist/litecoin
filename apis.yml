@@ -379,6 +379,8 @@ apis:
   humanURL: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
   baseURL: http://localhost:9332
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI

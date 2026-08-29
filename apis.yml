@@ -5,6 +5,20 @@ description: Litecoin is a peer-to-peer cryptocurrency network based on the Bitc
   built-in unauthenticated REST interface for public blockchain queries, and a Litecoin
   Space block explorer REST and WebSocket API (mempool.space-compatible) for querying
   transactions, addresses, blocks, UTXO data, mempool state, and fee estimates.
+deliveryModel:
+  model: open-core
+  license: MIT
+  open_source: true
+  commercial: true
+  callable_host: false
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: open

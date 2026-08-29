@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Litecoin Core JSON-RPC Addresses Blockchain API
-  description: 'The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
+  title: Litecoin Core REST Blockchain API
+  description: 'An unauthenticated, read-only HTTP REST interface built into Litecoin Core, enabled with the -rest flag. Supports retrieval of transactions, full blocks, block headers, block hash by height, chain information, UTXO set queries (per BIP64), and mempool statistics and contents. Responses are available in binary, hex-encoded, or JSON format depending on the file extension (.bin, .hex, .json) appended to each path. Runs on the same port as JSON-RPC (default 9332 mainnet). No authentication required.
 
     '
   version: '0.21'
@@ -13,13 +13,11 @@ info:
     url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
 servers:
 - url: http://localhost:9332
-  description: Litecoin Core mainnet
+  description: Litecoin Core mainnet (start with -rest flag)
 - url: http://localhost:19332
   description: Litecoin Core testnet
 - url: http://localhost:19443
   description: Litecoin Core regtest
-security:
-- basicAuth: []
 tags:
 - name: Blockchain
   description: Chain state information endpoints
@@ -73,13 +71,6 @@ components:
           type: integer
         softforks:
           type: object
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: 'HTTP Basic Authentication using credentials from the .litecoin/.cookie file or configured via rpcauth in litecoin.conf.
-
-        '
 externalDocs:
-  description: Litecoin Core JSON-RPC Interface Documentation
-  url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  description: Litecoin Core REST Interface Documentation
+  url: https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md

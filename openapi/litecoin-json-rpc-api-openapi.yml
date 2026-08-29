@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Litecoin Core Addresses JSON-RPC API
+  title: Litecoin Core JSON RPC API
   description: 'The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
 
     '
@@ -98,35 +98,6 @@ paths:
       - JSON-RPC
 components:
   schemas:
-    JsonRpcResponse:
-      type: object
-      properties:
-        jsonrpc:
-          type: string
-          description: JSON-RPC protocol version
-        id:
-          oneOf:
-          - type: string
-          - type: integer
-          - type: 'null'
-          description: Echoed request identifier
-        result:
-          description: 'The result of the method call. Shape varies per method. null when error is present.
-
-            '
-        error:
-          type: object
-          nullable: true
-          description: Present when the method call produced an application-level error
-          properties:
-            code:
-              type: integer
-              description: 'Standard JSON-RPC error code or Litecoin Core-specific code. Common codes: -32700 (parse error), -32600 (invalid request), -32601 (method not found), -32602 (invalid params), -1 (misc error), -5 (invalid or non-wallet transaction id), -8 (invalid parameter), -22 (transaction rejected), -25 (transaction already in mempool).
-
-                '
-            message:
-              type: string
-              description: Human-readable error description
     JsonRpcRequest:
       type: object
       required:
@@ -174,6 +145,36 @@ components:
             '
           items: {}
           default: []
+    JsonRpcResponse:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+          description: JSON-RPC protocol version
+        id:
+          oneOf:
+          - type: string
+          - type: integer
+          - type: 'null'
+          description: Echoed request identifier
+        result:
+          description: 'The result of the method call. Shape varies per method. null when error is present.
+
+            '
+        error:
+          type:
+          - object
+          - 'null'
+          description: Present when the method call produced an application-level error
+          properties:
+            code:
+              type: integer
+              description: 'Standard JSON-RPC error code or Litecoin Core-specific code. Common codes: -32700 (parse error), -32600 (invalid request), -32601 (method not found), -32602 (invalid params), -1 (misc error), -5 (invalid or non-wallet transaction id), -8 (invalid parameter), -22 (transaction rejected), -25 (transaction already in mempool).
+
+                '
+            message:
+              type: string
+              description: Human-readable error description
   securitySchemes:
     basicAuth:
       type: http

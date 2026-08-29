@@ -1,25 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Litecoin Core JSON-RPC Addresses Fees API
-  description: 'The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
+  title: Litecoin Space REST Fees API
+  description: 'A public REST API provided by the Litecoin Space block explorer (litecoinspace.org), a mempool.space-compatible service for the Litecoin network. Endpoints cover addresses (details, transactions, UTXOs, validation), blocks (details, headers, height, raw data, transactions), transactions (details, hex, raw, Merkle proofs, output spend status, broadcast), mempool (statistics, transaction IDs, recent transactions), fee recommendations, mining pool statistics, and network hashrate and difficulty data. No authentication required for public endpoints.
 
     '
-  version: '0.21'
+  version: '1.0'
   contact:
-    name: Litecoin Project
-    url: https://github.com/litecoin-project/litecoin
+    name: Litecoin Foundation
+    url: https://github.com/litecoin-foundation/ltcspace
   license:
     name: MIT
-    url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
 servers:
-- url: http://localhost:9332
-  description: Litecoin Core mainnet
-- url: http://localhost:19332
-  description: Litecoin Core testnet
-- url: http://localhost:19443
-  description: Litecoin Core regtest
-security:
-- basicAuth: []
+- url: https://litecoinspace.org/api
+  description: Litecoin Space mainnet
 tags:
 - name: Fees
   description: Fee estimation and recommendation endpoints
@@ -93,13 +86,6 @@ components:
           type: array
           items:
             type: number
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: 'HTTP Basic Authentication using credentials from the .litecoin/.cookie file or configured via rpcauth in litecoin.conf.
-
-        '
 externalDocs:
-  description: Litecoin Core JSON-RPC Interface Documentation
-  url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+  description: Litecoin Space REST API Documentation
+  url: https://litecoinspace.org/docs/api/rest

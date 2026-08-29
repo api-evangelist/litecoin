@@ -1,30 +1,42 @@
 {
   "provider": "litecoin",
   "sources": [
-    "litecoin-addresses-api-openapi.yml",
-    "litecoin-blockchain-api-openapi.yml",
-    "litecoin-blocks-api-openapi.yml",
-    "litecoin-fees-api-openapi.yml",
-    "litecoin-json-rpc-api-openapi.yml",
-    "litecoin-mempool-api-openapi.yml",
-    "litecoin-mining-api-openapi.yml",
-    "litecoin-transactions-api-openapi.yml",
-    "litecoin-utxo-api-openapi.yml"
+    "_original/litecoin-core-json-rpc.yml",
+    "_original/litecoin-core-rest.yml",
+    "_original/litecoin-space-rest.yml"
   ],
   "outputs": [
-    "litecoin-addresses-api-openapi.yml",
+    "litecoin-json-rpc-api-openapi.yml",
     "litecoin-blockchain-api-openapi.yml",
     "litecoin-blocks-api-openapi.yml",
-    "litecoin-fees-api-openapi.yml",
-    "litecoin-json-rpc-api-openapi.yml",
     "litecoin-mempool-api-openapi.yml",
-    "litecoin-mining-api-openapi.yml",
     "litecoin-transactions-api-openapi.yml",
-    "litecoin-utxo-api-openapi.yml"
+    "litecoin-utxo-api-openapi.yml",
+    "litecoin-addresses-api-openapi.yml",
+    "litecoin-fees-api-openapi.yml",
+    "litecoin-mining-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "litecoin-core-json-rpc.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "litecoin-core-rest.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "litecoin-space-rest.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'Blocks' spans 2 source specs (litecoin-core-rest.yml, litecoin-space-rest.yml): per-path servers applied",
+    "tag 'Mempool' spans 2 source specs (litecoin-core-rest.yml, litecoin-space-rest.yml): per-path servers applied",
+    "tag 'Transactions' spans 2 source specs (litecoin-core-rest.yml, litecoin-space-rest.yml): per-path servers applied"
+  ],
+  "skipped": [
+    "litecoin-addresses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "litecoin-blockchain-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "litecoin-blocks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "litecoin-fees-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "litecoin-json-rpc-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "litecoin-mempool-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "litecoin-mining-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "litecoin-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "litecoin-utxo-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

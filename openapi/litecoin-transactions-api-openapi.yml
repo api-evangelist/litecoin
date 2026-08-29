@@ -1,25 +1,17 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Litecoin Core JSON-RPC Addresses Transactions API
-  description: 'The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. Authentication is required via cookie file or rpcauth credentials. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest).
-
-    '
-  version: '0.21'
-  contact:
-    name: Litecoin Project
-    url: https://github.com/litecoin-project/litecoin
-  license:
-    name: MIT
-    url: https://github.com/litecoin-project/litecoin/blob/master/COPYING
+  title: Litecoin Transactions API
+  version: '1.0'
+  description: 'Operations tagged Transactions across 2 of this provider''s published API definitions: litecoin-core-rest.yml, litecoin-space-rest.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: http://localhost:9332
-  description: Litecoin Core mainnet
+  description: Litecoin Core mainnet (start with -rest flag)
 - url: http://localhost:19332
   description: Litecoin Core testnet
 - url: http://localhost:19443
   description: Litecoin Core regtest
-security:
-- basicAuth: []
+- url: https://litecoinspace.org/api
+  description: Litecoin Space mainnet
 tags:
 - name: Transactions
   description: Transaction retrieval endpoints
@@ -44,6 +36,13 @@ paths:
           description: Transaction not found
       tags:
       - Transactions
+    servers:
+    - url: http://localhost:9332
+      description: Litecoin Core mainnet (start with -rest flag)
+    - url: http://localhost:19332
+      description: Litecoin Core testnet
+    - url: http://localhost:19443
+      description: Litecoin Core regtest
   /rest/tx/{txHash}.hex:
     get:
       operationId: getTransactionHex
@@ -62,6 +61,13 @@ paths:
           description: Transaction not found
       tags:
       - Transactions
+    servers:
+    - url: http://localhost:9332
+      description: Litecoin Core mainnet (start with -rest flag)
+    - url: http://localhost:19332
+      description: Litecoin Core testnet
+    - url: http://localhost:19443
+      description: Litecoin Core regtest
   /rest/tx/{txHash}.bin:
     get:
       operationId: getTransactionBin
@@ -81,6 +87,13 @@ paths:
           description: Transaction not found
       tags:
       - Transactions
+    servers:
+    - url: http://localhost:9332
+      description: Litecoin Core mainnet (start with -rest flag)
+    - url: http://localhost:19332
+      description: Litecoin Core testnet
+    - url: http://localhost:19443
+      description: Litecoin Core regtest
   /tx/{txid}:
     get:
       operationId: getTransaction
@@ -99,6 +112,9 @@ paths:
           description: Transaction not found
       tags:
       - Transactions
+    servers:
+    - url: https://litecoinspace.org/api
+      description: Litecoin Space mainnet
   /tx/{txid}/hex:
     get:
       operationId: getTransactionHex
@@ -117,6 +133,9 @@ paths:
           description: Transaction not found
       tags:
       - Transactions
+    servers:
+    - url: https://litecoinspace.org/api
+      description: Litecoin Space mainnet
   /tx/{txid}/raw:
     get:
       operationId: getTransactionRaw
@@ -136,6 +155,9 @@ paths:
           description: Transaction not found
       tags:
       - Transactions
+    servers:
+    - url: https://litecoinspace.org/api
+      description: Litecoin Space mainnet
   /tx/{txid}/merkleblock-proof:
     get:
       operationId: getTransactionMerkleBlockProof
@@ -154,6 +176,9 @@ paths:
           description: Transaction not found or not confirmed
       tags:
       - Transactions
+    servers:
+    - url: https://litecoinspace.org/api
+      description: Litecoin Space mainnet
   /tx/{txid}/merkle-proof:
     get:
       operationId: getTransactionMerkleProof
@@ -172,6 +197,9 @@ paths:
           description: Transaction not found or not confirmed
       tags:
       - Transactions
+    servers:
+    - url: https://litecoinspace.org/api
+      description: Litecoin Space mainnet
   /tx/{txid}/outspend/{vout}:
     get:
       operationId: getTransactionOutspend
@@ -197,6 +225,9 @@ paths:
           description: Transaction or output not found
       tags:
       - Transactions
+    servers:
+    - url: https://litecoinspace.org/api
+      description: Litecoin Space mainnet
   /tx/{txid}/outspends:
     get:
       operationId: getTransactionOutspends
@@ -217,6 +248,9 @@ paths:
           description: Transaction not found
       tags:
       - Transactions
+    servers:
+    - url: https://litecoinspace.org/api
+      description: Litecoin Space mainnet
   /tx/{txid}/status:
     get:
       operationId: getTransactionStatus
@@ -235,6 +269,9 @@ paths:
           description: Transaction not found
       tags:
       - Transactions
+    servers:
+    - url: https://litecoinspace.org/api
+      description: Litecoin Space mainnet
   /tx:
     post:
       operationId: broadcastTransaction
@@ -258,7 +295,27 @@ paths:
           description: Invalid transaction
       tags:
       - Transactions
+    servers:
+    - url: https://litecoinspace.org/api
+      description: Litecoin Space mainnet
 components:
+  parameters:
+    txHash:
+      name: txHash
+      in: path
+      required: true
+      description: Transaction hash (txid) in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
+    txid:
+      name: txid
+      in: path
+      required: true
+      description: Transaction ID (txid) in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
   schemas:
     Transaction:
       type: object
@@ -325,16 +382,72 @@ components:
         blocktime:
           type: integer
           description: Block time (Unix timestamp)
-    MerkleProof:
+    Outspend:
       type: object
       properties:
-        block_height:
+        spent:
+          type: boolean
+        txid:
+          type:
+          - string
+          - 'null'
+        vin:
+          type:
+          - integer
+          - 'null'
+        status:
+          $ref: '#/components/schemas/TxStatus'
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
+          type: string
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
           type: integer
-        merkle:
+          description: Output value in satoshis
+    TxStatus:
+      type: object
+      properties:
+        confirmed:
+          type: boolean
+        block_height:
+          type:
+          - integer
+          - 'null'
+        block_hash:
+          type:
+          - string
+          - 'null'
+        block_time:
+          type:
+          - integer
+          - 'null'
+    TxInput:
+      type: object
+      properties:
+        txid:
+          type: string
+        vout:
+          type: integer
+        prevout:
+          $ref: '#/components/schemas/TxOutput'
+        scriptsig:
+          type: string
+        scriptsig_asm:
+          type: string
+        witness:
           type: array
           items:
             type: string
-        pos:
+        is_coinbase:
+          type: boolean
+        sequence:
           type: integer
     Transaction_2:
       type: object
@@ -364,93 +477,17 @@ components:
           description: Transaction fee in satoshis
         status:
           $ref: '#/components/schemas/TxStatus'
-    TxInput:
+    MerkleProof:
       type: object
       properties:
-        txid:
-          type: string
-        vout:
+        block_height:
           type: integer
-        prevout:
-          $ref: '#/components/schemas/TxOutput'
-        scriptsig:
-          type: string
-        scriptsig_asm:
-          type: string
-        witness:
+        merkle:
           type: array
           items:
             type: string
-        is_coinbase:
-          type: boolean
-        sequence:
+        pos:
           type: integer
-    Outspend:
-      type: object
-      properties:
-        spent:
-          type: boolean
-        txid:
-          type: string
-          nullable: true
-        vin:
-          type: integer
-          nullable: true
-        status:
-          $ref: '#/components/schemas/TxStatus'
-          nullable: true
-    TxStatus:
-      type: object
-      properties:
-        confirmed:
-          type: boolean
-        block_height:
-          type: integer
-          nullable: true
-        block_hash:
-          type: string
-          nullable: true
-        block_time:
-          type: integer
-          nullable: true
-    TxOutput:
-      type: object
-      properties:
-        scriptpubkey:
-          type: string
-        scriptpubkey_asm:
-          type: string
-        scriptpubkey_type:
-          type: string
-        scriptpubkey_address:
-          type: string
-        value:
-          type: integer
-          description: Output value in satoshis
-  parameters:
-    txid:
-      name: txid
-      in: path
-      required: true
-      description: Transaction ID (txid) in hex format
-      schema:
-        type: string
-        pattern: ^[0-9a-fA-F]{64}$
-    txHash:
-      name: txHash
-      in: path
-      required: true
-      description: Transaction hash (txid) in hex format
-      schema:
-        type: string
-        pattern: ^[0-9a-fA-F]{64}$
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: 'HTTP Basic Authentication using credentials from the .litecoin/.cookie file or configured via rpcauth in litecoin.conf.
-
-        '
-externalDocs:
-  description: Litecoin Core JSON-RPC Interface Documentation
-  url: https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md
+x-refined-from:
+- litecoin-core-rest.yml
+- litecoin-space-rest.yml

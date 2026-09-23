@@ -26,7 +26,8 @@
     "litecoin-space-rest.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "tag 'Blocks' spans 2 source specs (litecoin-core-rest.yml, litecoin-space-rest.yml): per-path servers applied",
     "tag 'Mempool' spans 2 source specs (litecoin-core-rest.yml, litecoin-space-rest.yml): per-path servers applied",
-    "tag 'Transactions' spans 2 source specs (litecoin-core-rest.yml, litecoin-space-rest.yml): per-path servers applied"
+    "tag 'Transactions' spans 2 source specs (litecoin-core-rest.yml, litecoin-space-rest.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "litecoin-addresses-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Litecoin Space REST Mining API
-  description: 'A public REST API provided by the Litecoin Space block explorer (litecoinspace.org), a mempool.space-compatible service for the Litecoin network. Endpoints cover addresses (details, transactions, UTXOs, validation), blocks (details, headers, height, raw data, transactions), transactions (details, hex, raw, Merkle proofs, output spend status, broadcast), mempool (statistics, transaction IDs, recent transactions), fee recommendations, mining pool statistics, and network hashrate and difficulty data. No authentication required for public endpoints.
-
-    '
+  description: A public REST API provided by the Litecoin Space block explorer (litecoinspace.org), a mempool.space-compatible service for the Litecoin network.
   version: '1.0'
   contact:
     name: Litecoin Foundation
@@ -245,17 +243,6 @@ paths:
       - Mining
 components:
   schemas:
-    HashratePoint:
-      type: object
-      properties:
-        timestamp:
-          type: integer
-        avgHashrate:
-          type: number
-        share:
-          type: number
-        blockCount:
-          type: integer
     NetworkHashrate:
       type: object
       properties:
@@ -281,6 +268,55 @@ components:
           type: number
         currentDifficulty:
           type: number
+    DifficultyAdjustmentCurrent:
+      type: object
+      properties:
+        progressPercent:
+          type: number
+        difficultyChange:
+          type: number
+        estimatedRetargetDate:
+          type: integer
+        remainingBlocks:
+          type: integer
+        remainingTime:
+          type: integer
+        previousRetarget:
+          type: number
+        previousTime:
+          type: integer
+        nextRetargetHeight:
+          type: integer
+        timeAvg:
+          type: integer
+        timeOffset:
+          type: integer
+        expectedBlocks:
+          type: number
+    RewardStats:
+      type: object
+      properties:
+        startBlock:
+          type: integer
+        endBlock:
+          type: integer
+        totalReward:
+          type: integer
+        totalFee:
+          type: integer
+        totalTx:
+          type: integer
+    DifficultyAdjustment:
+      type: object
+      properties:
+        time:
+          type: integer
+        height:
+          type: integer
+        difficulty:
+          type: number
+        adjustment:
+          type: number
     PoolHashrateAverage:
       type: object
       properties:
@@ -292,38 +328,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/HashratePoint'
-    MiningPool:
+    HashratePoint:
       type: object
       properties:
-        id:
+        timestamp:
           type: integer
-        name:
-          type: string
-        slug:
-          type: string
+        avgHashrate:
+          type: number
+        share:
+          type: number
         blockCount:
           type: integer
-        rank:
-          type: integer
-        emptyBlocks:
-          type: integer
-        avgMatchRate:
-          type: number
-        avgFeeDelta:
-          type: string
-        poolUniqueId:
-          type: integer
-    MiningPools:
-      type: object
-      properties:
-        pools:
-          type: array
-          items:
-            $ref: '#/components/schemas/MiningPool'
-        blockCount:
-          type: integer
-        lastEstimatedHashrate:
-          type: number
     Block:
       type: object
       properties:
@@ -354,55 +369,38 @@ components:
           type: integer
         difficulty:
           type: number
-    RewardStats:
+    MiningPools:
       type: object
       properties:
-        startBlock:
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/MiningPool'
+        blockCount:
           type: integer
-        endBlock:
-          type: integer
-        totalReward:
-          type: integer
-        totalFee:
-          type: integer
-        totalTx:
-          type: integer
-    DifficultyAdjustmentCurrent:
+        lastEstimatedHashrate:
+          type: number
+    MiningPool:
       type: object
       properties:
-        progressPercent:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        blockCount:
+          type: integer
+        rank:
+          type: integer
+        emptyBlocks:
+          type: integer
+        avgMatchRate:
           type: number
-        difficultyChange:
-          type: number
-        estimatedRetargetDate:
+        avgFeeDelta:
+          type: string
+        poolUniqueId:
           type: integer
-        remainingBlocks:
-          type: integer
-        remainingTime:
-          type: integer
-        previousRetarget:
-          type: number
-        previousTime:
-          type: integer
-        nextRetargetHeight:
-          type: integer
-        timeAvg:
-          type: integer
-        timeOffset:
-          type: integer
-        expectedBlocks:
-          type: number
-    DifficultyAdjustment:
-      type: object
-      properties:
-        time:
-          type: integer
-        height:
-          type: integer
-        difficulty:
-          type: number
-        adjustment:
-          type: number
   parameters:
     timePeriod:
       name: timePeriod

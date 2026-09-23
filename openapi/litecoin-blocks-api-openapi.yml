@@ -20,9 +20,7 @@ paths:
     get:
       operationId: getBlockJson
       summary: Get block with full transaction details (JSON)
-      description: 'Returns complete block data including all transaction details in JSON format. Returns 404 if the block is not found.
-
-        '
+      description: Returns complete block data including all transaction details in JSON format. Returns 404 if the block is not found.
       parameters:
       - $ref: '#/components/parameters/blockHash'
       responses:
@@ -98,9 +96,7 @@ paths:
     get:
       operationId: getBlockNoTxDetailsJson
       summary: Get block without full transaction details (JSON)
-      description: 'Returns block data in JSON format, but the transactions array contains only transaction hashes rather than full transaction objects.
-
-        '
+      description: Returns block data in JSON format, but the transactions array contains only transaction hashes rather than full transaction objects.
       parameters:
       - $ref: '#/components/parameters/blockHash'
       responses:
@@ -150,9 +146,7 @@ paths:
     get:
       operationId: getBlockHeadersJson
       summary: Get block headers (JSON)
-      description: 'Retrieves the specified number of block headers starting from the given block hash and going in the upward (newer) direction.
-
-        '
+      description: Retrieves the specified number of block headers starting from the given block hash and going in the upward (newer) direction.
       parameters:
       - $ref: '#/components/parameters/count'
       - $ref: '#/components/parameters/blockHash'
@@ -558,41 +552,16 @@ paths:
     - url: https://litecoinspace.org/api
       description: Litecoin Space mainnet
 components:
-  parameters:
-    height:
-      name: height
-      in: path
-      required: true
-      description: Block height (0-indexed from genesis)
-      schema:
-        type: integer
-        minimum: 0
-    blockHash:
-      name: blockHash
-      in: path
-      required: true
-      description: Block hash in hex format
-      schema:
-        type: string
-        pattern: ^[0-9a-fA-F]{64}$
-    count:
-      name: count
-      in: path
-      required: true
-      description: Number of block headers to retrieve
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 2000
-    hash:
-      name: hash
-      in: path
-      required: true
-      description: Block hash in hex format
-      schema:
-        type: string
-        pattern: ^[0-9a-fA-F]{64}$
   schemas:
+    BlockNoTxDetails:
+      allOf:
+      - $ref: '#/components/schemas/Block'
+      properties:
+        tx:
+          type: array
+          items:
+            type: string
+          description: Array of transaction IDs only
     BlockHeader:
       type: object
       properties:
@@ -608,6 +577,51 @@ components:
           type: string
         merkleroot:
           type: string
+        time:
+          type: integer
+        mediantime:
+          type: integer
+        nonce:
+          type: integer
+        bits:
+          type: string
+        difficulty:
+          type: number
+        chainwork:
+          type: string
+        nTx:
+          type: integer
+        previousblockhash:
+          type: string
+        nextblockhash:
+          type: string
+    Block:
+      type: object
+      properties:
+        hash:
+          type: string
+          description: Block hash
+        confirmations:
+          type: integer
+        size:
+          type: integer
+        strippedsize:
+          type: integer
+        weight:
+          type: integer
+        height:
+          type: integer
+        version:
+          type: integer
+        versionHex:
+          type: string
+        merkleroot:
+          type: string
+        tx:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+          description: Full transaction objects
         time:
           type: integer
         mediantime:
@@ -691,60 +705,6 @@ components:
         blocktime:
           type: integer
           description: Block time (Unix timestamp)
-    Block:
-      type: object
-      properties:
-        hash:
-          type: string
-          description: Block hash
-        confirmations:
-          type: integer
-        size:
-          type: integer
-        strippedsize:
-          type: integer
-        weight:
-          type: integer
-        height:
-          type: integer
-        version:
-          type: integer
-        versionHex:
-          type: string
-        merkleroot:
-          type: string
-        tx:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
-          description: Full transaction objects
-        time:
-          type: integer
-        mediantime:
-          type: integer
-        nonce:
-          type: integer
-        bits:
-          type: string
-        difficulty:
-          type: number
-        chainwork:
-          type: string
-        nTx:
-          type: integer
-        previousblockhash:
-          type: string
-        nextblockhash:
-          type: string
-    BlockNoTxDetails:
-      allOf:
-      - $ref: '#/components/schemas/Block'
-      properties:
-        tx:
-          type: array
-          items:
-            type: string
-          description: Array of transaction IDs only
     BlockWithMining:
       allOf:
       - $ref: '#/components/schemas/Block_2'
@@ -771,29 +731,36 @@ components:
                   type: string
                 slug:
                   type: string
-    BlockStatus:
+    Block_2:
       type: object
       properties:
-        in_best_chain:
-          type: boolean
+        id:
+          type: string
+          description: Block hash
         height:
           type: integer
-        next_best:
-          type: string
-    TxOutput:
-      type: object
-      properties:
-        scriptpubkey:
-          type: string
-        scriptpubkey_asm:
-          type: string
-        scriptpubkey_type:
-          type: string
-        scriptpubkey_address:
-          type: string
-        value:
+        version:
           type: integer
-          description: Output value in satoshis
+        timestamp:
+          type: integer
+        tx_count:
+          type: integer
+        size:
+          type: integer
+        weight:
+          type: integer
+        merkle_root:
+          type: string
+        previousblockhash:
+          type: string
+        mediantime:
+          type: integer
+        nonce:
+          type: integer
+        bits:
+          type: integer
+        difficulty:
+          type: number
     TxStatus:
       type: object
       properties:
@@ -860,36 +827,63 @@ components:
           description: Transaction fee in satoshis
         status:
           $ref: '#/components/schemas/TxStatus'
-    Block_2:
+    BlockStatus:
       type: object
       properties:
-        id:
-          type: string
-          description: Block hash
+        in_best_chain:
+          type: boolean
         height:
           type: integer
-        version:
-          type: integer
-        timestamp:
-          type: integer
-        tx_count:
-          type: integer
-        size:
-          type: integer
-        weight:
-          type: integer
-        merkle_root:
+        next_best:
           type: string
-        previousblockhash:
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
           type: string
-        mediantime:
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
           type: integer
-        nonce:
-          type: integer
-        bits:
-          type: integer
-        difficulty:
-          type: number
+          description: Output value in satoshis
+  parameters:
+    count:
+      name: count
+      in: path
+      required: true
+      description: Number of block headers to retrieve
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2000
+    height:
+      name: height
+      in: path
+      required: true
+      description: Block height (0-indexed from genesis)
+      schema:
+        type: integer
+        minimum: 0
+    blockHash:
+      name: blockHash
+      in: path
+      required: true
+      description: Block hash in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
+    hash:
+      name: hash
+      in: path
+      required: true
+      description: Block hash in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
 x-refined-from:
 - litecoin-core-rest.yml
 - litecoin-space-rest.yml

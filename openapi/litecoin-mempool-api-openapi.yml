@@ -20,9 +20,7 @@ paths:
     get:
       operationId: getMempoolInfo
       summary: Get mempool info
-      description: 'Returns statistics about the current state of the mempool, including the number of transactions, total size, and fee information. Only available in JSON format.
-
-        '
+      description: Returns statistics about the current state of the mempool, including the number of transactions, total size, and fee information. Only available in JSON format.
       responses:
         '200':
           description: Mempool statistics
@@ -43,9 +41,7 @@ paths:
     get:
       operationId: getMempoolContents
       summary: Get mempool contents
-      description: 'Returns all transactions currently in the mempool with full details. Only available in JSON format. Use with caution on busy nodes as the response can be very large.
-
-        '
+      description: Returns all transactions currently in the mempool with full details. Only available in JSON format. Use with caution on busy nodes as the response can be very large.
       responses:
         '200':
           description: All mempool transactions
@@ -195,17 +191,6 @@ components:
         minrelaytxfee:
           type: number
           description: Current minimum relay fee for transactions
-    MempoolRecentTx:
-      type: object
-      properties:
-        txid:
-          type: string
-        fee:
-          type: integer
-        vsize:
-          type: integer
-        value:
-          type: integer
     MempoolStats:
       type: object
       properties:
@@ -225,6 +210,17 @@ components:
             type: array
             items:
               type: number
+    MempoolRecentTx:
+      type: object
+      properties:
+        txid:
+          type: string
+        fee:
+          type: integer
+        vsize:
+          type: integer
+        value:
+          type: integer
 x-refined-from:
 - litecoin-core-rest.yml
 - litecoin-space-rest.yml

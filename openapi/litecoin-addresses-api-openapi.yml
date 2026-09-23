@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Litecoin Space REST Addresses API
-  description: 'A public REST API provided by the Litecoin Space block explorer (litecoinspace.org), a mempool.space-compatible service for the Litecoin network. Endpoints cover addresses (details, transactions, UTXOs, validation), blocks (details, headers, height, raw data, transactions), transactions (details, hex, raw, Merkle proofs, output spend status, broadcast), mempool (statistics, transaction IDs, recent transactions), fee recommendations, mining pool statistics, and network hashrate and difficulty data. No authentication required for public endpoints.
-
-    '
+  description: A public REST API provided by the Litecoin Space block explorer (litecoinspace.org), a mempool.space-compatible service for the Litecoin network.
   version: '1.0'
   contact:
     name: Litecoin Foundation
@@ -21,9 +19,7 @@ paths:
     get:
       operationId: getAddress
       summary: Get address details
-      description: 'Returns details about an address including chain stats (funded, spent, tx count) and current mempool stats.
-
-        '
+      description: Returns details about an address including chain stats (funded, spent, tx count) and current mempool stats.
       parameters:
       - $ref: '#/components/parameters/address'
       responses:
@@ -41,9 +37,7 @@ paths:
     get:
       operationId: getAddressTxs
       summary: Get address transactions
-      description: 'Returns up to 50 mempool transactions plus the first 25 confirmed transactions for the address. To get more confirmed transactions, use the after_txid parameter.
-
-        '
+      description: Returns up to 50 mempool transactions plus the first 25 confirmed transactions for the address. To get more confirmed transactions, use the after_txid parameter.
       parameters:
       - $ref: '#/components/parameters/address'
       - name: after_txid
@@ -140,29 +134,24 @@ paths:
       tags:
       - Addresses
 components:
-  parameters:
-    address:
-      name: address
-      in: path
-      required: true
-      description: Litecoin address (P2PKH, P2SH, or bech32)
-      schema:
-        type: string
   schemas:
-    TxOutput:
+    AddressValidation:
       type: object
       properties:
-        scriptpubkey:
+        isvalid:
+          type: boolean
+        address:
           type: string
-        scriptpubkey_asm:
+        scriptPubKey:
           type: string
-        scriptpubkey_type:
-          type: string
-        scriptpubkey_address:
-          type: string
-        value:
+        isscript:
+          type: boolean
+        iswitness:
+          type: boolean
+        witness_version:
           type: integer
-          description: Output value in satoshis
+        witness_program:
+          type: string
     TxStatus:
       type: object
       properties:
@@ -229,18 +218,6 @@ components:
           description: Transaction fee in satoshis
         status:
           $ref: '#/components/schemas/TxStatus'
-    Utxo:
-      type: object
-      properties:
-        txid:
-          type: string
-        vout:
-          type: integer
-        status:
-          $ref: '#/components/schemas/TxStatus'
-        value:
-          type: integer
-          description: Value in satoshis
     AddressDetails:
       type: object
       properties:
@@ -274,23 +251,40 @@ components:
               type: integer
             tx_count:
               type: integer
-    AddressValidation:
+    Utxo:
       type: object
       properties:
-        isvalid:
-          type: boolean
-        address:
+        txid:
           type: string
-        scriptPubKey:
-          type: string
-        isscript:
-          type: boolean
-        iswitness:
-          type: boolean
-        witness_version:
+        vout:
           type: integer
-        witness_program:
+        status:
+          $ref: '#/components/schemas/TxStatus'
+        value:
+          type: integer
+          description: Value in satoshis
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
           type: string
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
+          type: integer
+          description: Output value in satoshis
+  parameters:
+    address:
+      name: address
+      in: path
+      required: true
+      description: Litecoin address (P2PKH, P2SH, or bech32)
+      schema:
+        type: string
 externalDocs:
   description: Litecoin Space REST API Documentation
   url: https://litecoinspace.org/docs/api/rest

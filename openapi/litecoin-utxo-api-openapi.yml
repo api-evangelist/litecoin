@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Litecoin Core REST UTXO API
-  description: 'An unauthenticated, read-only HTTP REST interface built into Litecoin Core, enabled with the -rest flag. Supports retrieval of transactions, full blocks, block headers, block hash by height, chain information, UTXO set queries (per BIP64), and mempool statistics and contents. Responses are available in binary, hex-encoded, or JSON format depending on the file extension (.bin, .hex, .json) appended to each path. Runs on the same port as JSON-RPC (default 9332 mainnet). No authentication required.
-
-    '
+  description: An unauthenticated, read-only HTTP REST interface built into Litecoin Core, enabled with the -rest flag. Supports retrieval of transactions, full blocks, block headers, block hash by height, chain information, UTXO set queries (per BIP64), and mempool statistics and contents. Responses are available in binary, hex-encoded, or JSON format depending on the file extension (.bin, .hex, .json) appended to each path. Runs on the same port as JSON-RPC (default 9332 mainnet). No authentication required.
   version: '0.21'
   contact:
     name: Litecoin Project
@@ -26,9 +24,7 @@ paths:
     get:
       operationId: getUtxosJson
       summary: Get UTXOs (JSON)
-      description: 'Queries the UTXO set for specified outpoints per BIP64. The checkmempool segment is a flag (0 or 1) indicating whether to check the mempool for unconfirmed outputs. Outpoints are specified as txid-n pairs separated by slashes (e.g. txid1-0/txid2-1).
-
-        '
+      description: Queries the UTXO set for specified outpoints per BIP64. The checkmempool segment is a flag (0 or 1) indicating whether to check the mempool for unconfirmed outputs. Outpoints are specified as txid-n pairs separated by slashes (e.g. txid1-0/txid2-1).
       parameters:
       - name: checkmempool
         in: path

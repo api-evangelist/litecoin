@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Litecoin Space REST Fees API
-  description: 'A public REST API provided by the Litecoin Space block explorer (litecoinspace.org), a mempool.space-compatible service for the Litecoin network. Endpoints cover addresses (details, transactions, UTXOs, validation), blocks (details, headers, height, raw data, transactions), transactions (details, hex, raw, Merkle proofs, output spend status, broadcast), mempool (statistics, transaction IDs, recent transactions), fee recommendations, mining pool statistics, and network hashrate and difficulty data. No authentication required for public endpoints.
-
-    '
+  description: A public REST API provided by the Litecoin Space block explorer (litecoinspace.org), a mempool.space-compatible service for the Litecoin network.
   version: '1.0'
   contact:
     name: Litecoin Foundation
@@ -21,9 +19,7 @@ paths:
     get:
       operationId: getFeesRecommended
       summary: Get recommended fees
-      description: 'Returns current recommended fee rates for fast confirmation, half-hour confirmation, hour confirmation, economy, and minimum relay.
-
-        '
+      description: Returns current recommended fee rates for fast confirmation, half-hour confirmation, hour confirmation, economy, and minimum relay.
       responses:
         '200':
           description: Recommended fee rates in sat/vB
@@ -51,6 +47,23 @@ paths:
       - Fees
 components:
   schemas:
+    MempoolBlock:
+      type: object
+      properties:
+        blockSize:
+          type: integer
+        blockVSize:
+          type: number
+        nTx:
+          type: integer
+        totalFees:
+          type: integer
+        medianFee:
+          type: number
+        feeRange:
+          type: array
+          items:
+            type: number
     FeeRecommendations:
       type: object
       properties:
@@ -69,23 +82,6 @@ components:
         minimumFee:
           type: integer
           description: Minimum relay fee rate in sat/vB
-    MempoolBlock:
-      type: object
-      properties:
-        blockSize:
-          type: integer
-        blockVSize:
-          type: number
-        nTx:
-          type: integer
-        totalFees:
-          type: integer
-        medianFee:
-          type: number
-        feeRange:
-          type: array
-          items:
-            type: number
 externalDocs:
   description: Litecoin Space REST API Documentation
   url: https://litecoinspace.org/docs/api/rest

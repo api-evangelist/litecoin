@@ -20,9 +20,7 @@ paths:
     get:
       operationId: getTransactionJson
       summary: Get transaction (JSON)
-      description: 'Returns a transaction in JSON format. Searches the mempool by default. Use txindex=1 in litecoin.conf to also retrieve confirmed transactions that are not in the mempool.
-
-        '
+      description: Returns a transaction in JSON format. Searches the mempool by default. Use txindex=1 in litecoin.conf to also retrieve confirmed transactions that are not in the mempool.
       parameters:
       - $ref: '#/components/parameters/txHash'
       responses:
@@ -397,20 +395,6 @@ components:
           - 'null'
         status:
           $ref: '#/components/schemas/TxStatus'
-    TxOutput:
-      type: object
-      properties:
-        scriptpubkey:
-          type: string
-        scriptpubkey_asm:
-          type: string
-        scriptpubkey_type:
-          type: string
-        scriptpubkey_address:
-          type: string
-        value:
-          type: integer
-          description: Output value in satoshis
     TxStatus:
       type: object
       properties:
@@ -488,6 +472,20 @@ components:
             type: string
         pos:
           type: integer
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
+          type: string
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
+          type: integer
+          description: Output value in satoshis
 x-refined-from:
 - litecoin-core-rest.yml
 - litecoin-space-rest.yml

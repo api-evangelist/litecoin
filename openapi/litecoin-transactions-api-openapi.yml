@@ -115,7 +115,7 @@ paths:
       description: Litecoin Space mainnet
   /tx/{txid}/hex:
     get:
-      operationId: getTransactionHex
+      operationId: getTxByTxidHex
       summary: Get transaction hex
       description: Returns the raw transaction in hex-encoded format.
       parameters:
@@ -131,6 +131,8 @@ paths:
           description: Transaction not found
       tags:
       - Transactions
+      x-operation-id-source: normalized
+      x-operation-id-original: getTransactionHex
     servers:
     - url: https://litecoinspace.org/api
       description: Litecoin Space mainnet
@@ -297,23 +299,6 @@ paths:
     - url: https://litecoinspace.org/api
       description: Litecoin Space mainnet
 components:
-  parameters:
-    txHash:
-      name: txHash
-      in: path
-      required: true
-      description: Transaction hash (txid) in hex format
-      schema:
-        type: string
-        pattern: ^[0-9a-fA-F]{64}$
-    txid:
-      name: txid
-      in: path
-      required: true
-      description: Transaction ID (txid) in hex format
-      schema:
-        type: string
-        pattern: ^[0-9a-fA-F]{64}$
   schemas:
     Transaction:
       type: object
@@ -380,21 +365,6 @@ components:
         blocktime:
           type: integer
           description: Block time (Unix timestamp)
-    Outspend:
-      type: object
-      properties:
-        spent:
-          type: boolean
-        txid:
-          type:
-          - string
-          - 'null'
-        vin:
-          type:
-          - integer
-          - 'null'
-        status:
-          $ref: '#/components/schemas/TxStatus'
     TxStatus:
       type: object
       properties:
@@ -433,6 +403,46 @@ components:
           type: boolean
         sequence:
           type: integer
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
+          type: string
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
+          type: integer
+          description: Output value in satoshis
+    Outspend:
+      type: object
+      properties:
+        spent:
+          type: boolean
+        txid:
+          type:
+          - string
+          - 'null'
+        vin:
+          type:
+          - integer
+          - 'null'
+        status:
+          $ref: '#/components/schemas/TxStatus'
+    MerkleProof:
+      type: object
+      properties:
+        block_height:
+          type: integer
+        merkle:
+          type: array
+          items:
+            type: string
+        pos:
+          type: integer
     Transaction_2:
       type: object
       properties:
@@ -461,31 +471,23 @@ components:
           description: Transaction fee in satoshis
         status:
           $ref: '#/components/schemas/TxStatus'
-    MerkleProof:
-      type: object
-      properties:
-        block_height:
-          type: integer
-        merkle:
-          type: array
-          items:
-            type: string
-        pos:
-          type: integer
-    TxOutput:
-      type: object
-      properties:
-        scriptpubkey:
-          type: string
-        scriptpubkey_asm:
-          type: string
-        scriptpubkey_type:
-          type: string
-        scriptpubkey_address:
-          type: string
-        value:
-          type: integer
-          description: Output value in satoshis
+  parameters:
+    txHash:
+      name: txHash
+      in: path
+      required: true
+      description: Transaction hash (txid) in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
+    txid:
+      name: txid
+      in: path
+      required: true
+      description: Transaction ID (txid) in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
 x-refined-from:
 - litecoin-core-rest.yml
 - litecoin-space-rest.yml

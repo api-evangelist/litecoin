@@ -135,23 +135,6 @@ paths:
       - Addresses
 components:
   schemas:
-    AddressValidation:
-      type: object
-      properties:
-        isvalid:
-          type: boolean
-        address:
-          type: string
-        scriptPubKey:
-          type: string
-        isscript:
-          type: boolean
-        iswitness:
-          type: boolean
-        witness_version:
-          type: integer
-        witness_program:
-          type: string
     TxStatus:
       type: object
       properties:
@@ -190,34 +173,20 @@ components:
           type: boolean
         sequence:
           type: integer
-    Transaction:
+    TxOutput:
       type: object
       properties:
-        txid:
+        scriptpubkey:
           type: string
-        version:
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
           type: integer
-        locktime:
-          type: integer
-        vin:
-          type: array
-          items:
-            $ref: '#/components/schemas/TxInput'
-        vout:
-          type: array
-          items:
-            $ref: '#/components/schemas/TxOutput'
-        size:
-          type: integer
-        weight:
-          type: integer
-        sigops:
-          type: integer
-        fee:
-          type: integer
-          description: Transaction fee in satoshis
-        status:
-          $ref: '#/components/schemas/TxStatus'
+          description: Output value in satoshis
     AddressDetails:
       type: object
       properties:
@@ -263,20 +232,51 @@ components:
         value:
           type: integer
           description: Value in satoshis
-    TxOutput:
+    AddressValidation:
       type: object
       properties:
-        scriptpubkey:
+        isvalid:
+          type: boolean
+        address:
           type: string
-        scriptpubkey_asm:
+        scriptPubKey:
           type: string
-        scriptpubkey_type:
-          type: string
-        scriptpubkey_address:
-          type: string
-        value:
+        isscript:
+          type: boolean
+        iswitness:
+          type: boolean
+        witness_version:
           type: integer
-          description: Output value in satoshis
+        witness_program:
+          type: string
+    Transaction:
+      type: object
+      properties:
+        txid:
+          type: string
+        version:
+          type: integer
+        locktime:
+          type: integer
+        vin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxInput'
+        vout:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxOutput'
+        size:
+          type: integer
+        weight:
+          type: integer
+        sigops:
+          type: integer
+        fee:
+          type: integer
+          description: Transaction fee in satoshis
+        status:
+          $ref: '#/components/schemas/TxStatus'
   parameters:
     address:
       name: address

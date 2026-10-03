@@ -191,17 +191,6 @@ components:
         minrelaytxfee:
           type: number
           description: Current minimum relay fee for transactions
-    MempoolRecentTx:
-      type: object
-      properties:
-        txid:
-          type: string
-        fee:
-          type: integer
-        vsize:
-          type: integer
-        value:
-          type: integer
     MempoolStats:
       type: object
       properties:
@@ -221,6 +210,17 @@ components:
             type: array
             items:
               type: number
+    MempoolRecentTx:
+      type: object
+      properties:
+        txid:
+          type: string
+        fee:
+          type: integer
+        vsize:
+          type: integer
+        value:
+          type: integer
 x-refined-from:
 - litecoin-core-rest.yml
 - litecoin-space-rest.yml

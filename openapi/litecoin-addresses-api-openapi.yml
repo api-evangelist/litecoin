@@ -135,6 +135,39 @@ paths:
       - Addresses
 components:
   schemas:
+    AddressDetails:
+      type: object
+      properties:
+        address:
+          type: string
+        chain_stats:
+          type: object
+          properties:
+            funded_txo_count:
+              type: integer
+            funded_txo_sum:
+              type: integer
+              description: Total funded amount in satoshis
+            spent_txo_count:
+              type: integer
+            spent_txo_sum:
+              type: integer
+              description: Total spent amount in satoshis
+            tx_count:
+              type: integer
+        mempool_stats:
+          type: object
+          properties:
+            funded_txo_count:
+              type: integer
+            funded_txo_sum:
+              type: integer
+            spent_txo_count:
+              type: integer
+            spent_txo_sum:
+              type: integer
+            tx_count:
+              type: integer
     TxStatus:
       type: object
       properties:
@@ -173,65 +206,6 @@ components:
           type: boolean
         sequence:
           type: integer
-    TxOutput:
-      type: object
-      properties:
-        scriptpubkey:
-          type: string
-        scriptpubkey_asm:
-          type: string
-        scriptpubkey_type:
-          type: string
-        scriptpubkey_address:
-          type: string
-        value:
-          type: integer
-          description: Output value in satoshis
-    AddressDetails:
-      type: object
-      properties:
-        address:
-          type: string
-        chain_stats:
-          type: object
-          properties:
-            funded_txo_count:
-              type: integer
-            funded_txo_sum:
-              type: integer
-              description: Total funded amount in satoshis
-            spent_txo_count:
-              type: integer
-            spent_txo_sum:
-              type: integer
-              description: Total spent amount in satoshis
-            tx_count:
-              type: integer
-        mempool_stats:
-          type: object
-          properties:
-            funded_txo_count:
-              type: integer
-            funded_txo_sum:
-              type: integer
-            spent_txo_count:
-              type: integer
-            spent_txo_sum:
-              type: integer
-            tx_count:
-              type: integer
-    Utxo:
-      type: object
-      properties:
-        txid:
-          type: string
-        vout:
-          type: integer
-        status:
-          $ref: '#/components/schemas/TxStatus'
-        value:
-          type: integer
-          description: Value in satoshis
     AddressValidation:
       type: object
       properties:
@@ -277,6 +251,32 @@ components:
           description: Transaction fee in satoshis
         status:
           $ref: '#/components/schemas/TxStatus'
+    Utxo:
+      type: object
+      properties:
+        txid:
+          type: string
+        vout:
+          type: integer
+        status:
+          $ref: '#/components/schemas/TxStatus'
+        value:
+          type: integer
+          description: Value in satoshis
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
+          type: string
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
+          type: integer
+          description: Output value in satoshis
   parameters:
     address:
       name: address

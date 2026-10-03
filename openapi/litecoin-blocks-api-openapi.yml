@@ -552,6 +552,40 @@ paths:
     - url: https://litecoinspace.org/api
       description: Litecoin Space mainnet
 components:
+  parameters:
+    height:
+      name: height
+      in: path
+      required: true
+      description: Block height (0-indexed from genesis)
+      schema:
+        type: integer
+        minimum: 0
+    blockHash:
+      name: blockHash
+      in: path
+      required: true
+      description: Block hash in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
+    count:
+      name: count
+      in: path
+      required: true
+      description: Number of block headers to retrieve
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2000
+    hash:
+      name: hash
+      in: path
+      required: true
+      description: Block hash in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
   schemas:
     Block:
       type: object
@@ -580,39 +614,6 @@ components:
           items:
             $ref: '#/components/schemas/Transaction'
           description: Full transaction objects
-        time:
-          type: integer
-        mediantime:
-          type: integer
-        nonce:
-          type: integer
-        bits:
-          type: string
-        difficulty:
-          type: number
-        chainwork:
-          type: string
-        nTx:
-          type: integer
-        previousblockhash:
-          type: string
-        nextblockhash:
-          type: string
-    BlockHeader:
-      type: object
-      properties:
-        hash:
-          type: string
-        confirmations:
-          type: integer
-        height:
-          type: integer
-        version:
-          type: integer
-        versionHex:
-          type: string
-        merkleroot:
-          type: string
         time:
           type: integer
         mediantime:
@@ -705,6 +706,82 @@ components:
         blocktime:
           type: integer
           description: Block time (Unix timestamp)
+    BlockHeader:
+      type: object
+      properties:
+        hash:
+          type: string
+        confirmations:
+          type: integer
+        height:
+          type: integer
+        version:
+          type: integer
+        versionHex:
+          type: string
+        merkleroot:
+          type: string
+        time:
+          type: integer
+        mediantime:
+          type: integer
+        nonce:
+          type: integer
+        bits:
+          type: string
+        difficulty:
+          type: number
+        chainwork:
+          type: string
+        nTx:
+          type: integer
+        previousblockhash:
+          type: string
+        nextblockhash:
+          type: string
+    TxStatus:
+      type: object
+      properties:
+        confirmed:
+          type: boolean
+        block_height:
+          type:
+          - integer
+          - 'null'
+        block_hash:
+          type:
+          - string
+          - 'null'
+        block_time:
+          type:
+          - integer
+          - 'null'
+    BlockWithMining:
+      allOf:
+      - $ref: '#/components/schemas/Block_2'
+      properties:
+        extras:
+          type: object
+          properties:
+            reward:
+              type: integer
+            coinbaseTx:
+              type: object
+            totalFees:
+              type: integer
+            avgFee:
+              type: integer
+            avgFeeRate:
+              type: integer
+            pool:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                slug:
+                  type: string
     Block_2:
       type: object
       properties:
@@ -735,23 +812,6 @@ components:
           type: integer
         difficulty:
           type: number
-    TxStatus:
-      type: object
-      properties:
-        confirmed:
-          type: boolean
-        block_height:
-          type:
-          - integer
-          - 'null'
-        block_hash:
-          type:
-          - string
-          - 'null'
-        block_time:
-          type:
-          - integer
-          - 'null'
     TxInput:
       type: object
       properties:
@@ -773,55 +833,6 @@ components:
           type: boolean
         sequence:
           type: integer
-    TxOutput:
-      type: object
-      properties:
-        scriptpubkey:
-          type: string
-        scriptpubkey_asm:
-          type: string
-        scriptpubkey_type:
-          type: string
-        scriptpubkey_address:
-          type: string
-        value:
-          type: integer
-          description: Output value in satoshis
-    BlockWithMining:
-      allOf:
-      - $ref: '#/components/schemas/Block_2'
-      properties:
-        extras:
-          type: object
-          properties:
-            reward:
-              type: integer
-            coinbaseTx:
-              type: object
-            totalFees:
-              type: integer
-            avgFee:
-              type: integer
-            avgFeeRate:
-              type: integer
-            pool:
-              type: object
-              properties:
-                id:
-                  type: integer
-                name:
-                  type: string
-                slug:
-                  type: string
-    BlockStatus:
-      type: object
-      properties:
-        in_best_chain:
-          type: boolean
-        height:
-          type: integer
-        next_best:
-          type: string
     Transaction_2:
       type: object
       properties:
@@ -850,40 +861,29 @@ components:
           description: Transaction fee in satoshis
         status:
           $ref: '#/components/schemas/TxStatus'
-  parameters:
-    height:
-      name: height
-      in: path
-      required: true
-      description: Block height (0-indexed from genesis)
-      schema:
-        type: integer
-        minimum: 0
-    blockHash:
-      name: blockHash
-      in: path
-      required: true
-      description: Block hash in hex format
-      schema:
-        type: string
-        pattern: ^[0-9a-fA-F]{64}$
-    count:
-      name: count
-      in: path
-      required: true
-      description: Number of block headers to retrieve
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 2000
-    hash:
-      name: hash
-      in: path
-      required: true
-      description: Block hash in hex format
-      schema:
-        type: string
-        pattern: ^[0-9a-fA-F]{64}$
+    BlockStatus:
+      type: object
+      properties:
+        in_best_chain:
+          type: boolean
+        height:
+          type: integer
+        next_best:
+          type: string
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
+          type: string
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
+          type: integer
+          description: Output value in satoshis
 x-refined-from:
 - litecoin-core-rest.yml
 - litecoin-space-rest.yml

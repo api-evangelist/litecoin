@@ -243,6 +243,53 @@ paths:
       - Mining
 components:
   schemas:
+    NetworkHashrate:
+      type: object
+      properties:
+        hashrates:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: integer
+              avgHashrate:
+                type: number
+        difficulty:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: integer
+              difficulty:
+                type: number
+        currentHashrate:
+          type: number
+        currentDifficulty:
+          type: number
+    HashratePoint:
+      type: object
+      properties:
+        timestamp:
+          type: integer
+        avgHashrate:
+          type: number
+        share:
+          type: number
+        blockCount:
+          type: integer
+    PoolHashrateAverage:
+      type: object
+      properties:
+        poolName:
+          type: string
+        poolId:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HashratePoint'
     Block:
       type: object
       properties:
@@ -273,28 +320,6 @@ components:
           type: integer
         difficulty:
           type: number
-    PoolHashrateAverage:
-      type: object
-      properties:
-        poolName:
-          type: string
-        poolId:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/HashratePoint'
-    HashratePoint:
-      type: object
-      properties:
-        timestamp:
-          type: integer
-        avgHashrate:
-          type: number
-        share:
-          type: number
-        blockCount:
-          type: integer
     DifficultyAdjustment:
       type: object
       properties:
@@ -331,17 +356,6 @@ components:
           type: integer
         expectedBlocks:
           type: number
-    MiningPools:
-      type: object
-      properties:
-        pools:
-          type: array
-          items:
-            $ref: '#/components/schemas/MiningPool'
-        blockCount:
-          type: integer
-        lastEstimatedHashrate:
-          type: number
     RewardStats:
       type: object
       properties:
@@ -355,31 +369,6 @@ components:
           type: integer
         totalTx:
           type: integer
-    NetworkHashrate:
-      type: object
-      properties:
-        hashrates:
-          type: array
-          items:
-            type: object
-            properties:
-              timestamp:
-                type: integer
-              avgHashrate:
-                type: number
-        difficulty:
-          type: array
-          items:
-            type: object
-            properties:
-              timestamp:
-                type: integer
-              difficulty:
-                type: number
-        currentHashrate:
-          type: number
-        currentDifficulty:
-          type: number
     MiningPool:
       type: object
       properties:
@@ -401,6 +390,17 @@ components:
           type: string
         poolUniqueId:
           type: integer
+    MiningPools:
+      type: object
+      properties:
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/MiningPool'
+        blockCount:
+          type: integer
+        lastEstimatedHashrate:
+          type: number
   parameters:
     timePeriod:
       name: timePeriod

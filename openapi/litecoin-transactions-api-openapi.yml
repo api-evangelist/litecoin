@@ -403,6 +403,45 @@ components:
           type: boolean
         sequence:
           type: integer
+    Transaction_2:
+      type: object
+      properties:
+        txid:
+          type: string
+        version:
+          type: integer
+        locktime:
+          type: integer
+        vin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxInput'
+        vout:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxOutput'
+        size:
+          type: integer
+        weight:
+          type: integer
+        sigops:
+          type: integer
+        fee:
+          type: integer
+          description: Transaction fee in satoshis
+        status:
+          $ref: '#/components/schemas/TxStatus'
+    MerkleProof:
+      type: object
+      properties:
+        block_height:
+          type: integer
+        merkle:
+          type: array
+          items:
+            type: string
+        pos:
+          type: integer
     TxOutput:
       type: object
       properties:
@@ -430,45 +469,6 @@ components:
           type:
           - integer
           - 'null'
-        status:
-          $ref: '#/components/schemas/TxStatus'
-    MerkleProof:
-      type: object
-      properties:
-        block_height:
-          type: integer
-        merkle:
-          type: array
-          items:
-            type: string
-        pos:
-          type: integer
-    Transaction_2:
-      type: object
-      properties:
-        txid:
-          type: string
-        version:
-          type: integer
-        locktime:
-          type: integer
-        vin:
-          type: array
-          items:
-            $ref: '#/components/schemas/TxInput'
-        vout:
-          type: array
-          items:
-            $ref: '#/components/schemas/TxOutput'
-        size:
-          type: integer
-        weight:
-          type: integer
-        sigops:
-          type: integer
-        fee:
-          type: integer
-          description: Transaction fee in satoshis
         status:
           $ref: '#/components/schemas/TxStatus'
   parameters:

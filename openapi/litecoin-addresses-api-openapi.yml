@@ -135,6 +135,41 @@ paths:
       - Addresses
 components:
   schemas:
+    TxInput:
+      type: object
+      properties:
+        txid:
+          type: string
+        vout:
+          type: integer
+        prevout:
+          $ref: '#/components/schemas/TxOutput'
+        scriptsig:
+          type: string
+        scriptsig_asm:
+          type: string
+        witness:
+          type: array
+          items:
+            type: string
+        is_coinbase:
+          type: boolean
+        sequence:
+          type: integer
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
+          type: string
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
+          type: integer
+          description: Output value in satoshis
     AddressDetails:
       type: object
       properties:
@@ -168,44 +203,18 @@ components:
               type: integer
             tx_count:
               type: integer
-    TxStatus:
-      type: object
-      properties:
-        confirmed:
-          type: boolean
-        block_height:
-          type:
-          - integer
-          - 'null'
-        block_hash:
-          type:
-          - string
-          - 'null'
-        block_time:
-          type:
-          - integer
-          - 'null'
-    TxInput:
+    Utxo:
       type: object
       properties:
         txid:
           type: string
         vout:
           type: integer
-        prevout:
-          $ref: '#/components/schemas/TxOutput'
-        scriptsig:
-          type: string
-        scriptsig_asm:
-          type: string
-        witness:
-          type: array
-          items:
-            type: string
-        is_coinbase:
-          type: boolean
-        sequence:
+        status:
+          $ref: '#/components/schemas/TxStatus'
+        value:
           type: integer
+          description: Value in satoshis
     AddressValidation:
       type: object
       properties:
@@ -223,6 +232,23 @@ components:
           type: integer
         witness_program:
           type: string
+    TxStatus:
+      type: object
+      properties:
+        confirmed:
+          type: boolean
+        block_height:
+          type:
+          - integer
+          - 'null'
+        block_hash:
+          type:
+          - string
+          - 'null'
+        block_time:
+          type:
+          - integer
+          - 'null'
     Transaction:
       type: object
       properties:
@@ -251,32 +277,6 @@ components:
           description: Transaction fee in satoshis
         status:
           $ref: '#/components/schemas/TxStatus'
-    Utxo:
-      type: object
-      properties:
-        txid:
-          type: string
-        vout:
-          type: integer
-        status:
-          $ref: '#/components/schemas/TxStatus'
-        value:
-          type: integer
-          description: Value in satoshis
-    TxOutput:
-      type: object
-      properties:
-        scriptpubkey:
-          type: string
-        scriptpubkey_asm:
-          type: string
-        scriptpubkey_type:
-          type: string
-        scriptpubkey_address:
-          type: string
-        value:
-          type: integer
-          description: Output value in satoshis
   parameters:
     address:
       name: address

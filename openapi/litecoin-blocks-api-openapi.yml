@@ -561,14 +561,6 @@ components:
       schema:
         type: integer
         minimum: 0
-    blockHash:
-      name: blockHash
-      in: path
-      required: true
-      description: Block hash in hex format
-      schema:
-        type: string
-        pattern: ^[0-9a-fA-F]{64}$
     count:
       name: count
       in: path
@@ -578,6 +570,14 @@ components:
         type: integer
         minimum: 1
         maximum: 2000
+    blockHash:
+      name: blockHash
+      in: path
+      required: true
+      description: Block hash in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
     hash:
       name: hash
       in: path
@@ -587,6 +587,48 @@ components:
         type: string
         pattern: ^[0-9a-fA-F]{64}$
   schemas:
+    BlockHeader:
+      type: object
+      properties:
+        hash:
+          type: string
+        confirmations:
+          type: integer
+        height:
+          type: integer
+        version:
+          type: integer
+        versionHex:
+          type: string
+        merkleroot:
+          type: string
+        time:
+          type: integer
+        mediantime:
+          type: integer
+        nonce:
+          type: integer
+        bits:
+          type: string
+        difficulty:
+          type: number
+        chainwork:
+          type: string
+        nTx:
+          type: integer
+        previousblockhash:
+          type: string
+        nextblockhash:
+          type: string
+    BlockNoTxDetails:
+      allOf:
+      - $ref: '#/components/schemas/Block'
+      properties:
+        tx:
+          type: array
+          items:
+            type: string
+          description: Array of transaction IDs only
     Block:
       type: object
       properties:
@@ -632,15 +674,6 @@ components:
           type: string
         nextblockhash:
           type: string
-    BlockNoTxDetails:
-      allOf:
-      - $ref: '#/components/schemas/Block'
-      properties:
-        tx:
-          type: array
-          items:
-            type: string
-          description: Array of transaction IDs only
     Transaction:
       type: object
       properties:
@@ -706,38 +739,49 @@ components:
         blocktime:
           type: integer
           description: Block time (Unix timestamp)
-    BlockHeader:
+    TxInput:
       type: object
       properties:
-        hash:
+        txid:
           type: string
-        confirmations:
+        vout:
           type: integer
+        prevout:
+          $ref: '#/components/schemas/TxOutput'
+        scriptsig:
+          type: string
+        scriptsig_asm:
+          type: string
+        witness:
+          type: array
+          items:
+            type: string
+        is_coinbase:
+          type: boolean
+        sequence:
+          type: integer
+    TxOutput:
+      type: object
+      properties:
+        scriptpubkey:
+          type: string
+        scriptpubkey_asm:
+          type: string
+        scriptpubkey_type:
+          type: string
+        scriptpubkey_address:
+          type: string
+        value:
+          type: integer
+          description: Output value in satoshis
+    BlockStatus:
+      type: object
+      properties:
+        in_best_chain:
+          type: boolean
         height:
           type: integer
-        version:
-          type: integer
-        versionHex:
-          type: string
-        merkleroot:
-          type: string
-        time:
-          type: integer
-        mediantime:
-          type: integer
-        nonce:
-          type: integer
-        bits:
-          type: string
-        difficulty:
-          type: number
-        chainwork:
-          type: string
-        nTx:
-          type: integer
-        previousblockhash:
-          type: string
-        nextblockhash:
+        next_best:
           type: string
     TxStatus:
       type: object
@@ -756,32 +800,6 @@ components:
           type:
           - integer
           - 'null'
-    BlockWithMining:
-      allOf:
-      - $ref: '#/components/schemas/Block_2'
-      properties:
-        extras:
-          type: object
-          properties:
-            reward:
-              type: integer
-            coinbaseTx:
-              type: object
-            totalFees:
-              type: integer
-            avgFee:
-              type: integer
-            avgFeeRate:
-              type: integer
-            pool:
-              type: object
-              properties:
-                id:
-                  type: integer
-                name:
-                  type: string
-                slug:
-                  type: string
     Block_2:
       type: object
       properties:
@@ -812,27 +830,6 @@ components:
           type: integer
         difficulty:
           type: number
-    TxInput:
-      type: object
-      properties:
-        txid:
-          type: string
-        vout:
-          type: integer
-        prevout:
-          $ref: '#/components/schemas/TxOutput'
-        scriptsig:
-          type: string
-        scriptsig_asm:
-          type: string
-        witness:
-          type: array
-          items:
-            type: string
-        is_coinbase:
-          type: boolean
-        sequence:
-          type: integer
     Transaction_2:
       type: object
       properties:
@@ -861,29 +858,32 @@ components:
           description: Transaction fee in satoshis
         status:
           $ref: '#/components/schemas/TxStatus'
-    BlockStatus:
-      type: object
+    BlockWithMining:
+      allOf:
+      - $ref: '#/components/schemas/Block_2'
       properties:
-        in_best_chain:
-          type: boolean
-        height:
-          type: integer
-        next_best:
-          type: string
-    TxOutput:
-      type: object
-      properties:
-        scriptpubkey:
-          type: string
-        scriptpubkey_asm:
-          type: string
-        scriptpubkey_type:
-          type: string
-        scriptpubkey_address:
-          type: string
-        value:
-          type: integer
-          description: Output value in satoshis
+        extras:
+          type: object
+          properties:
+            reward:
+              type: integer
+            coinbaseTx:
+              type: object
+            totalFees:
+              type: integer
+            avgFee:
+              type: integer
+            avgFeeRate:
+              type: integer
+            pool:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                slug:
+                  type: string
 x-refined-from:
 - litecoin-core-rest.yml
 - litecoin-space-rest.yml

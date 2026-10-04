@@ -47,23 +47,6 @@ paths:
       - Fees
 components:
   schemas:
-    MempoolBlock:
-      type: object
-      properties:
-        blockSize:
-          type: integer
-        blockVSize:
-          type: number
-        nTx:
-          type: integer
-        totalFees:
-          type: integer
-        medianFee:
-          type: number
-        feeRange:
-          type: array
-          items:
-            type: number
     FeeRecommendations:
       type: object
       properties:
@@ -82,6 +65,23 @@ components:
         minimumFee:
           type: integer
           description: Minimum relay fee rate in sat/vB
+    MempoolBlock:
+      type: object
+      properties:
+        blockSize:
+          type: integer
+        blockVSize:
+          type: number
+        nTx:
+          type: integer
+        totalFees:
+          type: integer
+        medianFee:
+          type: number
+        feeRange:
+          type: array
+          items:
+            type: number
 externalDocs:
   description: Litecoin Space REST API Documentation
   url: https://litecoinspace.org/docs/api/rest

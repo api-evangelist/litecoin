@@ -243,6 +243,76 @@ paths:
       - Mining
 components:
   schemas:
+    HashratePoint:
+      type: object
+      properties:
+        timestamp:
+          type: integer
+        avgHashrate:
+          type: number
+        share:
+          type: number
+        blockCount:
+          type: integer
+    RewardStats:
+      type: object
+      properties:
+        startBlock:
+          type: integer
+        endBlock:
+          type: integer
+        totalReward:
+          type: integer
+        totalFee:
+          type: integer
+        totalTx:
+          type: integer
+    DifficultyAdjustmentCurrent:
+      type: object
+      properties:
+        progressPercent:
+          type: number
+        difficultyChange:
+          type: number
+        estimatedRetargetDate:
+          type: integer
+        remainingBlocks:
+          type: integer
+        remainingTime:
+          type: integer
+        previousRetarget:
+          type: number
+        previousTime:
+          type: integer
+        nextRetargetHeight:
+          type: integer
+        timeAvg:
+          type: integer
+        timeOffset:
+          type: integer
+        expectedBlocks:
+          type: number
+    MiningPool:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        blockCount:
+          type: integer
+        rank:
+          type: integer
+        emptyBlocks:
+          type: integer
+        avgMatchRate:
+          type: number
+        avgFeeDelta:
+          type: string
+        poolUniqueId:
+          type: integer
     NetworkHashrate:
       type: object
       properties:
@@ -268,17 +338,6 @@ components:
           type: number
         currentDifficulty:
           type: number
-    HashratePoint:
-      type: object
-      properties:
-        timestamp:
-          type: integer
-        avgHashrate:
-          type: number
-        share:
-          type: number
-        blockCount:
-          type: integer
     PoolHashrateAverage:
       type: object
       properties:
@@ -290,6 +349,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/HashratePoint'
+    DifficultyAdjustment:
+      type: object
+      properties:
+        time:
+          type: integer
+        height:
+          type: integer
+        difficulty:
+          type: number
+        adjustment:
+          type: number
     Block:
       type: object
       properties:
@@ -320,76 +390,6 @@ components:
           type: integer
         difficulty:
           type: number
-    DifficultyAdjustment:
-      type: object
-      properties:
-        time:
-          type: integer
-        height:
-          type: integer
-        difficulty:
-          type: number
-        adjustment:
-          type: number
-    DifficultyAdjustmentCurrent:
-      type: object
-      properties:
-        progressPercent:
-          type: number
-        difficultyChange:
-          type: number
-        estimatedRetargetDate:
-          type: integer
-        remainingBlocks:
-          type: integer
-        remainingTime:
-          type: integer
-        previousRetarget:
-          type: number
-        previousTime:
-          type: integer
-        nextRetargetHeight:
-          type: integer
-        timeAvg:
-          type: integer
-        timeOffset:
-          type: integer
-        expectedBlocks:
-          type: number
-    RewardStats:
-      type: object
-      properties:
-        startBlock:
-          type: integer
-        endBlock:
-          type: integer
-        totalReward:
-          type: integer
-        totalFee:
-          type: integer
-        totalTx:
-          type: integer
-    MiningPool:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        slug:
-          type: string
-        blockCount:
-          type: integer
-        rank:
-          type: integer
-        emptyBlocks:
-          type: integer
-        avgMatchRate:
-          type: number
-        avgFeeDelta:
-          type: string
-        poolUniqueId:
-          type: integer
     MiningPools:
       type: object
       properties:

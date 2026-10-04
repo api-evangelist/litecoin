@@ -299,6 +299,23 @@ paths:
     - url: https://litecoinspace.org/api
       description: Litecoin Space mainnet
 components:
+  parameters:
+    txHash:
+      name: txHash
+      in: path
+      required: true
+      description: Transaction hash (txid) in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
+    txid:
+      name: txid
+      in: path
+      required: true
+      description: Transaction ID (txid) in hex format
+      schema:
+        type: string
+        pattern: ^[0-9a-fA-F]{64}$
   schemas:
     Transaction:
       type: object
@@ -365,23 +382,6 @@ components:
         blocktime:
           type: integer
           description: Block time (Unix timestamp)
-    TxStatus:
-      type: object
-      properties:
-        confirmed:
-          type: boolean
-        block_height:
-          type:
-          - integer
-          - 'null'
-        block_hash:
-          type:
-          - string
-          - 'null'
-        block_time:
-          type:
-          - integer
-          - 'null'
     TxInput:
       type: object
       properties:
@@ -402,45 +402,6 @@ components:
         is_coinbase:
           type: boolean
         sequence:
-          type: integer
-    Transaction_2:
-      type: object
-      properties:
-        txid:
-          type: string
-        version:
-          type: integer
-        locktime:
-          type: integer
-        vin:
-          type: array
-          items:
-            $ref: '#/components/schemas/TxInput'
-        vout:
-          type: array
-          items:
-            $ref: '#/components/schemas/TxOutput'
-        size:
-          type: integer
-        weight:
-          type: integer
-        sigops:
-          type: integer
-        fee:
-          type: integer
-          description: Transaction fee in satoshis
-        status:
-          $ref: '#/components/schemas/TxStatus'
-    MerkleProof:
-      type: object
-      properties:
-        block_height:
-          type: integer
-        merkle:
-          type: array
-          items:
-            type: string
-        pos:
           type: integer
     TxOutput:
       type: object
@@ -471,23 +432,62 @@ components:
           - 'null'
         status:
           $ref: '#/components/schemas/TxStatus'
-  parameters:
-    txHash:
-      name: txHash
-      in: path
-      required: true
-      description: Transaction hash (txid) in hex format
-      schema:
-        type: string
-        pattern: ^[0-9a-fA-F]{64}$
-    txid:
-      name: txid
-      in: path
-      required: true
-      description: Transaction ID (txid) in hex format
-      schema:
-        type: string
-        pattern: ^[0-9a-fA-F]{64}$
+    MerkleProof:
+      type: object
+      properties:
+        block_height:
+          type: integer
+        merkle:
+          type: array
+          items:
+            type: string
+        pos:
+          type: integer
+    TxStatus:
+      type: object
+      properties:
+        confirmed:
+          type: boolean
+        block_height:
+          type:
+          - integer
+          - 'null'
+        block_hash:
+          type:
+          - string
+          - 'null'
+        block_time:
+          type:
+          - integer
+          - 'null'
+    Transaction_2:
+      type: object
+      properties:
+        txid:
+          type: string
+        version:
+          type: integer
+        locktime:
+          type: integer
+        vin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxInput'
+        vout:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxOutput'
+        size:
+          type: integer
+        weight:
+          type: integer
+        sigops:
+          type: integer
+        fee:
+          type: integer
+          description: Transaction fee in satoshis
+        status:
+          $ref: '#/components/schemas/TxStatus'
 x-refined-from:
 - litecoin-core-rest.yml
 - litecoin-space-rest.yml

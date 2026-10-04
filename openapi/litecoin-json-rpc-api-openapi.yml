@@ -92,36 +92,6 @@ paths:
       - JSON-RPC
 components:
   schemas:
-    JsonRpcResponse:
-      type: object
-      properties:
-        jsonrpc:
-          type: string
-          description: JSON-RPC protocol version
-        id:
-          oneOf:
-          - type: string
-          - type: integer
-          - type: 'null'
-          description: Echoed request identifier
-        result:
-          description: 'The result of the method call. Shape varies per method. null when error is present.
-
-            '
-        error:
-          type:
-          - object
-          - 'null'
-          description: Present when the method call produced an application-level error
-          properties:
-            code:
-              type: integer
-              description: 'Standard JSON-RPC error code or Litecoin Core-specific code. Common codes: -32700 (parse error), -32600 (invalid request), -32601 (method not found), -32602 (invalid params), -1 (misc error), -5 (invalid or non-wallet transaction id), -8 (invalid parameter), -22 (transaction rejected), -25 (transaction already in mempool).
-
-                '
-            message:
-              type: string
-              description: Human-readable error description
     JsonRpcRequest:
       type: object
       required:
@@ -169,6 +139,36 @@ components:
             '
           items: {}
           default: []
+    JsonRpcResponse:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+          description: JSON-RPC protocol version
+        id:
+          oneOf:
+          - type: string
+          - type: integer
+          - type: 'null'
+          description: Echoed request identifier
+        result:
+          description: 'The result of the method call. Shape varies per method. null when error is present.
+
+            '
+        error:
+          type:
+          - object
+          - 'null'
+          description: Present when the method call produced an application-level error
+          properties:
+            code:
+              type: integer
+              description: 'Standard JSON-RPC error code or Litecoin Core-specific code. Common codes: -32700 (parse error), -32600 (invalid request), -32601 (method not found), -32602 (invalid params), -1 (misc error), -5 (invalid or non-wallet transaction id), -8 (invalid parameter), -22 (transaction rejected), -25 (transaction already in mempool).
+
+                '
+            message:
+              type: string
+              description: Human-readable error description
   securitySchemes:
     basicAuth:
       type: http

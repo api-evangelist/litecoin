@@ -476,6 +476,12 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml
 common:
+  - type: Plans
+    url: plans/litecoin-core-json-rpc.yml
+  - type: RateLimits
+    url: rate-limits/litecoin-core-json-rpc.yml
+  - type: FinOps
+    url: finops/litecoin-core-json-rpc.yml
   - type: License
     name: MIT
     url: https://github.com/litecoin-project/litecoin/blob/master/LICENSE

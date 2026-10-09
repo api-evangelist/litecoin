@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Litecoin Space REST API Plans
 description: The Litecoin Space block explorer REST API is a free public service
   operated by the Litecoin Foundation. It is a mempool.space-compatible API for the
@@ -36,3 +40,45 @@ plans:
       - All public API features
       - No rate limits
       - Full control over infrastructure
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Self-Hosted Node
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Self-Hosted Node (REST Enabled)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Public Free
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Self-Hosted
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Public Free
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Self-Hosted
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []

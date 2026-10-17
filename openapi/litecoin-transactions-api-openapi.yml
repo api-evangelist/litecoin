@@ -382,27 +382,34 @@ components:
         blocktime:
           type: integer
           description: Block time (Unix timestamp)
-    TxInput:
+    MerkleProof:
       type: object
       properties:
-        txid:
-          type: string
-        vout:
+        block_height:
           type: integer
-        prevout:
-          $ref: '#/components/schemas/TxOutput'
-        scriptsig:
-          type: string
-        scriptsig_asm:
-          type: string
-        witness:
+        merkle:
           type: array
           items:
             type: string
-        is_coinbase:
-          type: boolean
-        sequence:
+        pos:
           type: integer
+    TxStatus:
+      type: object
+      properties:
+        confirmed:
+          type: boolean
+        block_height:
+          type:
+          - integer
+          - 'null'
+        block_hash:
+          type:
+          - string
+          - 'null'
+        block_time:
+          type:
+          - integer
+          - 'null'
     TxOutput:
       type: object
       properties:
@@ -432,34 +439,6 @@ components:
           - 'null'
         status:
           $ref: '#/components/schemas/TxStatus'
-    MerkleProof:
-      type: object
-      properties:
-        block_height:
-          type: integer
-        merkle:
-          type: array
-          items:
-            type: string
-        pos:
-          type: integer
-    TxStatus:
-      type: object
-      properties:
-        confirmed:
-          type: boolean
-        block_height:
-          type:
-          - integer
-          - 'null'
-        block_hash:
-          type:
-          - string
-          - 'null'
-        block_time:
-          type:
-          - integer
-          - 'null'
     Transaction_2:
       type: object
       properties:
@@ -488,6 +467,27 @@ components:
           description: Transaction fee in satoshis
         status:
           $ref: '#/components/schemas/TxStatus'
+    TxInput:
+      type: object
+      properties:
+        txid:
+          type: string
+        vout:
+          type: integer
+        prevout:
+          $ref: '#/components/schemas/TxOutput'
+        scriptsig:
+          type: string
+        scriptsig_asm:
+          type: string
+        witness:
+          type: array
+          items:
+            type: string
+        is_coinbase:
+          type: boolean
+        sequence:
+          type: integer
 x-refined-from:
 - litecoin-core-rest.yml
 - litecoin-space-rest.yml

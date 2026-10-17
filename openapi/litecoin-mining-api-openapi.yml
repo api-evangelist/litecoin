@@ -243,17 +243,17 @@ paths:
       - Mining
 components:
   schemas:
-    HashratePoint:
+    PoolHashrateAverage:
       type: object
       properties:
-        timestamp:
+        poolName:
+          type: string
+        poolId:
           type: integer
-        avgHashrate:
-          type: number
-        share:
-          type: number
-        blockCount:
-          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HashratePoint'
     RewardStats:
       type: object
       properties:
@@ -267,31 +267,6 @@ components:
           type: integer
         totalTx:
           type: integer
-    DifficultyAdjustmentCurrent:
-      type: object
-      properties:
-        progressPercent:
-          type: number
-        difficultyChange:
-          type: number
-        estimatedRetargetDate:
-          type: integer
-        remainingBlocks:
-          type: integer
-        remainingTime:
-          type: integer
-        previousRetarget:
-          type: number
-        previousTime:
-          type: integer
-        nextRetargetHeight:
-          type: integer
-        timeAvg:
-          type: integer
-        timeOffset:
-          type: integer
-        expectedBlocks:
-          type: number
     MiningPool:
       type: object
       properties:
@@ -313,6 +288,28 @@ components:
           type: string
         poolUniqueId:
           type: integer
+    HashratePoint:
+      type: object
+      properties:
+        timestamp:
+          type: integer
+        avgHashrate:
+          type: number
+        share:
+          type: number
+        blockCount:
+          type: integer
+    DifficultyAdjustment:
+      type: object
+      properties:
+        time:
+          type: integer
+        height:
+          type: integer
+        difficulty:
+          type: number
+        adjustment:
+          type: number
     NetworkHashrate:
       type: object
       properties:
@@ -337,28 +334,6 @@ components:
         currentHashrate:
           type: number
         currentDifficulty:
-          type: number
-    PoolHashrateAverage:
-      type: object
-      properties:
-        poolName:
-          type: string
-        poolId:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/HashratePoint'
-    DifficultyAdjustment:
-      type: object
-      properties:
-        time:
-          type: integer
-        height:
-          type: integer
-        difficulty:
-          type: number
-        adjustment:
           type: number
     Block:
       type: object
@@ -400,6 +375,31 @@ components:
         blockCount:
           type: integer
         lastEstimatedHashrate:
+          type: number
+    DifficultyAdjustmentCurrent:
+      type: object
+      properties:
+        progressPercent:
+          type: number
+        difficultyChange:
+          type: number
+        estimatedRetargetDate:
+          type: integer
+        remainingBlocks:
+          type: integer
+        remainingTime:
+          type: integer
+        previousRetarget:
+          type: number
+        previousTime:
+          type: integer
+        nextRetargetHeight:
+          type: integer
+        timeAvg:
+          type: integer
+        timeOffset:
+          type: integer
+        expectedBlocks:
           type: number
   parameters:
     timePeriod:

@@ -117,30 +117,6 @@ paths:
       description: Litecoin Space mainnet
 components:
   schemas:
-    MempoolInfo:
-      type: object
-      properties:
-        loaded:
-          type: boolean
-          description: True if the mempool is fully loaded
-        size:
-          type: integer
-          description: Current transaction count in mempool
-        bytes:
-          type: integer
-          description: Sum of all transaction sizes in bytes
-        usage:
-          type: integer
-          description: Total memory usage for the mempool in bytes
-        maxmempool:
-          type: integer
-          description: Maximum memory usage for the mempool in bytes
-        mempoolminfee:
-          type: number
-          description: Minimum fee rate in LTC/kB for acceptance into mempool
-        minrelaytxfee:
-          type: number
-          description: Current minimum relay fee for transactions
     MempoolEntry:
       type: object
       properties:
@@ -191,6 +167,41 @@ components:
             type: string
         bip125-replaceable:
           type: boolean
+    MempoolInfo:
+      type: object
+      properties:
+        loaded:
+          type: boolean
+          description: True if the mempool is fully loaded
+        size:
+          type: integer
+          description: Current transaction count in mempool
+        bytes:
+          type: integer
+          description: Sum of all transaction sizes in bytes
+        usage:
+          type: integer
+          description: Total memory usage for the mempool in bytes
+        maxmempool:
+          type: integer
+          description: Maximum memory usage for the mempool in bytes
+        mempoolminfee:
+          type: number
+          description: Minimum fee rate in LTC/kB for acceptance into mempool
+        minrelaytxfee:
+          type: number
+          description: Current minimum relay fee for transactions
+    MempoolRecentTx:
+      type: object
+      properties:
+        txid:
+          type: string
+        fee:
+          type: integer
+        vsize:
+          type: integer
+        value:
+          type: integer
     MempoolStats:
       type: object
       properties:
@@ -210,17 +221,6 @@ components:
             type: array
             items:
               type: number
-    MempoolRecentTx:
-      type: object
-      properties:
-        txid:
-          type: string
-        fee:
-          type: integer
-        vsize:
-          type: integer
-        value:
-          type: integer
 x-refined-from:
 - litecoin-core-rest.yml
 - litecoin-space-rest.yml

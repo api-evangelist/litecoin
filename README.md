@@ -1,4 +1,4 @@
-# Litecoin (litecoin)
+# Litecoin
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,146 +66,140 @@
 
 Litecoin is a peer-to-peer cryptocurrency network based on the Bitcoin protocol, offering faster block times (2.5 minutes) and lower transaction fees. It exposes a JSON-RPC interface via Litecoin Core for direct node interaction, a built-in unauthenticated REST interface for public blockchain queries, and a Litecoin Space block explorer REST and WebSocket API (mempool.space-compatible) for querying transactions, addresses, blocks, UTXO data, mempool state, and fee estimates.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/apis.yml)
+**Areas:** Cryptocurrency · Blockchain · Litecoin · LTC · Payments · Decentralized Finance · Block Explorer · JSON-RPC
 
-## Tags
+## Litecoin on APIs.io
 
-- Cryptocurrency
-- Blockchain
-- Litecoin
-- LTC
-- Payments
-- Decentralized Finance
-- Block Explorer
-- JSON-RPC
+Everything profiled for Litecoin is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/litecoin/](https://apis.io/providers/litecoin/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (10)
 
-- **Created:** 2026-06-14
-- **Modified:** 2026-06-14
+- [Litecoin Space WebSocket API](https://apis.io/apis/litecoin/litecoin-space-websocket-api/) — A real-time WebSocket API provided by Litecoin Space (litecoinspace.org) for subscribing to live Litecoin network events. Clients connect to the WebSocket…
+- [Litecoin Addresses API](https://apis.io/apis/litecoin/litecoin-addresses-api/) — Address lookup, transaction history, and UTXO endpoints
+- [Litecoin Blockchain API](https://apis.io/apis/litecoin/litecoin-blockchain-api/) — Chain state information endpoints
+- [Litecoin Blocks API](https://apis.io/apis/litecoin/litecoin-blocks-api/) — Block and header retrieval endpoints
+- [Litecoin Fees API](https://apis.io/apis/litecoin/litecoin-fees-api/) — Fee estimation and recommendation endpoints
+- [Litecoin JSON-RPC API](https://apis.io/apis/litecoin/litecoin-json-rpc-api/) — Litecoin Core JSON-RPC 2.0 interface. All methods are accessed via a single POST endpoint using the method field to select the operation.
+- [Litecoin Mempool API](https://apis.io/apis/litecoin/litecoin-mempool-api/) — Mempool state and contents endpoints
+- [Litecoin Mining API](https://apis.io/apis/litecoin/litecoin-mining-api/) — Mining pool statistics, hashrate, and difficulty endpoints
+- [Litecoin Transactions API](https://apis.io/apis/litecoin/litecoin-transactions-api/) — Transaction retrieval endpoints
+- [Litecoin UTXO API](https://apis.io/apis/litecoin/litecoin-utxo-api/) — Unspent transaction output query endpoints
 
-## APIs
+### Published properties
 
-### Litecoin Core JSON-RPC API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The primary programmatic interface to a Litecoin Core node. Clients send HTTP POST requests with JSON-RPC 2.0 payloads to interact with the node. Methods cover blockchain state, block and transaction retrieval, mempool inspection, network peers, mining, UTXO queries, address validation, raw transaction construction and broadcast, and fee estimation. The daemon listens on port 9332 (mainnet), 19332 (testnet), and 19443 (regtest). Authentication is required via cookie file or rpcauth credentials.
+#### Agentic access (1)
 
-- **Human URL:** [https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md](https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md)
-- **Base URL:** `http://localhost:9332`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Litecoin Agentic Access](https://apis.io/agentic-access/litecoin/litecoin-agentic-access/)
 
-- JSON-RPC
-- Blockchain
-- Litecoin Core
-- Node
-- Transactions
-- Blocks
-- Mempool
-- UTXO
-- Mining
+#### Collections (9)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://github.com/litecoin-project/litecoin/blob/master/doc/JSON-RPC-interface.md)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/openapi/litecoin-core-json-rpc.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Plans](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-json-rpc.yml)
-- [Rate Limits](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-json-rpc.yml)
-- [Fin Ops](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-json-rpc.yml)
+- [Litecoin Core JSON-RPC Addresses API](https://apis.io/collections/litecoin/open-litecoin-addresses-api/)
+- [Litecoin Core JSON-RPC Addresses Blockchain API](https://apis.io/collections/litecoin/open-litecoin-blockchain-api/)
+- [Litecoin Core JSON-RPC Addresses Blocks API](https://apis.io/collections/litecoin/open-litecoin-blocks-api/)
+- [Litecoin Core JSON-RPC Addresses Fees API](https://apis.io/collections/litecoin/open-litecoin-fees-api/)
+- [Litecoin Core Addresses JSON-RPC API](https://apis.io/collections/litecoin/open-litecoin-json-rpc-api/)
+- [Litecoin Core JSON-RPC Addresses Mempool API](https://apis.io/collections/litecoin/open-litecoin-mempool-api/)
+- [Litecoin Core JSON-RPC Addresses Mining API](https://apis.io/collections/litecoin/open-litecoin-mining-api/)
+- [Litecoin Core JSON-RPC Addresses Transactions API](https://apis.io/collections/litecoin/open-litecoin-transactions-api/)
+- [Litecoin Core JSON-RPC Addresses UTXO API](https://apis.io/collections/litecoin/open-litecoin-utxo-api/)
 
-### Litecoin Core REST API
+#### Security (2)
 
-An unauthenticated, read-only HTTP REST interface built into Litecoin Core and enabled with the -rest flag. Supports retrieval of transactions, full blocks, block headers, block hash by height, chain information, UTXO set queries (per BIP64), and mempool statistics and contents. Responses are available in binary, hex-encoded, or JSON format depending on the file extension (.bin, .hex, .json) appended to each path. Runs on the same port as JSON-RPC (default 9332 mainnet).
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md](https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md)
-- **Base URL:** `http://localhost:9332`
+- [Litecoin Authentication](https://apis.io/security/litecoin/litecoin-authentication/)
+- [Litecoin Domain Security](https://apis.io/security/litecoin/litecoin-domain-security/)
 
-#### Tags
+#### Plans and pricing (4)
 
-- REST
-- Blockchain
-- Litecoin Core
-- Transactions
-- Blocks
-- UTXO
-- Mempool
-- Read-Only
+Published plans, tiers and prices.
 
-#### Properties
+- [Litecoin Core Json Rpc](https://apis.io/plans/litecoin/litecoin-core-json-rpc/)
+- [Litecoin Core Rest](https://apis.io/plans/litecoin/litecoin-core-rest/)
+- [Litecoin Space Rest](https://apis.io/plans/litecoin/litecoin-space-rest/)
+- [Litecoin Space Websocket](https://apis.io/plans/litecoin/litecoin-space-websocket/)
 
-- [Documentation](https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/openapi/litecoin-core-rest.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Plans](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-core-rest.yml)
-- [Rate Limits](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-core-rest.yml)
-- [Fin Ops](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-core-rest.yml)
+#### Rate limits (4)
 
-### Litecoin Space REST API
+Published request limits.
 
-A public REST API provided by the Litecoin Space block explorer (litecoinspace.org), a mempool.space-compatible service for the Litecoin network. Endpoints cover addresses (details, transactions, UTXOs, validation), blocks (details, headers, height, raw data, transactions), transactions (details, hex, raw, Merkle proofs, output spend status, broadcast), mempool (statistics, transaction IDs, recent transactions), fee recommendations, mining pool statistics, and network hashrate and difficulty data. No authentication required for public endpoints.
+- [Litecoin Core Json Rpc](https://apis.io/rate-limits/litecoin/litecoin-core-json-rpc/)
+- [Litecoin Core Rest](https://apis.io/rate-limits/litecoin/litecoin-core-rest/)
+- [Litecoin Space Rest](https://apis.io/rate-limits/litecoin/litecoin-space-rest/)
+- [Litecoin Space Websocket](https://apis.io/rate-limits/litecoin/litecoin-space-websocket/)
 
-- **Human URL:** [https://litecoinspace.org/docs/api/rest](https://litecoinspace.org/docs/api/rest)
-- **Base URL:** `https://litecoinspace.org/api`
+#### FinOps (4)
 
-#### Tags
+What the API costs to run, by operation.
 
-- REST
-- Block Explorer
-- Litecoin Space
-- Transactions
-- Blocks
-- Addresses
-- UTXO
-- Mempool
-- Fees
-- Mining
-- Public
+- [Litecoin Core Json Rpc](https://apis.io/finops/litecoin/litecoin-core-json-rpc/)
+- [Litecoin Core Rest](https://apis.io/finops/litecoin/litecoin-core-rest/)
+- [Litecoin Space Rest](https://apis.io/finops/litecoin/litecoin-space-rest/)
+- [Litecoin Space Websocket](https://apis.io/finops/litecoin/litecoin-space-websocket/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://litecoinspace.org/docs/api/rest)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/openapi/litecoin-space-rest.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Plans](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-rest.yml)
-- [Rate Limits](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-rest.yml)
-- [Fin Ops](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-rest.yml)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Litecoin Space WebSocket API
-
-A real-time WebSocket API provided by Litecoin Space (litecoinspace.org) for subscribing to live Litecoin network events. Clients connect to the WebSocket endpoint and subscribe to channels including new blocks, mempool block projections, live 2-hour fee rate charts, and network stats. Address tracking is supported to receive push notifications for new mempool and block-confirmed transactions involving a specific address.
-
-- **Human URL:** [https://litecoinspace.org/docs/api/websocket](https://litecoinspace.org/docs/api/websocket)
-- **Base URL:** `wss://litecoinspace.org/api/v1/ws`
-
-#### Tags
-
-- WebSocket
-- Block Explorer
-- Litecoin Space
-- Real-Time
-- Blocks
-- Mempool
-- Address Tracking
-- Fees
-
-#### Properties
-
-- [Documentation](https://litecoinspace.org/docs/api/websocket)
-- [Plans](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/plans/litecoin-space-websocket.yml)
-- [Rate Limits](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/rate-limits/litecoin-space-websocket.yml)
-- [Fin Ops](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/finops/litecoin-space-websocket.yml)
-
-## Common Properties
-
-- [J S O N Ld](https://raw.githubusercontent.com/api-evangelist/litecoin/refs/heads/main/json-ld/litecoin.json) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Git Hub Org](https://github.com/litecoin-project)
-- [Git Hub Org](https://github.com/litecoin-foundation)
 - [Website](https://litecoin.org)
-- [Blog](https://blog.litecoin.org)
-- [Explorer](https://litecoinspace.org)
-- [Source Code](https://github.com/litecoin-project/litecoin)
 - [Changelog](https://github.com/litecoin-project/litecoin/releases)
+- [Blog](https://blog.litecoin.org)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** API Evangelist
-**Email:** kin@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 23.6** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 44.1 |
+| Contract governance | 0.0 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 22.6 |
+| Access clarity | 5.3 |
+
+**Agent readiness 22.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.7** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/litecoin/](https://apis.io/providers/litecoin/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Litecoin: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/litecoin/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
